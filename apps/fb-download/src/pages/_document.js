@@ -6,8 +6,8 @@ export default function Document() {
       <Head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0866ff" />
-        <link rel="apple-touch-icon" href="/icons/icons-130.png" />
-        <link rel="icon" href="/icons/icons-130.png" />
+        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        <link rel="icon" href="/icons/icon-192.png" />
       </Head>
       <body>
         <Main />
