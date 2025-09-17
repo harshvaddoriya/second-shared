@@ -51,6 +51,7 @@ export default function Home() {
         onDownloadClick={handleDownloadEvent}
         onPasteClick={handlePasteEvent}
       />
+      <AppPromotion mobileImg={Images.mobile} appHeight={377} />
       <AboutProcess
         image={Images.Download}
         title="Facebook Videos and Photos Download"
@@ -86,9 +87,6 @@ export default function Home() {
         secondDescription="Story is a long video type. If you can’t watch it now, you can download Story videos to your device to be sure that you can return to watching later, without the need to be online or in case the Story can be deleted."
         secondLink="/story"
       />
-
-
-      <AppPromotion mobileImg={Images.mobile} appHeight={377} />
       <FaqSection
         title="Frequently asked questions (FAQ)"
         intro="This FAQ answers common questions and worries about FacebookDl.app, which is a tool to download public Facebook content.If your question isn’t covered, you can get in touch with us by sending an email through our contact page."

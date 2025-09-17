@@ -1,9 +1,36 @@
-import Link from "next/link";
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaDownload } from "@/icons/index";
 import styles from "./AppPromotion.module.scss";
 
 export default function AppPromotion({ mobileImg, appHeight = 400 }) {
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isInstallable, setIsInstallable] = useState(false);
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setIsInstallable(true);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      setDeferredPrompt(null);
+      setIsInstallable(false);
+    } else {
+      alert("PWA installation is not supported on this browser.");
+    }
+  };
+
   return (
     <section
       className={styles.promo}
@@ -12,36 +39,38 @@ export default function AppPromotion({ mobileImg, appHeight = 400 }) {
     >
       <div className={styles.container}>
         <div className={styles.leftSection}>
-          <div className={styles.imageWrapper}>
-            {mobileImg && (
+          {mobileImg && (
+            <div className={styles.imageWrapper}>
               <Image
                 src={mobileImg}
-                alt="Mobile phone displaying Instagram app interface with downloaded content"
+                alt="Mobile phone displaying app interface"
                 height={appHeight}
                 width={500}
                 className={styles.phoneImage}
                 priority
               />
-            )}
-          </div>
+            </div>
+          )}
         </div>
+
         <div className={styles.content}>
-          <h2 id="app-promo-heading">Download with mobile app</h2>
+          <h2 id="app-promo-heading">Download our mobile app</h2>
           <p>
-            Download your favorite photos, videos Reels and story in a single
-            tap!Enjoy fast, HD downloads free of watermarks with our app—an
-            excellent option for Social Media content.
+            Download your favorite photos, videos, Reels, and stories in a
+            single tap! Enjoy fast, HD downloads free of watermarks with our
+            app.
           </p>
-          <Link href="/">
-            <button
-              className={styles.installBtn}
-              type="button"
-              aria-label="Install mobile app for downloading Instagram content"
-            >
-              <FaDownload size={18} />
-              Install now
-            </button>
-          </Link>
+
+          <button
+            className={styles.installBtn}
+            type="button"
+            aria-label="Install mobile app"
+            onClick={handleInstallClick}
+            disabled={!isInstallable}
+          >
+            <FaDownload size={18} />
+            Install now
+          </button>
         </div>
       </div>
     </section>

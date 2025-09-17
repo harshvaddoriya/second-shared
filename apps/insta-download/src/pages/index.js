@@ -28,9 +28,11 @@ export default function Home() {
         downloadFacebookMedia={downloadFacebookMedia}
         placeholder="Insert Instagram link here...."
         loadingMessage="Fetching Instagram media, please wait..."
-        // onDownloadClick={handleDownloadEvent}
-        // onPasteClick={handlePasteEvent}
+      // onDownloadClick={handleDownloadEvent}
+      // onPasteClick={handlePasteEvent}
       />
+
+      <AppPromotion mobileImg={Images.mobile} />
 
       <AboutProcess
         image={Images.Download}
@@ -77,8 +79,6 @@ export default function Home() {
         description="Carousel, also known as Album or Gallery posts type with multiple photos, videos, or mixed content. If you need to download multiple photos from Instagram, the InstaDl.app is the best to download gallery."
         link="/carousel"
       />
-
-      <AppPromotion mobileImg={Images.mobile} />
 
       <FaqSection
         title="Frequently asked questions (FAQ)"

@@ -50,7 +50,13 @@ export default function DownloadDescription({
           role="article"
         >
           <div className={styles.description}>
-            <h2 id={`${firstSectionId}-title`}>{title}</h2>
+            {link ? (
+              <Link href={link} className={styles.titleLink}>
+                <h2 id={`${firstSectionId}-title`}>{title}</h2>
+              </Link>
+            ) : (
+              <h2 id={`${firstSectionId}-title`}>{title}</h2>
+            )}
             <p>{description}</p>
           </div>
 
@@ -115,9 +121,14 @@ export default function DownloadDescription({
               </div>
             )}
             <div className={styles.description}>
-              {secondTitle && (
-                <h2 id={`${secondSectionId}-title`}>{secondTitle}</h2>
-              )}
+              {secondTitle &&
+                (secondLink ? (
+                  <Link href={secondLink} className={styles.titleLink}>
+                    <h2 id={`${secondSectionId}-title`}>{secondTitle}</h2>
+                  </Link>
+                ) : (
+                  <h2 id={`${secondSectionId}-title`}>{secondTitle}</h2>
+                ))}
               {secondDescription && <p>{secondDescription}</p>}
             </div>
           </div>

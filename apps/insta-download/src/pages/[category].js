@@ -34,6 +34,7 @@ export default function CategoryPage({ content = categoryContent }) {
       // onDownloadClick={handleDownloadEvent}
       // onPasteClick={handlePasteEvent}
       />
+      <AppPromotion mobileImg={Images.mobile} />
       <AboutProcess
         image={content.about.image}
         title={content.about.title}
@@ -56,7 +57,6 @@ export default function CategoryPage({ content = categoryContent }) {
         secondLink={content.downloadDescription.secondLink}
       />
 
-      <AppPromotion mobileImg={Images.mobile} />
       <FaqSection
         title="Frequently asked questions (FAQ)"
         intro={content.faq.intro}
