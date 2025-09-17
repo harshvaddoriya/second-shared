@@ -1,0 +1,85 @@
+import React from "react";
+import {
+  Header,
+  Footer,
+  Downloader,
+  AboutProcess,
+  DownloadDescription,
+  AppPromotion,
+  FaqSection,
+} from "@/shared";
+import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
+import { categoryContent } from "@/dataStore/categoryContent";
+import { previewComponentMap } from "@/dataStore/mediaPreviewTypes";
+import { downloadFacebookMedia } from "@/utils/api";
+import Images from "../../public/images/index";
+
+export default function CategoryPage({ content = categoryContent }) {
+
+  if (!content) {
+    return <h1>404 | Page Not Found</h1>;
+  }
+
+  return (
+    <>
+      <Header logo={Images.Logo} />
+      <Downloader
+        title={content.title}
+        subtitle={content.subtitle}
+        mainLinks={mainNavLinks}
+        previewComponentMap={previewComponentMap}
+        downloadFacebookMedia={downloadFacebookMedia}
+        placeholder={content.placeholder}
+        loadingMessage="Fetching Instagram media, please wait..."
+      // onDownloadClick={handleDownloadEvent}
+      // onPasteClick={handlePasteEvent}
+      />
+      <AboutProcess
+        image={content.about.image}
+        title={content.about.title}
+        description={content.about.description}
+        heading={content.about.heading}
+        smallDescription={content.about.smallDescription}
+        steps={content.about.steps}
+      />
+
+      <DownloadDescription
+        heading={content.downloadDescription.heading}
+        headingDescription={content.downloadDescription.headingDescription}
+        image={content.downloadDescription.image}
+        title={content.downloadDescription.title}
+        description={content.downloadDescription.description}
+        link={content.downloadDescription.link}
+        secondImage={content.downloadDescription.secondImage}
+        secondTitle={content.downloadDescription.secondTitle}
+        secondDescription={content.downloadDescription.secondDescription}
+        secondLink={content.downloadDescription.secondLink}
+      />
+
+      <AppPromotion mobileImg={Images.mobile} />
+      <FaqSection
+        title="Frequently asked questions (FAQ)"
+        intro={content.faq.intro}
+        image={content.faq.image}
+        faqs={content.faq.items}
+      />
+      <Footer
+        logo={Images.Logo}
+        mainLinks={mainNavLinks}
+        legalLinks={legalLinks}
+        appName="InstaDl"
+      />
+    </>
+  );
+}
+
+export async function getServerSideProps({ params }) {
+  const { category } = params;
+  const { categoryContent } = await import("@/dataStore/categoryContent");
+
+  return {
+    props: {
+      content: categoryContent[category] || null,
+    },
+  };
+}

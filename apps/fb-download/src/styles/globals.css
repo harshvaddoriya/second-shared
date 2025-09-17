@@ -1,0 +1,90 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --color-white: #fff;
+  --footer-border: #0866ff;
+  --gradient-blue: linear-gradient(315deg, #60a5fa, #2563eb);
+  --gradient-color: linear-gradient(
+    108deg,
+    rgba(66, 103, 178, 0.9) -57.13%,
+    #1877f2 11.08%,
+    rgba(224, 230, 255, 0.9) 102.57%
+  );
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: Roboto, sans-serif;
+  color: #111;
+  scroll-behavior: smooth;
+  background-color: #f9fafb;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 4px;
+}
+
+.swiper-pagination-bullet {
+  background-color: #e7d2c2 !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ffffff !important;
+}
