@@ -5,15 +5,18 @@ import Images from "../../public/images/index";
 import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
 function ContactUs() {
     return (
-        <><Head>
-            <title>Contact - FacebookDL</title>
-            <meta
-                name="description"
-                content="Get in touch with the FacebookDl support team."
-            />
-        </Head>
+        <>
+            <Head>
+                <title>Contact - FacebookDL</title>
+                <meta
+                    name="description"
+                    content="Get in touch with the FacebookDl support team."
+                />
+            </Head>
             <Header logo={Images.Logo} />
-            <Contact />
+            <main style={{ flex: 1 }}>
+                <Contact />
+            </main>
             <Footer
                 logo={Images.Logo}
                 mainLinks={mainNavLinks}

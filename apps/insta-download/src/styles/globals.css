@@ -30,6 +30,16 @@ body {
   flex-direction: column;
 }
 
+#__next {
+  flex: 1; /* let Next.js root expand */
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* pushes footer to bottom */
+}
+
 a {
   text-decoration: none;
   color: inherit;

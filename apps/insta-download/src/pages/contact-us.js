@@ -16,7 +16,9 @@ function ContactUs() {
       </Head>
 
       <Header logo={Images.Logo} />
-      <Contact />
+      <main style={{ flex: 1 }}>
+        <Contact />
+      </main>
       <Footer
         logo={Images.Logo}
         mainLinks={mainNavLinks}
