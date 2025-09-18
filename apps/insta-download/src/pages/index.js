@@ -12,10 +12,26 @@ import {
   AppPromotion,
   FaqSection,
 } from "@/shared";
+import { sendGAEvent } from '@/utils/gaUtils';
 import { downloadFacebookMedia } from "@/utils/api";
 import Images from "../../public/images/index";
 
 export default function Home() {
+  const handlePasteEvent = ({ url }) => {
+    console.log('PASTE EVENT CALLED:', url);
+    sendGAEvent('paste_button_click', {
+      url,
+      app: 'sub-app',
+    });
+  };
+
+  const handleDownloadEvent = ({ url }) => {
+    console.log('Download EVENT CALLED:', url);
+    sendGAEvent('download_button_click', {
+      url,
+      app: 'sub-app',
+    });
+  };
   return (
     <>
       <Header logo={Images.Logo} />
@@ -28,8 +44,8 @@ export default function Home() {
         downloadFacebookMedia={downloadFacebookMedia}
         placeholder="Insert Instagram link here...."
         loadingMessage="Fetching Instagram media, please wait..."
-      // onDownloadClick={handleDownloadEvent}
-      // onPasteClick={handlePasteEvent}
+        onDownloadClick={handleDownloadEvent}
+        onPasteClick={handlePasteEvent}
       />
 
       <AppPromotion mobileImg={Images.mobile} />

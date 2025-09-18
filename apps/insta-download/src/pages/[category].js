@@ -13,12 +13,28 @@ import { categoryContent } from "@/dataStore/categoryContent";
 import { previewComponentMap } from "@/dataStore/mediaPreviewTypes";
 import { downloadFacebookMedia } from "@/utils/api";
 import Images from "../../public/images/index";
+import PageNotFound from "@/components/PageNotFound/PageNotFound";
+
 
 export default function CategoryPage({ content = categoryContent }) {
 
   if (!content) {
-    return <h1>404 | Page Not Found</h1>;
+    return <PageNotFound />;
   }
+
+  const handlePasteEvent = ({ url }) => {
+    sendGAEvent('paste_button_click', {
+      url,
+      app: 'sub-app',
+    });
+  };
+
+  const handleDownloadEvent = ({ url }) => {
+    sendGAEvent('download_button_click', {
+      url,
+      app: 'sub-app',
+    });
+  };
 
   return (
     <>
@@ -31,8 +47,8 @@ export default function CategoryPage({ content = categoryContent }) {
         downloadFacebookMedia={downloadFacebookMedia}
         placeholder={content.placeholder}
         loadingMessage="Fetching Instagram media, please wait..."
-      // onDownloadClick={handleDownloadEvent}
-      // onPasteClick={handlePasteEvent}
+        onDownloadClick={handleDownloadEvent}
+        onPasteClick={handlePasteEvent}
       />
       <AppPromotion mobileImg={Images.mobile} />
       <AboutProcess

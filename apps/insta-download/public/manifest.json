@@ -1,0 +1,16 @@
+{
+  "name": "InstaDl",
+  "short_name": "InstaDl",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#009ee2",
+  "description": "Download media from InstaDl easily",
+  "icons": [
+    {
+      "src": "/icons/icons-90.png",
+      "sizes": "90x90",
+      "type": "image/png"
+    }
+  ]
+}

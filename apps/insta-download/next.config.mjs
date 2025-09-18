@@ -1,6 +1,10 @@
 import NextFederationPlugin from '@module-federation/nextjs-mf';
+import pwa from 'next-pwa';
+
+const withPWA = pwa.default || pwa;
 
 const nextConfig = {
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
@@ -17,7 +21,6 @@ const nextConfig = {
     config.plugins.push(
       new NextFederationPlugin({
         name: 'instaDownload',
-
         filename: 'static/chunks/remoteEntry.js',
         remotes: {
           // shared: `shared@http://localhost:3002/_next/static/chunks/remoteEntry.js`,
@@ -29,11 +32,22 @@ const nextConfig = {
         },
       })
     );
+
     return config;
   },
+
+  experimental: {
+    esmExternals: false,
+  },
+
   output: 'standalone',
   staticPageGenerationTimeout: 300,
 };
 
-export default nextConfig;
+export default withPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+})(nextConfig);
 

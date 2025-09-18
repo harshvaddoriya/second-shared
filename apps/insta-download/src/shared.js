@@ -48,6 +48,11 @@ export const FaqSection = dynamic(
   { ssr: false }
 );
 
+export const ErrorModal = dynamic(
+  () => import("shared/common").then((mod) => mod.ErrorModal),
+  { ssr: false }
+);
+
 
 // --------------other--------------------- //
 export const Contact = dynamic(
