@@ -1,6 +1,4 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const { getInstagramMedia } = require("../../lib/instagram-helper.js");
+import { getInstagramMedia } from "../../lib/instagram-helper.js";
 import { fetchStoryFromRapidAPI } from "../../lib/instagram-story-helper.js";
 import { callRapidAPI } from "../../lib/rapidapi.js";
 import { callApify } from "../../lib/apify.js";

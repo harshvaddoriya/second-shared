@@ -9,7 +9,13 @@ export default function SwiperNavigation({ swiper }) {
   const nextRef = useRef(null);
 
   useEffect(() => {
-    if (swiper && prevRef.current && nextRef.current) {
+    if (
+      swiper &&
+      swiper.params?.navigation &&
+      swiper.navigation &&
+      prevRef.current &&
+      nextRef.current
+    ) {
       swiper.params.navigation.prevEl = prevRef.current;
       swiper.params.navigation.nextEl = nextRef.current;
       swiper.navigation.init();

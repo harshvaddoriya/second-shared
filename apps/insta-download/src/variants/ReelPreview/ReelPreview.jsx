@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef } from "react";
 import { handleShare, handleDownload } from "shared/hooks";
 import { FaVolumeUp, FaVolumeMute } from "@/icons/index";

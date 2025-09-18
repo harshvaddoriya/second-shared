@@ -1,11 +1,6 @@
 
-const instagramUrlDirect = require("instagram-url-direct");
+import instagramUrlDirect from "instagram-url-direct";
 
-async function getInstagramMedia(url) {
+export async function getInstagramMedia(url) {
   return await instagramUrlDirect.instagramGetUrl(url);
 }
-
-
-module.exports = {
-  getInstagramMedia,
-};
