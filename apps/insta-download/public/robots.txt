@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://instagram-media-download.vercel.app/
+
+# Sitemaps
+Sitemap: https://instagram-media-download.vercel.app/sitemap.xml
