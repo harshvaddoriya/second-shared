@@ -1,19 +1,21 @@
-
 import React from "react";
+import Head from "next/head";
 import { Footer, Header, FaqSection } from "@/shared";
 import { mainFaq } from "@/dataStore/faqContent";
 import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
 import Images from "../../public/images/index";
 
-export const metadata = {
-    title: "Faq - InstaDL",
-    description:
-        "Find answers to the most frequently asked questions about InstaDL, including downloads, formats, privacy, and troubleshooting.",
-};
 
 function Faq() {
     return (
         <>
+            <Head>
+                <title>Faq - InstaDL</title>
+                <meta
+                    name="description"
+                    content="Find answers to the most frequently asked questions about InstaDL, including downloads, formats, privacy, and troubleshooting."
+                />
+            </Head>
             <Header logo={Images.Logo} />
             <FaqSection
                 title="FAQ - frequently asked question"

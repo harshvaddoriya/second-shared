@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://second-shared-insta-download.vercel.app/
-
-# Sitemaps
-Sitemap: https://second-shared-insta-download.vercel.app/sitemap.xml

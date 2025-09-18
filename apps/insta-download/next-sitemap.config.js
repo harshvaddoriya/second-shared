@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 const config = {
-    siteUrl: process.env.SITE_URL || "https://second-shared-insta-download.vercel.app/",
+    siteUrl: process.env.SITE_URL || "https://instagram-media-download.vercel.app/",
     generateRobotsTxt: true,
     sitemapSize: 5000,
     changefreq: "daily",

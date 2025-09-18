@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
 import { features } from "@/dataStore/whyUsData";
 import { previewComponentMap } from "@/dataStore/mediaPreviewTypes";
@@ -34,6 +35,14 @@ export default function Home() {
   };
   return (
     <>
+      <Head>
+        <title>InstaDL - Free Video Downloader</title>
+        <meta
+          name="description"
+          content="Download videos instantly from your favorite platforms for free."
+        />
+      </Head>
+
       <Header logo={Images.Logo} />
 
       <Downloader

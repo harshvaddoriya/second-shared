@@ -18,7 +18,7 @@ const mainNavLinks = [
     href: "/reels",
     label: "Reels",
     icon: <FaRegCalendarAlt />,
- 
+
   },
   {
     href: "/story",
@@ -30,13 +30,13 @@ const mainNavLinks = [
     href: "/viewer",
     label: "Viewer",
     icon: <FaRegEye />,
-   
+
   },
   {
     href: "/igtv",
     label: "Igtv",
     icon: <FaVideo />,
-   
+
   },
   {
     href: "/carousel",
@@ -50,7 +50,7 @@ const legalLinks = [
   { href: "/contact-us", label: "Contact" },
   { href: "/legal/privacy-policy", label: "Privacy Policy" },
   { href: "/legal/terms-and-conditions", label: "Terms & Conditions" },
-  {href:"https://fb-media-download.vercel.app/",label:"FacebookDl"},
+  { href: "https://facebook-media-download.vercel.app/", label: "FacebookDl" },
 ];
 
 

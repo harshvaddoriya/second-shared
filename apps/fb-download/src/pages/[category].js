@@ -1,3 +1,4 @@
+import Head from "next/head";
 import {
     Header,
     Footer,
@@ -20,6 +21,12 @@ export default function CategoryPage({ content }) {
     if (!content) {
         return <PageNotFound />;
     }
+
+    const title = `${content.title} | FacebookDL`;
+    const description =
+        content.metaDescription || content.subtitle || "Fast and free media downloader.";
+    const pageUrl = `https://facebook-media-download.vercel.app/${category}`;
+
     const handlePasteEvent = ({ url }) => {
         sendGAEvent('paste_button_click', {
             url,
@@ -37,6 +44,17 @@ export default function CategoryPage({ content }) {
 
     return (
         <>
+            <Head>
+                <title>{title}</title>
+                <meta name="description" content={description} />
+                <link rel="canonical" href={pageUrl} />
+
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={description} />
+                <meta property="og:url" content={pageUrl} />
+                <meta property="og:image" content={Images.Logo.src} />
+                <meta name="twitter:card" content="summary" />
+            </Head>
             <Header logo={Images.Logo} />
             <Downloader
                 title={content?.title}

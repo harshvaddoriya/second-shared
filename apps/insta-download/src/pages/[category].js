@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import {
   Header,
   Footer,
@@ -16,11 +17,16 @@ import Images from "../../public/images/index";
 import PageNotFound from "@/components/PageNotFound/PageNotFound";
 
 
-export default function CategoryPage({ content = categoryContent }) {
+export default function CategoryPage({ content = categoryContent, category }) {
 
   if (!content) {
     return <PageNotFound />;
   }
+
+  const title = `${content.title} | InstaDL`;
+  const description =
+    content.metaDescription || content.subtitle || "Fast and free media downloader.";
+  const pageUrl = `https://instagram-media-download.vercel.app/${category}`;
 
   const handlePasteEvent = ({ url }) => {
     sendGAEvent('paste_button_click', {
@@ -38,7 +44,20 @@ export default function CategoryPage({ content = categoryContent }) {
 
   return (
     <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={pageUrl} />
+
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:image" content={Images.Logo.src} />
+        <meta name="twitter:card" content="summary" />
+      </Head>
+
       <Header logo={Images.Logo} />
+
       <Downloader
         title={content.title}
         subtitle={content.subtitle}

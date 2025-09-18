@@ -1,18 +1,20 @@
 import React from "react";
+import Head from "next/head";
 import { Footer, Header, FaqSection } from "@/shared";
 import { mainFaq } from "@/dataStore/faqContent";
 import Images from "../../public/images/index";
 import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
 
-export const metadata = {
-    title: "Faq - FacebookDl",
-    description:
-        "Find answers to the most frequently asked questions about FacebookDl, including downloads, formats, privacy, and troubleshooting.",
-};
-
 function Faq() {
     return (
         <>
+            <Head>
+                <title>Faq - FacebookDL</title>
+                <meta
+                    name="description"
+                    content="Find answers to the most frequently asked questions about FacebookDl, including downloads, formats, privacy, and troubleshooting."
+                />
+            </Head>
             <Header logo={Images.Logo} />
             <FaqSection
                 title="FAQ - frequently asked question"
