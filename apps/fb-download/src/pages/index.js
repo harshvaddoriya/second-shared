@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { getCachedData, clearOldCache } from '@/utils/indexedDB';
 import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
 import { features } from "@/dataStore/whyUsData";
 import { steps, faqs } from "@/dataStore/faqContent";
@@ -19,34 +17,6 @@ import { downloadFacebookMedia } from "@/utils/api";
 import Images from "../../public/images/index";
 
 export default function Home() {
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-
-  useEffect(() => {
-    const handleOnline = () => {
-      setIsOnline(true);
-      console.log('Back online');
-    };
-    const handleOffline = () => {
-      setIsOnline(false);
-      console.log('You are offline');
-    };
-
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
-
-  // Clear old cache when back online
-  useEffect(() => {
-    if (isOnline) {
-      clearOldCache();
-    }
-  }, [isOnline]);
-
   const handlePasteEvent = ({ url }) => {
     console.log('PASTE EVENT CALLED:', url);
     sendGAEvent('paste_button_click', {
@@ -66,7 +36,6 @@ export default function Home() {
   return (
     <>
       <Header logo={Images.Logo} />
-      <div>Status: {isOnline ? 'Online' : 'Offline'}</div>
 
       <Downloader
         title="Facebook Downloader"
