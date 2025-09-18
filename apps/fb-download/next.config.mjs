@@ -51,4 +51,5 @@ export default withPWA({
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
+  maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
 })(nextConfig);
