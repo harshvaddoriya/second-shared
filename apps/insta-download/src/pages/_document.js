@@ -11,6 +11,15 @@ export default function Document() {
         <link rel="icon" href="/icons/icons-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX6Z7ZRE1R"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-ZX6Z7ZRE1R');
+          `,
+        }} />
       </Head>
       <body>
         <Main />
