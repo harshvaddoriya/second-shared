@@ -90,13 +90,22 @@ export default function CategoryPage({ content }) {
     );
 }
 
-export async function getServerSideProps({ params }) {
-    const { category } = params;
+export async function getStaticPaths() {
+    const { categoryContent } = await import("@/dataStore/categoryContent");
+
+    const paths = Object.keys(categoryContent).map((category) => ({
+        params: { category },
+    }));
+
+    return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
     const { categoryContent } = await import("@/dataStore/categoryContent");
 
     return {
         props: {
-            content: categoryContent[category] || null,
+            content: categoryContent[params.category] || null,
         },
     };
 }

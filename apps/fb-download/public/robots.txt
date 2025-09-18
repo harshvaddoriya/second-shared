@@ -1,2 +1,9 @@
+# *
 User-agent: *
 Allow: /
+
+# Host
+Host: https://second-shared-fb-download.vercel.app/
+
+# Sitemaps
+Sitemap: https://second-shared-fb-download.vercel.app/sitemap.xml
