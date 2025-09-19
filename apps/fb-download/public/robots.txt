@@ -2,6 +2,8 @@
 User-agent: *
 Allow: /
 
+# Host
+Host: https://facebook-media-download.vercel.app/
+
 # Sitemaps
 Sitemap: https://facebook-media-download.vercel.app/sitemap.xml
-Sitemap: https://facebook-media-download.vercel.app/sitemap-0.xml

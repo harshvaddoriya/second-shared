@@ -42,6 +42,38 @@ const nextConfig = {
 
   output: 'standalone',
   staticPageGenerationTimeout: 300,
+
+  async headers() {
+    return [
+      {
+        source: '/sitemap.xml',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/xml; charset=utf-8',
+          },
+        ],
+      },
+      {
+        source: '/sitemap-:path*',   // 👈 covers sitemap-0.xml, sitemap-1.xml, etc.
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/xml; charset=utf-8',
+          },
+        ],
+      },
+      {
+        source: '/robots.txt',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'text/plain; charset=utf-8',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default withPWA({
