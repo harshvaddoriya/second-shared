@@ -124,6 +124,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       content: categoryContent[params.category] || null,
+      category: params.category,
     },
   };
 }

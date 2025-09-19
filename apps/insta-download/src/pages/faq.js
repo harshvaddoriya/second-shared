@@ -7,6 +7,18 @@ import Images from "../../public/images/index";
 
 
 function Faq() {
+    const faqStructuredData = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": mainFaq.map((faq) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+            }
+        }))
+    };
     return (
         <>
             <Head>
@@ -14,6 +26,10 @@ function Faq() {
                 <meta
                     name="description"
                     content="Find answers to the most frequently asked questions about InstaDL, including downloads, formats, privacy, and troubleshooting."
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
                 />
             </Head>
             <Header logo={Images.Logo} />

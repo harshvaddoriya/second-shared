@@ -12,6 +12,18 @@ function ContactUs() {
                     name="description"
                     content="Get in touch with the FacebookDl support team."
                 />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "ContactPage",
+                            name: "Contact - FacebookDL",
+                            description: "Get in touch with the FacebookDL support team.",
+                            url: "https://facebook-media-download.vercel.app/contact-us",
+                        }),
+                    }}
+                />
             </Head>
             <Header logo={Images.Logo} />
             <main style={{ flex: 1 }}>

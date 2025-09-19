@@ -42,6 +42,7 @@ export default function Home() {
           name="description"
           content="Download videos instantly from your favorite platforms for free."
         />
+        <link rel="canonical" href="https://instagram-media-download.vercel.app/" />
       </Head>
       <Header logo={Images.Logo} />
 

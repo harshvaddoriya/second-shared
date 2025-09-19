@@ -13,6 +13,18 @@ function ContactUs() {
           name="description"
           content="Contact the InstaDL support team for help with Instagram downloads, troubleshooting, and any questions you may have."
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ContactPage",
+              name: "Contact - InstaDL",
+              description: "Get in touch with the InstaDL support team.",
+              url: "https://instagram-media-download.vercel.app/contact-us",
+            }),
+          }}
+        />
       </Head>
 
       <Header logo={Images.Logo} />

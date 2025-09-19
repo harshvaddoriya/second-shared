@@ -5,7 +5,7 @@ import legalPagesData from "@/dataStore/legalPagesContent";
 import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
 import Images from "../../../public/images/index";
 
-export default function PolicyPage({ pageData }) {
+export default function PolicyPage({ pageData,slug }) {
   if (!pageData) return <div>Page not found</div>;
 
   const title = pageData
@@ -14,11 +14,14 @@ export default function PolicyPage({ pageData }) {
   const description =
     pageData?.description || "The page you are looking for does not exist."
 
+  const pageUrl = `https://instagram-media-download.vercel.app/legal/${slug}`;
+
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
+        <link rel="canonical" href={pageUrl} />
       </Head>
       <Header logo={Images.Logo} />
       <Policy pageData={pageData} />;
@@ -45,5 +48,5 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const pageData = legalPagesData[params.slug] || null;
-  return { props: { pageData } };
+  return { props: { pageData, slug: params.slug } };
 }
