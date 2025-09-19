@@ -14,6 +14,7 @@ import { categoryContent } from "@/dataStore/categoryContent";
 import { previewComponentMap } from "@/dataStore/mediaPreviewTypes";
 import { downloadFacebookMedia } from "@/utils/api";
 import Images from "../../public/images/index";
+import { sendGAEvent } from '@/utils/gaUtils';
 import PageNotFound from "@/components/PageNotFound/PageNotFound";
 
 

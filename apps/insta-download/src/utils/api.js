@@ -1,5 +1,6 @@
 export async function downloadFacebookMedia(url) {
   if (!url || !url.trim()) {
+    console.log("image url---", url)
     throw new Error("Please enter a URL");
   }
 
@@ -11,12 +12,13 @@ export async function downloadFacebookMedia(url) {
     });
 
     const data = await res.json();
-
+    console.log("data of url--------------", data);
     if (!res.ok) {
       throw new Error(data.error || "Server error");
     }
-
+    console.log("return data", data);
     return data;
+
   } catch (err) {
     console.error("downloadInstagramMedia failed---", err);
     throw err;
