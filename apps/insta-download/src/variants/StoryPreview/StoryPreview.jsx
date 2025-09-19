@@ -202,7 +202,6 @@ export default function StoryPreview({ stories = [], data }) {
                       alt={`story-${idx}`}
                       className={styles.storyMedia}
                       onError={(e) => {
-                        console.error("Image failed to load", image, e);
                         const altImage =
                           story.display_resources?.[1]?.src ||
                           story.image_versions?.low_resolution?.url;
@@ -217,7 +216,6 @@ export default function StoryPreview({ stories = [], data }) {
                   ) : (
                     <div className={styles.storyPlaceholder}>
                       <p>No media URL found</p>
-                      <small>Check console for details</small>
                     </div>
                   )}
 

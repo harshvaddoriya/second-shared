@@ -9,11 +9,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.fna.fbcdn.net", // match ALL fbcdn.net subdomains
+        hostname: "**.fna.fbcdn.net",
       },
       {
         protocol: "https",
-        hostname: "**.cdninstagram.com", // also covers instagram cdn
+        hostname: "**.cdninstagram.com",
       },
     ],
   },

@@ -48,7 +48,6 @@ export default async function handler(req, res) {
                         media.media_url;
 
                     if (!mediaUrl) {
-                        console.warn(`No URL found for media ${index}:`, media);
                         return null;
                     }
 
@@ -136,13 +135,11 @@ export default async function handler(req, res) {
             results = null;
         }
 
-        console.log("getInstagramMedia result:", results);
         if (!hasMedia(results)) results = await callRapidAPI(url);
         if (!hasMedia(results)) results = await callApify(url);
 
         return respondOr404(results, res);
     } catch (err) {
-        console.error("API Handler Error:", err);
         return res
             .status(500)
             .json({

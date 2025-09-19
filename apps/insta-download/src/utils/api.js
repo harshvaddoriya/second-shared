@@ -12,11 +12,9 @@ export async function downloadFacebookMedia(url) {
     });
 
     const data = await res.json();
-    console.log("data of url--------------", data);
     if (!res.ok) {
       throw new Error(data.error || "Server error");
     }
-    console.log("return data", data);
     return data;
 
   } catch (err) {

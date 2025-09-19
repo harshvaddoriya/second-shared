@@ -9,6 +9,4 @@ export function trackErrorGA4({ error, errorInfo }) {
         fatal: false,
         extra_info: JSON.stringify(errorInfo || {}),
     });
-
-    console.log("GA4 tracked error:", error, errorInfo);
 }

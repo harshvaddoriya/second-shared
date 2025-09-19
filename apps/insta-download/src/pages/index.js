@@ -19,7 +19,6 @@ import Images from "../../public/images/index";
 
 export default function Home() {
   const handlePasteEvent = ({ url }) => {
-    console.log('PASTE EVENT CALLED:', url);
     sendGAEvent('paste_button_click', {
       url,
       app: 'sub-app',
@@ -27,7 +26,6 @@ export default function Home() {
   };
 
   const handleDownloadEvent = ({ url }) => {
-    console.log('Download EVENT CALLED:', url);
     sendGAEvent('download_button_click', {
       url,
       app: 'sub-app',

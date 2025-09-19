@@ -39,7 +39,6 @@ export default async function handler(req, res) {
         try {
             result = await getFacebookMedia(url);
         } catch (err) {
-            console.log("fb-downloader failed:", err.message);
             result = null;
         }
 
@@ -47,7 +46,6 @@ export default async function handler(req, res) {
             try {
                 result = await callFacebookPuppeteer(url);
             } catch (err) {
-                console.log("Puppeteer failed:", err.message);
                 result = null;
             }
         }

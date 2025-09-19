@@ -28,7 +28,7 @@ export async function fetchPostFromRapidAPI(url) {
 
     return {
         type: "post",
-        mediaUrls, // array of urls
+        mediaUrls,
         media: mediaUrls.map(u => ({ url: u })),
         mediaUrl: mediaUrls[0],
         title: firstMeta.title || null,

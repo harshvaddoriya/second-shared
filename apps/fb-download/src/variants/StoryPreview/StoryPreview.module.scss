@@ -44,7 +44,6 @@
   align-items: center;
 }
 
-
 .playPauseButton,.muteButton  {
   color: $color-white;
   cursor: pointer;
@@ -66,15 +65,12 @@
   }
 }
 
-
 .storyEmpty {
   text-align: center;
   padding: 2rem;
   font-size: 16px;
   color: #777;
 }
-
-
 
 .progressRow {
   display: flex;
