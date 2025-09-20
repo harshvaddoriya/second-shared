@@ -55,7 +55,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/sitemap-:path*',   // 👈 covers sitemap-0.xml, sitemap-1.xml, etc.
+        source: '/sitemap-:path*',
         headers: [
           {
             key: 'Content-Type',

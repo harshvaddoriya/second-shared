@@ -52,6 +52,8 @@ export default function Home() {
       <InstallPopup
         isVisible={popupVisible}
         onClose={() => setPopupVisible(false)}
+        buttonColor="#0866ff"
+        hoverColor="#2563eb"
       />
 
       <Downloader

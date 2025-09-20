@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
 import { features } from "@/dataStore/whyUsData";
 import { previewComponentMap } from "@/dataStore/mediaPreviewTypes";
@@ -7,6 +8,7 @@ import {
   Header,
   Footer,
   Downloader,
+  InstallPopup,
   AboutProcess,
   WhyUs,
   DownloadDescription,
@@ -18,6 +20,8 @@ import { downloadFacebookMedia } from "@/utils/api";
 import Images from "../../public/images/index";
 
 export default function Home() {
+  const [popupVisible, setPopupVisible] = useState(true);
+
   const handlePasteEvent = ({ url }) => {
     sendGAEvent('paste_button_click', {
       url,
@@ -43,6 +47,13 @@ export default function Home() {
       </Head>
 
       <Header logo={Images.Logo} />
+
+      <InstallPopup
+        isVisible={popupVisible}
+        onClose={() => setPopupVisible(false)}
+        buttonColor="#be185d"
+        hoverColor="#0654cc"
+      />
 
       <Downloader
         title="Instagram Downloader"
