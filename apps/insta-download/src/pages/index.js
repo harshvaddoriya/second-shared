@@ -52,7 +52,7 @@ export default function Home() {
         isVisible={popupVisible}
         onClose={() => setPopupVisible(false)}
         buttonColor="#be185d"
-        hoverColor="#0654cc"
+        hoverColor="#dd2a7b "
       />
 
       <Downloader
