@@ -9,7 +9,7 @@
 }
 
 .popup {
-  background: #fff;
+  background: $color-white;
   padding: 1.5rem;
   border-radius: 16px;
   max-width: 400px;
@@ -27,7 +27,7 @@
   p {
     font-size: 0.95rem;
     margin-bottom: 1rem;
-    color: #444;
+    color: $gray-medium;
   }
 }
 
@@ -40,7 +40,7 @@
 
 .installBtn {
   background: var(--btn-color, #e63946);
-  color: #fff;
+  color: $color-white;
   padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 8px;
@@ -54,7 +54,7 @@
 }
 
 .laterBtn {
-  background: #f1f1f1;
+  background: $gray-button;
   padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 8px;
@@ -63,7 +63,7 @@
   transition: 0.2s;
 
   &:hover {
-    background: #ddd;
+    background: $light-gray;
   }
 }
 

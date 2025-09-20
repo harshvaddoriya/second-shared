@@ -105,7 +105,7 @@
   }
 
   .search_form__button {
-    background: $gradient-blue;
+    background: var(--gradient-color, $gradient-blue);
     border: none;
     border-radius: 8px;
     color: $color-white;

@@ -16,7 +16,8 @@ export default function Downloader({
   placeholder = "Insert link here",
   loadingMessage = "Fetching media, please wait...",
   onDownloadClick,
-  onPasteClick
+  onPasteClick,
+  buttonGradient = "linear-gradient(315deg, #60a5fa, #2563eb)",
 }) {
   const [url, setUrl] = useState("");
   const [mediaData, setMediaData] = useState(null);
@@ -161,6 +162,7 @@ export default function Downloader({
             type="submit"
             disabled={loading}
             className={styles.search_form__button}
+            style={{ "--gradient-color": buttonGradient }}
           >
             {loading ? "Fetching..." : "Download"}
           </button>

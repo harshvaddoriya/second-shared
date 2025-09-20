@@ -2,11 +2,11 @@ import Image from "next/image";
 import styles from "./PostHeader.module.scss";
 
 export default function PostHeader({ username, avatar, color = "dark" }) {
-  const displayName = username || "Facebook_User";
+  const displayName = username || "Youtube_User";
 
   let initials = "";
-  if (displayName === "Facebook_User") {
-    initials = "FBU";
+  if (displayName === "Youtube_User") {
+    initials = "YTU";
   } else {
     initials = displayName
       .split(" ")

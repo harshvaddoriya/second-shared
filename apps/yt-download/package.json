@@ -1,0 +1,29 @@
+{
+  "name": "yt-download",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3003",
+    "build": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true SKIP_ENV_VALIDATION=true next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "next": "14.2.3",
+    "react-icons": "^5.5.0",
+    "swiper": "^11.2.10"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@module-federation/nextjs-mf": "^8.8.38",
+    "cross-env": "^10.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.3",
+    "ignore-loader": "^0.1.2"
+  }
+}
