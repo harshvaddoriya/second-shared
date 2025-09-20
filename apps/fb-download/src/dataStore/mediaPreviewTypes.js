@@ -9,3 +9,6 @@ export const previewComponentMap = {
     video: (props) => <PhotoPostPreview {...props} />,
     watch: (props) => <PhotoPostPreview {...props} />
 };
+
+
+

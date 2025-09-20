@@ -1,35 +1,11 @@
 "use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { FaDownload } from "@/icons/index";
+import { FaDownload } from "@/icons";
 import styles from "./AppPromotion.module.scss";
+import { usePwaInstall } from "@/hooks";
 
 export default function AppPromotion({ mobileImg, appHeight = 400 }) {
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [isInstallable, setIsInstallable] = useState(false);
-
-  useEffect(() => {
-    const handler = (e) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-      setIsInstallable(true);
-    };
-
-    window.addEventListener("beforeinstallprompt", handler);
-
-    return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
-
-  const handleInstallClick = async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      setDeferredPrompt(null);
-      setIsInstallable(false);
-    } else {
-      alert("PWA installation is not supported on this browser.");
-    }
-  };
+  const { isInstallable, install } = usePwaInstall();
 
   return (
     <section
@@ -65,7 +41,7 @@ export default function AppPromotion({ mobileImg, appHeight = 400 }) {
             className={styles.installBtn}
             type="button"
             aria-label="Install mobile app"
-            onClick={handleInstallClick}
+            onClick={install}
             disabled={!isInstallable}
           >
             <FaDownload size={18} />

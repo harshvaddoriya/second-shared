@@ -53,6 +53,11 @@ export const ErrorModal = dynamic(
     { ssr: false }
 );
 
+export const InstallPopup = dynamic(
+    () => import("shared/common").then((mod) => mod.InstallPopup),
+    { ssr: false }
+)
+
 
 // --------------other--------------------- //
 export const Contact = dynamic(

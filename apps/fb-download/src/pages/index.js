@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
 import { features } from "@/dataStore/whyUsData";
 import { steps, faqs } from "@/dataStore/faqContent";
@@ -6,18 +7,21 @@ import { previewComponentMap } from "@/dataStore/mediaPreviewTypes";
 import {
   Header,
   Footer,
+  InstallPopup,
   Downloader,
   AboutProcess,
   WhyUs,
   DownloadDescription,
   AppPromotion,
-  FaqSection,
+  FaqSection
 } from "@/shared";
 import { sendGAEvent } from '@/utils/gaUtils';
 import { downloadFacebookMedia } from "@/utils/api";
 import Images from "../../public/images/index";
 
 export default function Home() {
+  const [popupVisible, setPopupVisible] = useState(true);
+
   const handlePasteEvent = ({ url }) => {
     sendGAEvent('paste_button_click', {
       url,
@@ -42,7 +46,13 @@ export default function Home() {
         />
         <link rel="canonical" href="https://instagram-media-download.vercel.app/" />
       </Head>
+
       <Header logo={Images.Logo} />
+
+      <InstallPopup
+        isVisible={popupVisible}
+        onClose={() => setPopupVisible(false)}
+      />
 
       <Downloader
         title="Facebook Downloader"
@@ -57,6 +67,7 @@ export default function Home() {
       />
 
       <AppPromotion mobileImg={Images.mobile} appHeight={377} />
+
       <AboutProcess
         image={Images.Download}
         title="Facebook Videos and Photos Download"
