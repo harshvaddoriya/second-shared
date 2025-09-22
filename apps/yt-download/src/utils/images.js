@@ -9,7 +9,7 @@ const images = {
     videoImg2: "/images/about/videoImg2.png",
     DownloadTwo: "/images/about/Photo.png",
     videoImg3: "/images/about/VideoImage3.png",
-    videoImg4: "/images/about/dogImage.webp",
+    videoImg4: "/images/about/dogImage.png",
 };
 
 export default images;

@@ -8,7 +8,7 @@ import videoImg1 from "./about/videoImg1.png";
 import videoImg2 from "./about/videoImg2.png";
 import DownloadTwo from "./about/Photo.png";
 import videoImg3 from "./about/VideoImage3.png";
-import videoImg4 from "./about/dogImage.webp";
+import videoImg4 from "./about/dogImage.png";
 
 const images = {
     Logo,
