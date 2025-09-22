@@ -3,11 +3,16 @@
 import React from "react";
 import styles from "./styles.module.scss";
 
-export default function FaqSection({ title, intro, faqs }) {
+export default function FaqSection({ title, intro, faqs, headingColor }) {
   const titleId = React.useId();
 
   return (
-    <section className={styles.faq} aria-labelledby={titleId} role="region">
+    <section
+      className={styles.faq}
+      style={{ "--heading-color": headingColor }}
+      aria-labelledby={titleId}
+      role="region"
+    >
       <div className={styles.container}>
         <h2 id={titleId}>{title}</h2>
         <p className={styles.intro}>{intro}</p>

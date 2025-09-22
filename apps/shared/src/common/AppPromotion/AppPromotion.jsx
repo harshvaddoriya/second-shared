@@ -4,7 +4,11 @@ import { FaDownload } from "@/icons";
 import styles from "./AppPromotion.module.scss";
 import { usePwaInstall } from "@/hooks";
 
-export default function AppPromotion({ mobileImg, appHeight = 400 }) {
+export default function AppPromotion({
+  mobileImg,
+  appHeight = 400,
+  promoText = "",
+}) {
   const { isInstallable, install } = usePwaInstall();
 
   return (
@@ -31,11 +35,7 @@ export default function AppPromotion({ mobileImg, appHeight = 400 }) {
 
         <div className={styles.content}>
           <h2 id="app-promo-heading">Download our mobile app</h2>
-          <p>
-            Download your favorite photos, videos, Reels, and stories in a
-            single tap! Enjoy fast, HD downloads free of watermarks with our
-            app.
-          </p>
+          <p>{promoText}</p>
 
           <button
             className={styles.installBtn}

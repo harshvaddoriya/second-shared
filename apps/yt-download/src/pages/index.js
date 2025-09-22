@@ -55,7 +55,7 @@ export default function Home() {
 
       <Downloader
         title="Youtube Downloader"
-        subtitle="Download Youtube Videos, Shorts, Stories & Photos"
+        subtitle="Download Youtube Videos, Shorts & Photos"
         mainLinks={mainNavLinks}
         previewComponentMap={previewComponentMap}
         downloadYoutubeMedia={downloadYoutubeMedia}
@@ -66,48 +66,53 @@ export default function Home() {
       // onPasteClick={handlePasteEvent}
       />
 
-      <AppPromotion mobileImg={Images.mobile} appHeight={377} />
+      <AppPromotion
+        mobileImg={Images.mobile}
+        appHeight={377}
+        promoText="Download your favorite photos, videos, and shorts in a single tap! Enjoy fast, HD downloads free of watermarks with our app."
+      />
 
       <AboutProcess
         image={Images.Download}
         title="Youtube Videos and Shorts Download"
-        description="YoutubeDl is an online web tool that helps you download Youtube Videos, Photos, Shorts, Story. YoutubeDl.app is designed to be easy to use on any device, such as a mobile phone, tablet, or computer."
+        description="YoutubeDl is an online web tool that helps you download Youtube Videos, Photos, Shorts. YoutubeDl.app is designed to be easy to use on any device, such as a mobile, tablet, or in your computer."
         heading="How to Download Youtube Content?"
-        smallDescription="You must follow these three easy steps to download video, shorts, story and photo from Youtube. Follow the simple steps below."
+        smallDescription="You must follow these three easy steps to download video, short and photo from Youtube. Follow the simple steps below for best results."
         steps={steps}
+        headingColor="#ff0000"
       />
       <WhyUs
         title="Use YoutubeDl to download from Youtube"
         description="You can download videos in just two clicks, and the quality stays the same. Avoid using unreliable applications and appreciate the videos, even if they are of lower quality."
         features={features}
+        headingColor="#ff0000"
       />
       <DownloadDescription
         heading="Features of YoutubeDl"
-        headingDescription="With YoutubeDl you can download any type of content from Youtube. Our service includes a video downloader along with support for Shorts, Stories, and photos."
+        headingDescription="With YoutubeDl you can download any type of content from Youtube. Our service includes a video downloader along with support for Shorts and photos."
         image={Images.videoImg2}
         title="Video Downloader"
-        description="YoutubeDl.app supports Youtube video download for videos. YoutubeDl is created to enable you to download videos from your personal page."
+        description="YoutubeDl.app supports downloading YouTube videos easily. It is designed to help you save videos directly from YouTube to your device."
         link="/video"
         secondImage={Images.DownloadTwo}
         secondTitle="Photos Downloader"
         secondDescription="Youtube photo download provided by YoutubeDl.app is a great tool for saving images from Youtube posts. With YoutubeDl, You can save either a single post image or multiple Youtube photos."
         secondLink="/photo"
+        headingColor="#ff0000"
       />
       <DownloadDescription
         image={Images.videoImg1}
         title="Shorts Downloader"
-        description="Shorts represents a modern video style designed for quick, engaging clips.Youtube Shorts download with the help of YoutubeDl. Our Youtube Shorts downloader can help you to save your favorite Shorts videos."
+        description="Shorts are engaging videos designed for quick viewing. With YoutubeDl, you can easily download your favorite Shorts and save them directly to your device for offline viewing."
         link="/shorts"
-        secondImage={Images.videoImg3}
-        secondTitle="Story Downloader"
-        secondDescription="Story is a long video type. If you can’t watch it now, you can download Story videos to your device to be sure that you can return to watching later, without the need to be online or in case the Story can be deleted."
-        secondLink="/story"
+        headingColor="#ff0000"
       />
       <FaqSection
         title="Frequently asked questions (FAQ)"
-        intro="This FAQ answers common questions and worries about YoutubeDl.app, which is a tool to download public Youtube content.If your question isn’t covered, you can get in touch with us by sending an email through our contact page."
+        intro="This FAQ answers common questions and worries about YoutubeDl.app, which is a tool to download Youtube content.If your question isn’t covered, you can get in touch with us by sending an email through our contact page."
         image={Images.Download}
         faqs={faqs}
+        headingColor="#ff0000"
       />
       <Footer
         logo={Images.Logo}

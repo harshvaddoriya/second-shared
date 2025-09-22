@@ -63,7 +63,7 @@ const legalPagesData = {
             },
             {
                 heading: "2. Description of Service",
-                text: 'YoutubeDl.app is a free online tool that allows users to download Youtube content including photos, videos, shorts, stories and posts. Our service is provided "as is" without any warranties.',
+                text: 'YoutubeDl.app is a free online tool that allows users to download Youtube content including videos, shorts, and posts. Our service is provided "as is" without any warranties.',
             },
             {
                 heading: "3. User Responsibilities",

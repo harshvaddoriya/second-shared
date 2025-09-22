@@ -24,7 +24,9 @@ export default function Page() {
           <p>
             Contact our team via email:{" "}
             <a
-              href="mailto:resilient.tech001@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=resilient.tech001@gmail.com&su=Hello&body=I%20want%20to%20know%20more"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.link}
               aria-label="Send email to support at instadl.app"
             >

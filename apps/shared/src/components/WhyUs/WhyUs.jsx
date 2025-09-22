@@ -3,11 +3,15 @@
 import React from "react";
 import styles from "./styles.module.scss";
 
-export default function WhyUs({ title, description, features }) {
+export default function WhyUs({ title, description, features, headingColor }) {
   const titleId = React.useId();
 
   return (
-    <section className={styles.wrapper} aria-labelledby={titleId}>
+    <section
+      className={styles.wrapper}
+      aria-labelledby={titleId}
+      style={{ "--heading-color": headingColor }}
+    >
       <div className={styles.container}>
         <div className={styles.header}>
           <h3 id={titleId} className={styles.title}>

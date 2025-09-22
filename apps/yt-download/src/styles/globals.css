@@ -7,9 +7,9 @@
   --gradient-color: linear-gradient(
     108deg,
     #ff0000 0%,
-    /* YouTube Red start */ #ff3333 40%,
-    /* Medium red */ #ff6666 70%,
-    /* Light red */ #ff9999 100% /* Soft red, still clearly red */
+    #ff3333 40%,
+    #ff6666 70%,
+    #ff9999 100%
   );
 }
 

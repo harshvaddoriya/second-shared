@@ -9,9 +9,13 @@ export default function AboutProcess({
   description,
   smallDescription,
   steps,
+  headingColor,
 }) {
   return (
-    <section className={styles.wrapper}>
+    <section
+      className={styles.wrapper}
+      style={{ "--heading-color": headingColor }}
+    >
       <div className={styles.container}>
         <div className={styles.intro}>
           <div className={styles.imageWrapper}>
@@ -49,7 +53,6 @@ export default function AboutProcess({
 
                 <div className={styles.imgDescription}>
                   <h4>{step.title}</h4>
-
                   <p>{step.text}</p>
                 </div>
               </Link>

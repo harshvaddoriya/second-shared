@@ -16,10 +16,10 @@
 .subheading {
   font-size: 32px;
   font-weight: 700;
-  color: $primary-color;
+  color: var(--heading-color, $primary-color);
   text-align: center;
   padding-bottom:10px;
- margin-bottom:30px;
+  margin-bottom:30px;
   border-bottom: 2px solid transparent;
   border-image:var(--gradient-color) 1;
 
@@ -73,7 +73,7 @@
     h2 {
       font-size: 32px;
       font-weight: 700;
-      color: $primary-color;
+      color: var(--heading-color, $primary-color);
       margin-bottom: 18px;
 
       @media(max-width:480px){

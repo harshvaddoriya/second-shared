@@ -17,6 +17,7 @@ export default function DownloadDescription({
   imageAlt = "Feature descriptive illustrate",
   link,
   secondLink,
+  headingColor,
 }) {
   const headingId = React.useId();
   const firstSectionId = React.useId();
@@ -25,6 +26,7 @@ export default function DownloadDescription({
   return (
     <section
       className={styles.wrapper}
+      style={{ "--heading-color": headingColor }}
       role="region"
       aria-labelledby={heading ? headingId : undefined}
       aria-label={!heading ? title : undefined}

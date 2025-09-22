@@ -68,7 +68,11 @@ export default function Home() {
         onPasteClick={handlePasteEvent}
       />
 
-      <AppPromotion mobileImg={Images.mobile} appHeight={377} />
+      <AppPromotion
+        mobileImg={Images.mobile}
+        appHeight={377}
+        promoText="Download your favorite photos, videos, Reels, and stories in a single tap! Enjoy fast, HD downloads free of watermarks with our app."
+      />
 
       <AboutProcess
         image={Images.Download}

@@ -4,22 +4,17 @@ export const faqs = [
     {
         question: `What is YoutubeDl.app?`,
         answer:
-            "YoutubeDl.app is an online tool that lets you save Youtube content, such as photos, videos, Shorts, and Stories, directly to your device for offline viewing.",
-    },
-    {
-        question: "Is it legal to download from Youtube?",
-        answer:
-            `It’s generally okay to save public posts for your own use. But remember, the copyright stays with the original creator. Keep the files private unless you have permission to share them.`,
+            "YoutubeDl.app is an online tool that lets you download YouTube content such as videos, Shorts, community posts, and more directly to your device for offline viewing.",
     },
     {
         question: "Do I need to sign up or log in?",
         answer:
-            `No, you don’t. Just copy the Youtube link and paste it into YoutubeDl.app. No account is needed, no Youtube login, and no tracking cookies.`,
+            `No account or login is required. Simply copy the YouTube link and paste it into YoutubeDl.app. No YouTube login, no signup, and no tracking cookies.`,
     },
     {
         question: "Are there any limits on how much I can download?",
         answer:
-            `No. You can download as many posts as you want. Our servers don’t put any limits on the number of files.`,
+            `No, there are no limits. You can download as many YouTube videos, Shorts, or posts as you like without restrictions.`,
     },
     {
         question: "How do I download a post?",
@@ -32,23 +27,27 @@ export const faqs = [
     {
         question: "Why might the download be slow?",
         answer:
-            `Slowness can happen because of a weak internet connection, heavy ISP throttling, or Youtube’s rate limiting. Try switching to another Wi-Fi, turning off a VPN, or using a different browser. If that doesn’t help, contact us through the contact page — we respond quickly.`,
+            `Download speed may be affected by your internet connection, network throttling, or YouTube’s server limits. Try switching to another Wi-Fi, turning off VPN, or using a different browser. If issues continue, contact us through the support page.`,
     },
     {
         question: "Can I download content from private accounts?",
         answer:
-            `No, we can’t. We respect privacy, so only public posts are available. If the post isn’t visible when you’re not logged into Youtube, YoutubeDl.app can’t get it either.`,
+            `No. YoutubeDl.app only works with public content. Private videos, unlisted videos you don’t have access to, or paid/members-only content cannot be downloaded.`,
     },
     {
-        question: "Where do the files go on my phone or computer?",
+        question: "Where do the files go after downloading?",
         answer:
-            `On desktop, the files go to your default “Downloads” folder. On mobile, they’ll appear in your browser’s download list or in the “Files” app. Most gallery apps will show them automatically.`,
+            `On desktop, files are saved to your default 'Downloads' folder. On mobile, check your browser’s download list or the 'Files' app. Videos will also appear in your gallery or media player automatically.`,
+    },
+    {
+        question: "Is it legal to download from Youtube?",
+        answer:
+            `Downloading YouTube content without permission may violate YouTube’s terms of service. You can save videos for personal offline use, but the copyright stays with the original creator. Do not share or re-upload downloads unless you have the creator’s consent.`,
     },
     {
         question: "Is my link history stored on your servers?",
         answer:
-            `No.
-Links are processed in real time, and once the download is complete, both the original link and the converted file are removed from our servers.`,
+            `No. All links are processed in real time, and once your file is generated, both the original link and the file are permanently removed from our servers.`,
     },
 
 ];
@@ -56,13 +55,13 @@ export const steps = [
     {
         image: Images.step1,
         title: "Copy the URL",
-        text: "Open the Youtube, copy the URL of the post, story, shorts, video.",
+        text: "Open the Youtube, copy the URL of the post, shorts, video.",
         link: "/"
     },
     {
         image: Images.step2,
         title: "Paste the link",
-        text: "Return to the YoutubeDl website, paste the link into the input field and click the “Download” button.",
+        text: "Return to the YoutubeDl app or website, paste the link into the input field and click the “Download” button.",
         link: "/"
     },
     {
@@ -80,31 +79,31 @@ export const videoFaqs = [
             "There is no such term as “limit” for the number of videos you want to download by using the YoutubeDl video downloader. Just copy, paste and click to download!",
     },
     {
+        question: "What devices are compatible with this built-in Downloader?",
+        answer:
+            "You can use any device or operating system without any restrictions. Whether you're on an iPhone, Android phone, or a computer, you can easily download your favorite videos. Just make sure your device has enough storage space. Video downloads are also supported on common operating systems like macOS, Windows.",
+    },
+    {
         question:
             "Is there a fee for using Youtube Video Downloader offered by YoutubeDl?",
         answer:
             "This Youtube Video Downloader is completely free to use. There are no extra costs or charges for downloading any videos you wish to save.",
     },
     {
-        question: "What devices are compatible with this built-in Downloader?",
+        question: "What Is an Youtube Video Downloader?",
         answer:
-            "You can use any device or operating system without any restrictions. Whether you're on an iPhone, Android phone, or a computer, you can easily download your favorite videos. Just make sure your device has enough storage space. Video downloads are also supported on common operating systems like macOS, Windows.",
+            "YouTube allows users to save certain videos for offline viewing in the app, even without Premium. However, these downloads are limited — they can only be watched inside the YouTube app and not all videos are available. YoutubeDl.app offers a broader solution: it’s a free online tool that lets you download YouTube videos, Shorts, and posts directly to your device in different formats and qualities. No subscription, no account, and no app installation required — just copy the link, paste it into YoutubeDl.app, and click download.",
     },
     {
         question: "Are there any limits on the number of videos I can download?",
         answer: "No! You can download as many videos as you wish.",
-    },
-    {
-        question: "What Is an Youtube Video Downloader?",
-        answer:
-            "Youtube does not have such an online tool for downloading video files. For this reason we have created a free online tool to help Youtube followers to enjoy the watching later of their favorite video. No need for a subscription, account or installation of anything additional. The only requirement is to copy the link of the video you like, open the YoutubeDl video downloader website, paste the link onto the right field, and click to download.",
     },
 ];
 export const videoSteps = [
     {
         image: Images.step1,
         title: "Copy the URL",
-        text: "If you are navigating on Youtube or you prefer the Youtube app, and just found a post you really like, then what you should do is just click on (⋯) for iPhone or (⋮) for Android. Next, from the popup menu choose the “Copy Link” option to copy the link.",
+        text: "If you are navigating on Youtube or you prefer the Youtube app, and just found a video you really like, then what you should do is just click on (⋯) for iPhone or (⋮) for Android. Next, from the popup menu choose the “Copy Link” option to copy the link.",
         link: "/video"
     },
     {
@@ -123,23 +122,24 @@ export const videoSteps = [
 
 export const photoFaq = [
     {
-        question: "Can I download Youtube photos to my computer?",
-        answer:
-            `Of course, go ahead. YoutubeDl is an online service that works directly in your browser. Using this Youtube downloader on your PC is not a problem. Our photo downloader service is also available for tablets, Macs, and phones. Our photo downloading service is also available for tablets or phones.`
-    },
-    {
         question: "What file formats can I download using YoutubeDl?",
         answer:
             "These days, JPG is the easiest format to use when downloading images. For videos, MP4 remains the most widely used format around the world because it provides good quality while keeping the file size small."
     },
     {
+        question: "Can I download Youtube photos to my computer?",
+        answer:
+            `Of course, go ahead. YoutubeDl is an online service that works directly in your browser. Using this Youtube downloader on your PC is not a problem. Our photo downloader service is also available for tablets, Macs, and phones. Our photo downloading service is also available for tablets or phones.`
+    },
+
+    {
         question: "Is this Youtube a free service?",
         answer:
-            `Yes! Our Youtube picture downloader is totally free to use. You don't need to create an account or pay for any premium services.`
+            `Yes! Our Youtube photos downloader is totally free to use. You don't need to pay for any premium services.`
     },
     {
         question: "Which other devices are compatible with the YoutubeDl downloader?",
-        answer: `YoutubeDl works as an online service. You don't have to worry about using the YoutubeDl picture downloader on devices like iPads, iPhones, or Android phones. It also works perfectly on other devices like PCs. All you need is a web browser, and you're ready to go!`,
+        answer: `YoutubeDl works as an online service. You don't have to worry about using the YoutubeDl photos downloader on devices like iPads, iPhones, or Android phones. It also works perfectly on other devices like PCs. All you need is a web browser, and you're ready to go!`,
     },
     {
         question: "How safe is it to download Youtube photos using YoutubeDl?",
@@ -175,11 +175,6 @@ export const shortsFaq = [
             `Yes, definitely. YoutubeDl is an online service that works smoothly in your browser. You can use this Youtube Shorts downloader on your PC without any problems. Our Shorts downloader also works on tablets, Macs, and phones. Likewise, our photo downloading service is available for use on tablets and phones as well.`
     },
     {
-        question: "What kinds of file formats can I download using YoutubeDl?",
-        answer:
-            `These days, the JPG format is the easiest choice for downloading images. For videos, MP4 is still the most widely used format around the world because it offers good quality and keeps the file size small.`
-    },
-    {
         question: "Is this Youtube Shorts downloader a free service?",
         answer:
             `Yes! Our Youtube Shorts downloader is totally free to use. You don’t need to create an account or pay for any extra services.`
@@ -188,6 +183,11 @@ export const shortsFaq = [
         question:
             "Which additional devices can work with the YoutubeDl Shorts downloader?",
         answer: `YoutubeDl is a flexible web service that works well on any device, like an iPad, iPhone, Android phone, or something else. You can use the YoutubeDl Shorts downloader easily without any problems. It works smoothly on computers and all kinds of devices. All you need is a web browser, and you're all set to start.`
+    },
+    {
+        question: "What kinds of file formats can I download using YoutubeDl?",
+        answer:
+            `These days, the JPG format is the easiest choice for downloading images. For videos, MP4 is still the most widely used format around the world because it offers good quality and keeps the file size small.`
     },
     {
         question: `How safe is it to download Youtube Shorts using YoutubeDl?`,
@@ -215,67 +215,26 @@ export const shortsSteps = [
     },
 ];
 
-export const storyFaq = [
-    {
-        question: "What are Youtube Stories and Highlights?",
-        answer:
-            "Stories and Highlights are two features that let users share photos and videos which disappear after 24 hours. The main difference is that Highlights are kept in a private album named Highlights, while regular stories are added to a public gallery called Your Story."
-    },
-    {
-        question: "How to download Youtube stories?",
-        answer: [
-            `1. Tap the thumbnail for your story (it will be at the top of your feed). Once you select it, you'll be taken to a screen with an icon on the right top with three dots. Tap it.`,
-            `2. Select Copy Link, tap the small button on the screen.`,
-            `3. Copy its URL then open the YoutubeDl webpage.`,
-            `4. Paste the copied URL onto the indicated field on YoutubeDl`,
-            `5. Tap Download, when you're done choosing what story you want to download in your download!`,
-        ],
-    },
-    {
-        question: "How many times can I save Youtube stories?",
-        answer: `There are no limits on how many times you can save stories. You can use our Youtube story download service as much as you want. And the best part is, it's completely free. You can download an Youtube story and use it however you like — whether to keep it for yourself, share it with friends, or even print it out and put it on your wall. It's all up to you!`
-    },
-    {
-        question:
-            "Can I download Youtube stories from my Android or iPhone?",
-        answer: `Yes, various methods are available for anonymously downloading Youtube stories on Android. One of the easiest and most convenient ways is through our website. This Youtube story downloader is entirely free and unrestricted, compatible with major browsers like Google Chrome, Firefox, Safari, and Opera. You can effortlessly download any stories or highlights, allowing you to view them anonymously on your device at any time.`,
-    },
-];
-export const storySteps = [
-    {
-        image: Images.step1,
-        title: "Copy the URL",
-        text: "Open a Story you really like, then what you should do is just click on (⋯) for iPhone or (⋮) for Android. Next, from the popup menu choose the “Copy Link” option to copy the link.",
-        link: "/story"
-    },
-    {
-        image: Images.step2,
-        title: "Paste the link",
-        text: "Paste the copied link into the designated box, then tap the Download button to initiate.",
-        link: "/story"
-    },
-    {
-        image: Images.step3,
-        title: "Download",
-        text: `After tapping Download, the Story will be stored automatically—on iPhones it goes to your Downloads folder, while on Android it appears in your device’s default download gallery.`,
-        link: "/story"
-    },
-];
-
-
 export const mainFaq = [
     {
         question: "What is YoutubeDl.app and why would you need it?",
-        answer: `YoutubeDl.app helps you download and save photos or videos from Youtube. It’s the easiest and most convenient way to save your favorite moments and memories to watch later.`,
+        answer: `YoutubeDl.app helps you download and save shorts or videos from Youtube. It’s the easiest and most convenient way to save your favorite moments and memories to watch later.`,
+    },
+    {
+        question: `What quality does YoutubeDl use for downloaded content?`,
+        answer: `The short answer is: the same quality as the original. We don’t alter the videos or photos in any way.`,
+    },
+    {
+        question: `What kind of device can I use to download Youtube videos?`,
+        answer: `You can use any device with a web browser, such as a PC, laptop, Mac, iPhone, or any smartphone. YoutubeDl is a web-based tool and doesn’t require installation—but if you prefer, you can also install our app directly from this website. Simply copy the YouTube link and paste it into our tool—quick, easy, and fast!`,
     },
     {
         question: `Advantages of using YoutubeDl.app:`,
         answer: [
             "1. You can quickly access it by entering the address in your browser.",
             "2.If there’s a video in a public Youtube post, you can download it directly.",
-            "3. If there are multiple photos in a single post, you can download all of them with links.",
-            "4. The quality of the downloaded videos is high.",
-            "5. You don’t need to ll extra software or spend a lot of time.",
+            "3. The quality of the downloaded videos is as per your requirement.",
+            "4. You don’t need to all extra software or spend a lot of time.",
         ],
     },
     {
@@ -287,14 +246,6 @@ export const mainFaq = [
         answer: `Typically, you can access your download list by pressing Ctrl + J. The location may vary based on your browser and operating system. It might open in a new tab or directly show you where the files are stored. You can check how to find your download folder.`,
     },
     {
-        question: `What quality does YoutubeDl use for downloaded content?`,
-        answer: `The short answer is: the same quality as the original. We don’t alter the videos or photos in any way.`,
-    },
-    {
-        question: `Is it illegal to download private Youtube posts`,
-        answer: `No, it’s not illegal to download videos that are publicly posted on Youtube. However, there are rules about how the content can be used, especially for commercial use. If you use the content for such purposes, you must give proper credit to the original creator.`,
-    },
-    {
         question: `Which operating systems can be used to download Youtube videos?`,
         answer: `You can use any system that has a web browser, like Windows, macOS, Linux, iOS, or Android. Make sure your device has enough storage space, especially if you're downloading large files. Just copy the URL from Youtube and paste it into YoutubeDl.app.`,
     },
@@ -302,13 +253,10 @@ export const mainFaq = [
         question: `Can I download multiple shorts with YoutubeDl at the same time?`,
         answer: ` Unfortunately, you can only download one shorts at a time. We recommend saving all the URLs in a list and then pasting them one by one into the tool. This way, you won’t miss any of your favorite shorts.`,
     },
-    {
-        question: `What kind of device can I use to download Youtube videos?`,
-        answer: `You can use any device that has a web browser, such as a PC, laptop, Mac, iPhone, or any smartphone. YoutubeDl is a web-based tool and doesn’t need to be installed. Just copy the link from Youtube and paste it into our tool—simple and fast!`,
-    },
+
     {
         question: `What quality do the videos I download through YoutubeDl have?`,
-        answer: `All videos you download will be in the same quality as the original. Our downloader ensures the quality remains unchanged. Quality is important, and we know that!`,
+        answer: `All videos you download will match the original quality by default. Our downloader ensures the quality remains unchanged, but if you prefer, you can also choose to download in lower quality. Quality is important, and we know that!`,
     },
 ];
 

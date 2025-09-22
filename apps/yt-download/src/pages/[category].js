@@ -20,10 +20,6 @@ export default function CategoryPage({ content, category }) {
         return <PageNotFound />;
     }
 
-
-
-
-
     return (
         <>
             <Header logo={Images.Logo} />
@@ -39,7 +35,11 @@ export default function CategoryPage({ content, category }) {
             // onDownloadClick={handleDownloadEvent}
             // onPasteClick={handlePasteEvent}
             />
-            <AppPromotion mobileImg={Images.mobile} appHeight={377} />
+            <AppPromotion
+                mobileImg={Images.mobile}
+                appHeight={377}
+                promoText="Download your favorite photos, videos, and shorts in a single tap! Enjoy fast, HD downloads free of watermarks with our app."
+            />
             <AboutProcess
                 image={content?.about.image}
                 title={content?.about.title}
@@ -47,6 +47,7 @@ export default function CategoryPage({ content, category }) {
                 heading={content?.about.heading}
                 smallDescription={content?.about.smallDescription}
                 steps={content?.about.steps}
+                headingColor="#ff0000"
             />
 
             <DownloadDescription
@@ -60,6 +61,7 @@ export default function CategoryPage({ content, category }) {
                 secondTitle={content?.downloadDescription.secondTitle}
                 secondDescription={content?.downloadDescription.secondDescription}
                 secondLink={content?.downloadDescription.secondLink}
+                headingColor="#ff0000"
             />
 
             <FaqSection

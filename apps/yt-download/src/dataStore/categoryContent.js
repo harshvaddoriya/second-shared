@@ -18,6 +18,7 @@ export const categoryContent = {
         about: {
             image: Images.Download,
             title: "Download Youtube Videos",
+            heading: "How to download Youtube videos?",
             description:
                 "Explore a variety of interesting content on Youtube and get your favorite videos with YoutubeDl. This easy online tool lets you download Youtube videos anytime, without any limits. YoutubeDl lets you download as many videos as you want for watching offline, all with just a few simple steps.",
             smallDescription:
@@ -29,7 +30,7 @@ export const categoryContent = {
             image: Images.videoImg2,
             title: "Save videos",
             description:
-                "Please note that once you download the video from Youtube you are required to make it available for everyone to see it. In case you are not respecting this rule you will be restricted to download videos from private accounts. Rules are always to be respected!",
+                "Please note that once you download a video from YouTube, you must use it responsibly and respect copyright and content rules. Downloading videos from private or restricted accounts without permission is prohibited. Always follow YouTube’s guidelines when using downloaded content.",
             link: "/video",
             secondImage: Images.videoImg4,
             secondTitle: "Video Downloader",
@@ -40,7 +41,7 @@ export const categoryContent = {
         faq: {
             title: "Frequently asked questions (FAQ)",
             intro:
-                "This FAQ answers common questions or worries people have about the YoutubeDl.app downloader. If you don't find the information you're looking for, you can send us an email through our contact page.",
+                "This FAQ answers common questions or worries people have about the YoutubeDl.app video downloader. If you don't find the information you're looking for, you can send us an email through our contact page.",
             image: Images.Download,
             items: videoFaqs,
         },
@@ -66,7 +67,7 @@ export const categoryContent = {
         },
         faq: {
             title: "Frequently asked questions (FAQ)",
-            intro: `This FAQ gives answers to common questions or worries people have about the YoutubeDl.app Youtube. If you don't find the information you're looking for, you can send us an email through our contact page.`,
+            intro: `This FAQ gives answers to common questions or worries people have about the YoutubeDl.app posts download. If you don't find the information you're looking for, you can send us an email through our contact page.`,
             image: Images.Download,
             items: photoFaq,
         },
@@ -88,46 +89,14 @@ export const categoryContent = {
             heading: "Youtube Shorts Downloader",
             image: Images.videoImg1,
             title: "Youtube Shorts Download",
-            description: `Youtube Shorts is a new feature on Youtube that lets people make short videos, either 15 or 30 seconds long. With Youtube's strong editing tools, users can create and customize videos in their own unique way. However, Youtube does not allow people to directly download Shorts videos. To easily download Shorts videos, YoutubeDl is a simple tool that works well. It lets users download any Shorts video on different devices like computers, tablets, and phones, including iPhones and Android devices.`,
+            description: `Youtube Shorts is a new feature on Youtube that lets people make short videos, either 15 or 30 seconds long. With Youtube's strong editing tools, users can create and customize videos in their own unique way. To easily download Shorts videos, YoutubeDl is a simple tool that works well. It lets users download any Shorts video on different devices like computers, tablets, and phones, including iPhones and Android devices.`,
             link: "/shorts",
         },
         faq: {
             title: "Frequently asked questions (FAQ)",
-            intro: `This FAQ gives answers to common questions or issues people have about the YoutubeDl.app Youtube Shorts downloader. If you don't find the answer you're looking for, you can send us an email through our contact page.`,
+            intro: `This FAQ gives answers to common questions or issues people have about the YoutubeDl.app Shorts downloader. If you don't find the answer you're looking for, you can send us an email through our contact page.`,
             image: Images.Download,
             items: shortsFaq,
-        },
-    },
-    story: {
-        title: "Youtube Story Downloader",
-        subtitle: "Download your Youtube story and highlights easily!",
-        placeholder: "Insert Youtube story link here...",
-        about: {
-            image: Images.Download,
-            title: "Youtube Story saver",
-            description: `Youtube Story Saver by YoutubeDl is the perfect tool for easily downloading any Youtube story directly to your device, all while staying completely private. Whether you want to re-upload, share again, or just save your favorite stories to your personal media collection for viewing with friends later, YoutubeDl makes it simple. There are no limits, so you can keep those memories safe and share the fun again and again. YoutubeDl's Story Saver is great for people who just browse Youtube and those who use it a lot, helping you save those quick, special moments shared in stories. Plus, you can use our tool right from your web browser—no need to download any extra apps! Enjoy the convenience and speed of YoutubeDl's Youtube Story Saver and never miss out on a story that grabs your attention.`,
-            heading: "How to download Story Youtube?",
-            smallDescription:
-                "Only three easy and quickest steps to download an Youtube Story",
-            steps: storySteps,
-        },
-        downloadDescription: {
-            heading: "Youtube Story Download",
-            headingDescription: `Youtube is a social media app where people can share stories and post them for their followers to see. You can make stories and highlights just like on Snapchat. Our website lets you download Youtube stories with just one click!`,
-            image: Images.videoImg2,
-            title: "Story Saver",
-            description: `Remember, if you want to save a Story from Youtube, make sure it's set to public so everyone can see it. Follow this rule so you can download stories or highlights from your own accounts. Always follow the rules.`,
-            link: "/story",
-            secondImage: Images.videoImg1,
-            secondTitle: "Story Downloader",
-            secondDescription: `Also, you can download the Story online by just entering the Youtube Story link you want. This Youtube Story saver is free to use, and you don't need to create an account to use it. It's completely anonymous.`,
-            secondLink: "/story",
-        },
-        faq: {
-            title: "Frequently asked questions (FAQ)",
-            intro: `This FAQ answers common questions or issues people have about the YoutubeDl.app Youtube story downloader. If you don't find the information you're looking for, you can send us an email through the contact page.`,
-            image: Images.Download,
-            items: storyFaq,
         },
     },
 };
