@@ -1,10 +1,11 @@
-import ReelPreview from "@/variants/ShortsPreview/ShortsPreview";
+import ShortsPreview from "@/variants/ShortsPreview/ShortsPreview";
+import VideoPreview from "@/variants/VideoPreview/VideoPreview";
 import PhotoPostPreview from "@/variants/PhotoPostPreview/PhotoPostPreview";
 
 export const previewComponentMap = {
-    reel: (props) => <ReelPreview {...props} />,
+    shorts: (props) => <ShortsPreview {...props} />,
     photo: (props) => <PhotoPostPreview {...props} />,
-    video: (props) => <PhotoPostPreview {...props} />,
+    video: (props) => <VideoPreview {...props} />,
 };
 
 

@@ -31,8 +31,12 @@
 .link {
   color: $black-color;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   transition: color 0.2s ease;
+
+  @media(max-width:768px){
+    font-size: 14px;
+  }
 
   &:hover {
     color: #888b8e;
@@ -41,8 +45,13 @@
 
 .separator {
   color: #888b8e;
-  font-size: 14px;
-  margin: 0 4px;
+  font-size: 16px;
+  margin: 0 8px;
+
+  @media(max-width:768px){
+    font-size: 14px;
+    margin:0 4px;
+  }
 }
 
 .copyright {
