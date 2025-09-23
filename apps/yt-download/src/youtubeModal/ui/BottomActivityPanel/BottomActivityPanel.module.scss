@@ -41,3 +41,17 @@
   }
 
 }
+
+
+.stats {
+  display: flex;
+  gap: 12px;
+  margin: 8px 0;
+  font-size: 14px;
+  color: #555;
+  span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}

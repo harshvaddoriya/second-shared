@@ -1,28 +1,48 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useMemo } from "react";
 import BottomActivityPanel from "@/youtubeModal/ui/BottomActivityPanel/BottomActivityPanel";
-import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "shared/icons";
 import styles from "./ShortsPreview.module.scss";
 
-export default function ReelPreview({ data }) {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
+export default function ShortsPreview({ data, error }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const videoRef = useRef(null);
 
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) videoRef.current.pause();
-    else videoRef.current.play();
-    setIsPlaying(!isPlaying);
-  };
+  const postData = useMemo(() => {
+    if (!data) return null;
+    return {
+      id: data.id,
+      title: data.title,
+      description: data.description,
+      thumbnail: data.thumbnail,
+      mediaUrls: data.media?.map((item) => item.url).filter(Boolean) || [],
+      statistics: data.statistics || {},
+      initials: data.title?.charAt(0) || "Y",
+      username: "Youtube User",
+      fullName: "Youtube",
+      likes: parseInt(data.statistics?.likeCount) || 0,
+      views: parseInt(data.statistics?.viewCount) || 0,
+      comments: parseInt(data.statistics?.commentCount) || 0,
+    };
+  }, [data]);
 
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
-  };
+  if (error) {
+    return (
+      <div className={styles.reelContainer}>
+        <p style={{ color: "red" }}>Error: {error}</p>
+      </div>
+    );
+  }
+
+  if (!postData) {
+    return (
+      <div className={styles.reelContainer}>
+        <p>No shorts data available</p>
+      </div>
+    );
+  }
+
+  const mediaUrl = postData.mediaUrls[0] || "";
+  const caption = postData.title || "Shorts caption";
 
   const getTruncatedText = (text, maxLength = 80) => {
     if (!text) return "Shorts caption";
@@ -34,72 +54,50 @@ export default function ReelPreview({ data }) {
 
   const toggleCaption = () => setIsExpanded(!isExpanded);
 
-  const mediaUrl = data?.media?.[0]?.url || "";
-  const caption = data?.title || data?.caption || "Shorts caption";
-
   return (
     <div className={styles.reelContainer}>
-      <video
-        ref={videoRef}
-        className={styles.video}
-        src={mediaUrl}
-        controls
-        muted={isMuted}
-        autoPlay
-        playsInline
-        preload="metadata"
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-        onEnded={() => setIsPlaying(false)}
-      />
+      <div className={styles.videoContainer}>
+        <iframe
+          src={mediaUrl}
+          title={postData.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className={styles.video}
+        />
 
-      <div className={styles.topControls}>
-        <button
-          onClick={togglePlay}
-          className={styles.controlBtn}
-          aria-label={isPlaying ? "Pause" : "Play"}
-        >
-          {isPlaying ? <FaPause /> : <FaPlay />}
-        </button>
-
-        <button
-          onClick={toggleMute}
-          className={styles.controlBtn}
-          aria-label={isMuted ? "Unmute" : "Mute"}
-        >
-          {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
-        </button>
-      </div>
-
-      <div className={styles.overlayContent}>
-        <div className={styles.leftContent}>
-          <div className={styles.caption} onClick={toggleCaption}>
-            {isExpanded ? (
-              <>
-                {caption}
-                <span className={styles.showMore}> ... less</span>
-              </>
-            ) : (
-              <>
-                {getTruncatedText(caption)}
-                {caption.length > 80 && (
-                  <>
-                    <span>...</span>
-                    <span className={styles.showMore}> more</span>
-                  </>
-                )}
-              </>
-            )}
+        <div className={styles.overlayContent}>
+          <div className={styles.leftContent}>
+            <div className={styles.caption} onClick={toggleCaption}>
+              {isExpanded ? (
+                <>
+                  {caption}
+                  <span className={styles.showMore}> ... less</span>
+                </>
+              ) : (
+                <>
+                  {getTruncatedText(caption)}
+                  {caption.length > 80 && (
+                    <>
+                      <span>...</span>
+                      <span className={styles.showMore}> more</span>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
-
       <BottomActivityPanel
         data={{
-          ...data,
-          mediaUrls: [mediaUrl],
+          mediaUrls: postData.mediaUrls,
           currentMediaUrl: mediaUrl,
           currentMediaIndex: 0,
+          likes: postData.likes,
+          views: postData.views,
+          comments: postData.comments,
+          username: postData.username,
+          caption: postData.description,
         }}
       />
     </div>

@@ -17,6 +17,9 @@ export default function BottomActivityPanel({ data }) {
     caption,
     currentMediaUrl,
     currentMediaIndex,
+    likes,
+    views,
+    comments,
   } = data;
 
   const displayUsername = username || "Youtube_user";
@@ -44,6 +47,15 @@ export default function BottomActivityPanel({ data }) {
       <div className={styles.counterSection}>
         {caption && (
           <PostCaption username={displayUsername} caption={caption} />
+        )}
+        {(likes || views || comments) && (
+          <div className={styles.stats}>
+            {views !== undefined && <span>👁 {views.toLocaleString()}</span>}
+            {likes !== undefined && <span>👍 {likes.toLocaleString()}</span>}
+            {comments !== undefined && (
+              <span>💬 {comments.toLocaleString()}</span>
+            )}
+          </div>
         )}
 
         <div className={styles.shareDownload}>
