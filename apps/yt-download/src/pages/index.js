@@ -58,7 +58,7 @@ export default function Home() {
         subtitle="Download Youtube Videos, Shorts & Photos"
         mainLinks={mainNavLinks}
         previewComponentMap={previewComponentMap}
-        downloadYoutubeMedia={downloadYoutubeMedia}
+        downloadFacebookMedia={downloadYoutubeMedia}
         placeholder="Insert Youtube link here..."
         loadingMessage="Fetching Youtube media, please wait..."
         buttonGradient="linear-gradient(315deg, #ff4d4d, #ff0000)"
@@ -79,13 +79,13 @@ export default function Home() {
         heading="How to Download Youtube Content?"
         smallDescription="You must follow these three easy steps to download video, short and photo from Youtube. Follow the simple steps below for best results."
         steps={steps}
-        headingColor="#ff0000"
+        headingColor="#08003a"
       />
       <WhyUs
         title="Use YoutubeDl to download from Youtube"
         description="You can download videos in just two clicks, and the quality stays the same. Avoid using unreliable applications and appreciate the videos, even if they are of lower quality."
         features={features}
-        headingColor="#ff0000"
+        headingColor="#08003a"
       />
       <DownloadDescription
         heading="Features of YoutubeDl"
@@ -98,21 +98,21 @@ export default function Home() {
         secondTitle="Photos Downloader"
         secondDescription="Youtube photo download provided by YoutubeDl.app is a great tool for saving images from Youtube posts. With YoutubeDl, You can save either a single post image or multiple Youtube photos."
         secondLink="/photo"
-        headingColor="#ff0000"
+        headingColor="#08003a"
       />
       <DownloadDescription
         image={Images.videoImg1}
         title="Shorts Downloader"
         description="Shorts are engaging videos designed for quick viewing. With YoutubeDl, you can easily download your favorite Shorts and save them directly to your device for offline viewing."
         link="/shorts"
-        headingColor="#ff0000"
+        headingColor="#08003a"
       />
       <FaqSection
         title="Frequently asked questions (FAQ)"
         intro="This FAQ answers common questions and worries about YoutubeDl.app, which is a tool to download Youtube content.If your question isn’t covered, you can get in touch with us by sending an email through our contact page."
         image={Images.Download}
         faqs={faqs}
-        headingColor="#ff0000"
+        headingColor="#08003a"
       />
       <Footer
         logo={Images.Logo}

@@ -1,17 +1,12 @@
 export function getMediaTypeFromUrl(url) {
-    if (/\/stories\//i.test(url)) return "story";
-    if (/\/reel\//i.test(url)) return "reel";
-    if (/\/(videos|watch)\//i.test(url)) return "video";
-    if (/\/(photos|photo)\//i.test(url)) return "photo";
+    if (/\/shorts\//i.test(url)) return "shorts";
+    if (/\/watch\//i.test(url) || /v=/.test(url)) return "video";
     if (/\/posts?\//i.test(url)) return "post";
-
     return "video";
 }
 
 export async function downloadYoutubeMedia(url) {
-    if (!url || !url.trim()) {
-        throw new Error("Please enter a URL");
-    }
+    if (!url || !url.trim()) throw new Error("Please enter a URL");
 
     try {
         const res = await fetch("/api/youtube", {
@@ -21,10 +16,7 @@ export async function downloadYoutubeMedia(url) {
         });
 
         const data = await res.json();
-
-        if (!res.ok) {
-            throw new Error(data.error || "Server error");
-        }
+        if (!res.ok) throw new Error(data.error || "Server error");
 
         data.detectedType = getMediaTypeFromUrl(url);
         return data;

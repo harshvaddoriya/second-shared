@@ -5,11 +5,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.fna.fbcdn.net", // match ALL fbcdn.net subdomains
+        hostname: "i.ytimg.com",
       },
       {
         protocol: "https",
-        hostname: "**.cdninstagram.com", // also covers instagram cdn
+        hostname: "img.youtube.com", // optional, for other thumbnails
       },
     ],
   },
@@ -20,8 +20,8 @@ const nextConfig = {
 
         filename: 'static/chunks/remoteEntry.js',
         remotes: {
-          //shared: `shared@http://localhost:3002/_next/static/chunks/remoteEntry.js`,
-          shared: `shared@https://second-shared-shared.vercel.app/_next/static/chunks/remoteEntry.js`,
+          shared: `shared@http://localhost:3002/_next/static/chunks/remoteEntry.js`,
+          //shared: `shared@https://second-shared-shared.vercel.app/_next/static/chunks/remoteEntry.js`,
         },
         shared: {
           react: { singleton: true, requiredVersion: false },

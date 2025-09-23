@@ -21,36 +21,27 @@ export default function PhotoPostPreview({ userEnteredUrl, data }) {
 
     (async () => {
       try {
-        if (
-          userEnteredUrl.includes("youtube.com") ||
-          userEnteredUrl.includes("youtube.watch")
-        ) {
-          const mediaType = userEnteredUrl.includes("/videos/")
-            ? "video"
-            : "photo";
-          const res = await fetch(`/api/youtube/${mediaType}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ url: userEnteredUrl }),
-          });
-          const ytData = await res.json();
+        const res = await fetch(`/api/youtube`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: userEnteredUrl }),
+        });
 
-          if (res.ok) {
-            setPostData({
-              initials: ytData.initials,
-              username: "Youtube User",
-              fullName: "Youtube",
-              title: ytData.title,
-              mediaUrls: ytData.media?.map((item) => item.url) || [
-                ytData.media?.[0]?.url,
-              ],
-              ...ytData,
-              likes: Math.floor(Math.random() * 1000),
-              views: Math.floor(Math.random() * 10000),
-            });
-          } else {
-            throw new Error(ytData.error || "Something went wrong!");
-          }
+        const ytData = await res.json();
+
+        if (res.ok) {
+          setPostData({
+            initials: ytData.initials,
+            username: "Youtube User",
+            fullName: "Youtube",
+            title: ytData.title,
+            mediaUrls: ytData.media?.map((item) => item.url) || [],
+            likes: Math.floor(Math.random() * 1000),
+            views: ytData.statistics?.viewCount || 0,
+            ...ytData,
+          });
+        } else {
+          throw new Error(ytData.error || "Something went wrong!");
         }
       } catch (err) {
         console.error("API call failed:", err);
@@ -59,21 +50,16 @@ export default function PhotoPostPreview({ userEnteredUrl, data }) {
     })();
   }, [userEnteredUrl, data]);
 
-  if (error) {
-    return <p style={{ color: "red" }}>{error}</p>;
-  }
-
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
   if (!postData) return <p>Loading...</p>;
 
-  const mediaUrls =
-    postData.mediaUrls ||
-    (postData.media ? postData.media.map((item) => item.url) : []);
+  const mediaUrls = postData.mediaUrls || [];
 
   return (
     <>
       <div className={styles.post}>
         <PostHeader
-          avatar={postData?.initials}
+          avatar={postData?.thumbnail}
           username={postData?.username || "Youtube User"}
           fullName={postData?.fullName || "Youtube User"}
           title={postData?.title}

@@ -28,7 +28,7 @@ export default function CategoryPage({ content, category }) {
                 subtitle={content?.subtitle}
                 mainLinks={mainNavLinks}
                 previewComponentMap={previewComponentMap}
-                downloadYoutubeMedia={downloadYoutubeMedia}
+                downloadFacebookMedia={downloadYoutubeMedia}
                 placeholder={content?.placeholder}
                 loadingMessage="Fetching Youtube media, please wait..."
                 buttonGradient="linear-gradient(315deg, #ff4d4d, #ff0000)"
@@ -47,7 +47,7 @@ export default function CategoryPage({ content, category }) {
                 heading={content?.about.heading}
                 smallDescription={content?.about.smallDescription}
                 steps={content?.about.steps}
-                headingColor="#ff0000"
+                headingColor="#08003a"
             />
 
             <DownloadDescription
@@ -61,7 +61,7 @@ export default function CategoryPage({ content, category }) {
                 secondTitle={content?.downloadDescription.secondTitle}
                 secondDescription={content?.downloadDescription.secondDescription}
                 secondLink={content?.downloadDescription.secondLink}
-                headingColor="#ff0000"
+                headingColor="#08003a"
             />
 
             <FaqSection
@@ -69,6 +69,7 @@ export default function CategoryPage({ content, category }) {
                 intro={content?.faq.intro}
                 image={content?.faq.image}
                 faqs={content?.faq.items}
+                headingColor="#08003a"
             />
             <Footer
                 logo={Images.Logo}
