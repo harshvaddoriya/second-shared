@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  MdOutlineRemoveRedEye,
+  MdOutlineThumbUp,
+  MdOutlineComment,
+} from "shared/icons";
 import PostCaption from "@/youtubeModal/ui/PostCaption/PostCaption";
 import {
   handleShareAll,
@@ -22,15 +27,17 @@ export default function BottomActivityPanel({ data }) {
     comments,
   } = data;
 
-  const displayUsername = username || "Youtube_user";
+  //  const displayUsername = username || "Youtube_user";
+  console.log(currentMediaUrl, "check here-------------");
 
-  const handleDownloadClick = () => {
-    sendGAEvent("download_media_click", { mediaCount: mediaUrls.length });
-    if (mediaUrls.length > 1) {
-      handleDownloadAll(mediaUrls);
-    } else {
-      handleDownload(currentMediaUrl, currentMediaIndex);
-    }
+  const handleDownloadClick = (url, index) => {
+    if (!url || typeof url !== "string") return;
+
+    const videoId = url.split("/embed/")[1]; // extract videoId from embed URL
+    const a = document.createElement("a");
+    a.href = `/api/download-video?videoId=${videoId}`;
+    a.download = `video-${index + 1}.mp4`;
+    a.click();
   };
 
   const handleShareClick = () => {
@@ -45,21 +52,36 @@ export default function BottomActivityPanel({ data }) {
   return (
     <div className={styles.bottomAcitivity}>
       <div className={styles.counterSection}>
-        {caption && (
-          <PostCaption username={displayUsername} caption={caption} />
-        )}
-        {(likes || views || comments) && (
+        {caption && <PostCaption caption={caption} />}
+        {(likes !== undefined ||
+          views !== undefined ||
+          comments !== undefined) && (
           <div className={styles.stats}>
-            {views !== undefined && <span>👁 {views.toLocaleString()}</span>}
-            {likes !== undefined && <span>👍 {likes.toLocaleString()}</span>}
+            {likes !== undefined && (
+              <span>
+                <MdOutlineThumbUp size={18} /> {likes.toLocaleString()}
+              </span>
+            )}
+            {views !== undefined && (
+              <span>
+                <MdOutlineRemoveRedEye size={18} /> {views.toLocaleString()}
+              </span>
+            )}
             {comments !== undefined && (
-              <span>💬 {comments.toLocaleString()}</span>
+              <span>
+                <MdOutlineComment size={18} /> {comments.toLocaleString()}
+              </span>
             )}
           </div>
         )}
 
         <div className={styles.shareDownload}>
-          <button className={styles.shareBtn} onClick={handleDownloadClick}>
+          <button
+            className={styles.shareBtn}
+            onClick={() =>
+              handleDownloadClick(currentMediaUrl, currentMediaIndex)
+            }
+          >
             {mediaUrls.length > 1
               ? `Download All (${mediaUrls.length})`
               : "Download"}

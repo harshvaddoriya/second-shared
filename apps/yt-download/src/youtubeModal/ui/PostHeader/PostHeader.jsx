@@ -1,7 +1,13 @@
 import Image from "next/image";
 import styles from "./PostHeader.module.scss";
 
-export default function PostHeader({ username, avatar, color = "dark" }) {
+export default function PostHeader({
+  username,
+  avatar,
+  fullName,
+  title,
+  color = "dark",
+}) {
   const displayName = username || "Youtube_User";
 
   let initials = "";
@@ -18,25 +24,28 @@ export default function PostHeader({ username, avatar, color = "dark" }) {
 
   return (
     <div className={styles.header}>
-      {avatar ? (
-        <Image
-          src={avatar}
-          alt={displayName}
-          width={35}
-          height={35}
-          className={styles.avatar}
-        />
-      ) : (
-        <div className={styles.initials}>{initials}</div>
-      )}
+      {title && <h3 className={styles.videoTitle}>{title}</h3>}
+      <div className={styles.heading}>
+        {avatar ? (
+          <Image
+            src={avatar}
+            alt={displayName}
+            width={35}
+            height={35}
+            className={styles.avatar}
+          />
+        ) : (
+          <div className={styles.initials}>{initials}</div>
+        )}
 
-      <span
-        className={`${styles.username} ${
-          color === "light" ? styles.light : styles.dark
-        }`}
-      >
-        {displayName}
-      </span>
+        <span
+          className={`${styles.username} ${
+            color === "light" ? styles.light : styles.dark
+          }`}
+        >
+          {displayName}
+        </span>
+      </div>
     </div>
   );
 }

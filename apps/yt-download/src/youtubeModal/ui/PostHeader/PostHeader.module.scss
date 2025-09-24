@@ -2,11 +2,13 @@
 
 .header {
   padding: 10px;
+}
+.heading{
   display: flex;
   align-items: center;
   gap: 8px;
+  padding-top:5px;
 }
-
 .avatar {
   border-radius: 50%;
 }

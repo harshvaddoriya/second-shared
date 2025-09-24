@@ -1,5 +1,4 @@
 .bottomAcitivity {
-  padding: 10px;
   .shareDownload {
     gap: 10px;
     display: flex;
@@ -7,7 +6,6 @@
     .shareBtn {
       background: var(--gradient-blue);
       color: var(--color-white);
-
       border-radius: 10px;
       width: 50%;
       padding: 8px 0;
@@ -42,13 +40,13 @@
 
 }
 
-
 .stats {
   display: flex;
   gap: 12px;
-  margin: 8px 0;
+  margin: 12px;
   font-size: 14px;
   color: #555;
+
   span {
     display: flex;
     align-items: center;

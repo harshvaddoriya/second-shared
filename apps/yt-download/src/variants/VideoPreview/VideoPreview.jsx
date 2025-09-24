@@ -45,20 +45,10 @@ export default function VideoPreview({ data, error }) {
 
   return (
     <div className={styles.post}>
-      <h1>video preview</h1>
-      {/* Post Header */}
-      <PostHeader
-        avatar={postData.thumbnail}
-        username={postData.username}
-        fullName={postData.fullName}
-        title={postData.title}
-        color="dark"
-      />
-
       {mediaUrls.length > 0 ? (
         <MediaVideo src={mediaUrls[0]} />
       ) : (
-        <div style={{ padding: "20px", textAlign: "center" }}>
+        <div style={{ padding: "10px", textAlign: "center" }}>
           <p>No video URL available</p>
           {postData.thumbnail && (
             <img
@@ -69,6 +59,14 @@ export default function VideoPreview({ data, error }) {
           )}
         </div>
       )}
+
+      <PostHeader
+        avatar={postData.avatar}
+        username={postData.username}
+        fullName={postData.fullName}
+        title={postData.title}
+        color="dark"
+      />
 
       <BottomActivityPanel
         data={{
