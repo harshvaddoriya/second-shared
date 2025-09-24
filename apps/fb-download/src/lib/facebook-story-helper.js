@@ -1,11 +1,12 @@
 export async function fetchStoryFromRapidAPI(url) {
+    const apiKey = process.env.RAPIDAPI_KEY;
+    if (!apiKey) throw new Error("Missing Facebook RapidAPI key");
 
     const response = await fetch("https://facebook-media-api.p.rapidapi.com/media/stories", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            //"x-rapidapi-key": process.env.RAPIDAPI_KEY,
-            "x-rapidapi-key": 'ecfb71dbc6msh2db6058090453a8p1e7ff6jsna42d93ce4e1b',
+            "x-rapidapi-key": apiKey,
             "x-rapidapi-host": "facebook-media-api.p.rapidapi.com",
 
         },

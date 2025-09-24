@@ -1,9 +1,12 @@
 export async function fetchPostFromRapidAPI(url) {
+    const apiKey = process.env.RAPIDAPI_KEY;
+    if (!apiKey) throw new Error("Missing Facebook RapidAPI key");
+
     const response = await fetch("https://facebook17.p.rapidapi.com/api/facebook/links", {
         method: "POST",
         headers: {
             "content-type": "application/json",
-            "x-rapidapi-key": "ecfb71dbc6msh2db6058090453a8p1e7ff6jsna42d93ce4e1b",
+            "x-rapidapi-key": apiKey,
             "x-rapidapi-host": "facebook17.p.rapidapi.com",
         },
         body: JSON.stringify({ url }),

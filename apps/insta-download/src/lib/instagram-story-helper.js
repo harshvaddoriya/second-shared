@@ -2,10 +2,13 @@ export async function fetchStoryFromRapidAPI(url) {
   const apiUrl =
     "https://instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com/get-info-rapidapi";
 
+  const apiKey = process.env.RAPIDAPI_KEY;
+  if (!apiKey) throw new Error("Missing RapidAPI key");
+
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": 'cfbce86b39msh497454a3d96e36dp10c908jsne1b0550288eb',
+      "x-rapidapi-key": apiKey,
       "x-rapidapi-host":
         "instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com",
     },

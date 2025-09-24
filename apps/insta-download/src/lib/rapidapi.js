@@ -1,15 +1,19 @@
 // Not call & Not working
 
 export async function callRapidAPI(url) {
+  const apiKey = process.env.SECOND_RAPIDAPI_KEY;
+  if (!apiKey) throw new Error("Missing Second RapidAPI key");
+
   try {
     const response = await fetch(
       `https://instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com/get-info-rapidapi?url=${encodeURIComponent(
         url
       )}`,
+
       {
         method: "GET",
         headers: {
-          "x-rapidapi-key": 'ae42f8aee0mshb3fe23ab29181e8p129ebfjsnba40b78302f4',
+          "x-rapidapi-key": apiKey,
           "x-rapidapi-host": "instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com",
         }
       }
