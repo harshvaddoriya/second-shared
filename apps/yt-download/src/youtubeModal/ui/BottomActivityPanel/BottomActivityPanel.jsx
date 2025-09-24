@@ -27,7 +27,6 @@ export default function BottomActivityPanel({ data }) {
     comments,
   } = data;
 
-  //  const displayUsername = username || "Youtube_user";
   console.log(currentMediaUrl, "check here-------------");
 
   const handleDownloadClick = (url, index) => {
