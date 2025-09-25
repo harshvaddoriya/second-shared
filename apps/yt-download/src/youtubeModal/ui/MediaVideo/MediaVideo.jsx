@@ -6,13 +6,9 @@ export default function MediaVideo({ src }) {
 
   return (
     <div className={styles.videoWrapper}>
-      <iframe
-        src={`${src}?autoplay=1&mute=1`}
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
+      <video src={src} controls autoPlay muted loop className={styles.video}>
+        Your browser does not support the video tag.
+      </video>
     </div>
   );
 }

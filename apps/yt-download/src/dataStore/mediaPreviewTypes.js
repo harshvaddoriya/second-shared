@@ -9,7 +9,6 @@ export const previewComponentMap = {
     video: (props) => <VideoPreview {...props} />,
 };
 
-
 export default function MediaPreview({ url, mediaData }) {
     const type = mediaData?.detectedType || getMediaTypeFromUrl(url);
     const PreviewComponent = previewComponentMap[type];
