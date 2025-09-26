@@ -4,28 +4,34 @@ import { useMemo } from "react";
 import PostHeader from "@/youtubeModal/ui/PostHeader/PostHeader";
 import BottomActivityPanel from "@/youtubeModal/ui/BottomActivityPanel/BottomActivityPanel";
 import MediaVideo from "../../youtubeModal/ui/MediaVideo/MediaVideo";
-import styles from "./VideoPreview.module.scss";
+import styles from "./PlayListPreview.module.scss";
+import MediaGallery from "@/youtubeModal/ui/MediaGallery/MediaGallery";
 
-export default function VideoPreview({ data, error }) {
+export default function PlayListPreview({ data, error, playlist = [] }) {
+  // Determine main video data
+  const mainVideo = playlist.items?.[0] || data;
+
   const postData = useMemo(() => {
-    if (!data) return null;
-    return {
-      id: data.id,
-      title: data.title,
-      description: data.description,
-      thumbnail: data.thumbnail,
-      mediaUrls: data.media?.map((item) => item.url).filter(Boolean) || [],
-      statistics: data.statistics || {},
-      initials: data.initials || data.title?.charAt(0) || "Y",
-      username: "Youtube User",
-      fullName: "Youtube",
-      likes: parseInt(data.statistics?.likeCount) || 0,
-      views: parseInt(data.statistics?.viewCount) || 0,
-      comments: parseInt(data.statistics?.commentCount) || 0,
-    };
-  }, [data]);
+    if (!mainVideo) return null;
 
-  console.log("MEDIA OBJECT:", data.media);
+    const mediaUrls =
+      mainVideo.media?.map((item) => item.url).filter(Boolean) || [];
+
+    return {
+      id: mainVideo.id,
+      title: mainVideo.title,
+      description: mainVideo.description,
+      thumbnail: mainVideo.thumbnail,
+      mediaUrls,
+      statistics: mainVideo.statistics || {},
+      initials: mainVideo.initials || mainVideo.title?.charAt(0) || "Y",
+      username: mainVideo.channel?.name || "Youtube User",
+      fullName: mainVideo.channel?.name || "Youtube",
+      likes: parseInt(mainVideo.statistics?.likeCount) || 0,
+      views: parseInt(mainVideo.statistics?.viewCount) || 0,
+      comments: parseInt(mainVideo.statistics?.commentCount) || 0,
+    };
+  }, [mainVideo]);
 
   if (error) {
     return (
@@ -47,6 +53,7 @@ export default function VideoPreview({ data, error }) {
 
   return (
     <div className={styles.post}>
+      {/* Main video */}
       {mediaUrls.length > 0 ? (
         <MediaVideo src={mediaUrls[0]} />
       ) : (
@@ -62,14 +69,16 @@ export default function VideoPreview({ data, error }) {
         </div>
       )}
 
+      {/* Header */}
       <PostHeader
         avatar={postData.avatar}
-        username={postData?.username || "Youtube User"}
-        fullName={postData.fullName || "Youtube User"}
+        username={postData.username}
+        fullName={postData.fullName}
         title={postData.title}
         color="dark"
       />
 
+      {/* Activity panel */}
       <BottomActivityPanel
         data={{
           mediaUrls,
@@ -82,6 +91,16 @@ export default function VideoPreview({ data, error }) {
           comments: postData.comments,
         }}
       />
+
+      {/* Playlist gallery for remaining videos */}
+      {playlist.items?.length > 1 && (
+        <MediaGallery
+          mediaUrls={playlist.items
+            .slice(1)
+            .map((video) => video.media?.[0]?.url)
+            .filter(Boolean)}
+        />
+      )}
     </div>
   );
 }

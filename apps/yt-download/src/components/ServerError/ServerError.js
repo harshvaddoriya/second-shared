@@ -130,7 +130,7 @@ export default function Custom500() {
                 mainLinks={mainNavLinks}
                 legalLinks={legalLinks}
                 logoWidth={180}
-                logoHeight={24}
+                logoHeight={28}
                 appName="FacebookDl"
             />
         </div>

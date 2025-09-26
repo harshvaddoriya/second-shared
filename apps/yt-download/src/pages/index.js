@@ -1,4 +1,5 @@
-// import { useState } from "react";
+import Head from "next/head";
+import { useState } from "react";
 import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
 import { features } from "@/dataStore/whyUsData";
 import { steps, faqs } from "@/dataStore/faqContent";
@@ -6,6 +7,7 @@ import { previewComponentMap } from "@/dataStore/mediaPreviewTypes";
 import {
   Header,
   Footer,
+  InstallPopup,
   Downloader,
   AboutProcess,
   WhyUs,
@@ -13,45 +15,46 @@ import {
   AppPromotion,
   FaqSection
 } from "@/shared";
+import { sendGAEvent } from '@/utils/gaUtils';
 import { downloadYoutubeMedia } from "@/utils/api";
 import Images from "../../public/images/index";
 
 export default function Home() {
-  // const [popupVisible, setPopupVisible] = useState(true);
+  const [popupVisible, setPopupVisible] = useState(true);
 
-  // const handlePasteEvent = ({ url }) => {
-  //   sendGAEvent('paste_button_click', {
-  //     url,
-  //     app: 'sub-app',
-  //   });
-  // };
+  const handlePasteEvent = ({ url }) => {
+    sendGAEvent('paste_button_click', {
+      url,
+      app: 'sub-app',
+    });
+  };
 
-  // const handleDownloadEvent = ({ url }) => {
-  //   sendGAEvent('download_button_click', {
-  //     url,
-  //     app: 'sub-app',
-  //   });
-  // };
+  const handleDownloadEvent = ({ url }) => {
+    sendGAEvent('download_button_click', {
+      url,
+      app: 'sub-app',
+    });
+  };
 
   return (
     <>
-      {/* <Head>
+      <Head>
         <title>YoutubeDL - Free Video Downloader</title>
         <meta
           name="description"
           content="Download videos instantly from your favorite platforms for free."
         />
-        <link rel="canonical" href="https://instagram-media-download.vercel.app/" />
-      </Head> */}
+        <link rel="canonical" href="https://youtube-media-download.vercel.app/" />
+      </Head>
 
       <Header logo={Images.Logo} />
 
-      {/* <InstallPopup
+      <InstallPopup
         isVisible={popupVisible}
         onClose={() => setPopupVisible(false)}
-        buttonColor="#0866ff"
-        hoverColor="#2563eb"
-      /> */}
+        buttonColor="#FF0000"
+        hoverColor="#8B0000"
+      />
 
       <Downloader
         title="Youtube Downloader"
@@ -62,8 +65,8 @@ export default function Home() {
         placeholder="Insert Youtube link here..."
         loadingMessage="Fetching Youtube media, please wait..."
         buttonGradient="linear-gradient(315deg, #ff4d4d, #ff0000)"
-      // onDownloadClick={handleDownloadEvent}
-      // onPasteClick={handlePasteEvent}
+        onDownloadClick={handleDownloadEvent}
+        onPasteClick={handlePasteEvent}
       />
 
       <AppPromotion

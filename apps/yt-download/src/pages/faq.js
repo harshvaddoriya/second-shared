@@ -1,16 +1,40 @@
+import React from "react";
+import Head from "next/head";
 import { Footer, Header, FaqSection } from "@/shared";
 import { mainFaq } from "@/dataStore/faqContent";
 import { mainNavLinks, legalLinks } from "@/dataStore/linksContent";
 import Images from "../../public/images/index";
 
 function Faq() {
+    const faqStructuredData = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": mainFaq.map((faq) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+            }
+        }))
+    };
 
     return (
-        <>
+        <><Head>
+            <title>Faq - YoutubeDL</title>
+            <meta
+                name="description"
+                content="Find answers to the most frequently asked questions about YoutubeDl, including downloads, formats, privacy, and troubleshooting."
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+            />
+        </Head>
             <Header logo={Images.Logo} />
             <FaqSection
                 title="FAQ - frequently asked question"
-                intro="You’re here on this page, so you might be looking for help with downloading Youtube Photos and videos. Let’s go through the most common questions people have about YoutubeDl.app and the answers."
+                intro="You’re here on this page, so you might be looking for help with downloading Youtube Playlist and videos. Let’s go through the most common questions people have about YoutubeDl.app and the answers."
                 faqs={mainFaq}
             />
             <Footer

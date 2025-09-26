@@ -1,3 +1,4 @@
+import React from "react";
 import Head from "next/head";
 import { Footer, Header, Policy } from "@/shared";
 import legalPagesData from "@/dataStore/legalPagesContent";
@@ -7,8 +8,21 @@ import Images from "../../../public/images/index";
 export default function PolicyPage({ pageData, slug }) {
     if (!pageData) return <div>Page not found</div>;
 
+    const title = pageData
+        ? `${pageData.title} - YoutubeDL`
+        : "Page Not Found - YoutubeDL";
+    const description =
+        pageData?.description || "The page you are looking for does not exist."
+
+    const pageUrl = `https://youtube-media-download.vercel.app/legal/${slug}`;
+
+
     return (
-        <>
+        <><Head>
+            <title>{title}</title>
+            <meta name="description" content={description} />
+            <link rel="canonical" href={pageUrl} />
+        </Head>
             <Header logo={Images.Logo} />
             <Policy pageData={pageData} />;
             <Footer

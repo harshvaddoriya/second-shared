@@ -4,7 +4,7 @@ import styles from "./PostHeader.module.scss";
 export default function PostHeader({
   username,
   avatar,
-  fullName,
+
   title,
   color = "dark",
 }) {

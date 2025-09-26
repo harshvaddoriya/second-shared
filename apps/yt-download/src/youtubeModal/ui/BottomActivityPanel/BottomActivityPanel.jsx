@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import {
   MdOutlineRemoveRedEye,
   MdOutlineThumbUp,
@@ -27,8 +28,15 @@ export default function BottomActivityPanel({ data }) {
     comments,
   } = data;
 
+  const displayUsername = username || "Youtube_user";
+
   const handleDownloadClick = (url, index) => {
     if (!url || typeof url !== "string") return;
+
+    sendGAEvent("download_media_click", {
+      mediaCount: mediaUrls.length,
+      currentIndex: index,
+    });
 
     const a = document.createElement("a");
     a.href = `/api/download?url=${encodeURIComponent(url)}`;

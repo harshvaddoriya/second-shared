@@ -16,9 +16,9 @@ export default function MediaGallery({ mediaUrls = [] }) {
           <div key={idx} className={styles.mediaItem}>
             <div className={styles.mediaWrapper}>
               {isVideo(url) ? (
-                <MediaVideo src={url} />
+                <MediaVideo src={mediaUrls[0]} />
               ) : (
-                <MediaImage src={url} alt={`Media ${idx + 1}`} />
+                <MediaImage src={mediaUrls[0]} alt={`Media ${idx + 1}`} />
               )}
             </div>
             <div className={styles.actionButtons}>
