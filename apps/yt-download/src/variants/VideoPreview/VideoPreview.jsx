@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import PostHeader from "@/youtubeModal/ui/PostHeader/PostHeader";
 import BottomActivityPanel from "@/youtubeModal/ui/BottomActivityPanel/BottomActivityPanel";
-import MediaVideo from "@/youtubeModal/ui/MediaVideo/MediaVideo";
+import MediaVideo from "../../youtubeModal/ui/MediaVideo/MediaVideo";
 import styles from "./VideoPreview.module.scss";
 
 export default function VideoPreview({ data, error }) {
@@ -24,6 +24,8 @@ export default function VideoPreview({ data, error }) {
       comments: parseInt(data.statistics?.commentCount) || 0,
     };
   }, [data]);
+
+  console.log("MEDIA OBJECT:", data.media);
 
   if (error) {
     return (

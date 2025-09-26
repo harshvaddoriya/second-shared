@@ -28,7 +28,7 @@ export default async function handler(req, res) {
 
             if (!videoId) throw new Error("Invalid YouTube video URL");
 
-            data = await fetchYoutubeMedia(videoId);
+            data = await fetchYoutubeMedia(videoId, detectedType);
             console.log("API response data ------------", data);
         } else if (detectedType === "post") {
             const match = url.match(/posts?\/([a-zA-Z0-9_-]+)/);

@@ -1,7 +1,7 @@
 import axios from "axios";
 import parseCountText from "@/utils/commentCount";
 
-export async function fetchYoutubeMedia(videoId) {
+export async function fetchYoutubeMedia(videoId, detectedType) {
     const options = {
         method: "GET",
         url: "https://youtube-media-downloader.p.rapidapi.com/v2/video/details",
@@ -35,8 +35,8 @@ export async function fetchYoutubeMedia(videoId) {
             likeCount: data.likeCount || 0,
             commentCount: parseCountText(data.commentCountText) || 0,
         },
-        detectedType: "video",
-        type: "video",
+        detectedType,
+        type: detectedType,
     };
 }
 

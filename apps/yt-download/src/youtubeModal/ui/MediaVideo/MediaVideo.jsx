@@ -6,9 +6,14 @@ export default function MediaVideo({ src }) {
 
   return (
     <div className={styles.videoWrapper}>
-      <video src={src} controls autoPlay muted loop className={styles.video}>
-        Your browser does not support the video tag.
-      </video>
+      <video
+        src={src}
+        autoPlay
+        muted
+        controls
+        playsInline
+        style={{ width: "100%", borderRadius: "8px" }}
+      />
     </div>
   );
 }

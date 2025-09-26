@@ -14,6 +14,6 @@ export {
     FaVolumeUp, FaVolumeMute, FaRegComment, FaRegCommentDots
 } from "react-icons/fa";
 
-export { MdOutlineSlideshow, MdOutlineViewCarousel, MdDownload, MdDevices, MdThumbUp, MdSecurity, MdOutlineRemoveRedEye, MdOutlineThumbUp, MdOutlineComment } from "react-icons/md";
+export { MdOutlineSlideshow, MdOutlineViewCarousel, MdDownload, MdDevices, MdThumbUp, MdSecurity, MdOutlineRemoveRedEye, MdOutlineThumbUp, MdOutlineComment, MdOutlineShare } from "react-icons/md";
 
 export { IoIosEye, IoMdShareAlt } from "react-icons/io";
