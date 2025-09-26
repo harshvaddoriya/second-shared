@@ -13,7 +13,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "img.youtube.com", // optional, for other thumbnails
+        hostname: "img.youtube.com",
       },
     ],
   },
