@@ -1,13 +1,11 @@
 import Images from "@/utils/images";
 import {
-    photoSteps,
-    photoFaq,
+    playlistSteps,
+    playlistFaq,
     videoSteps,
     videoFaqs,
     shortsFaq,
     shortsSteps,
-    storySteps,
-    storyFaq,
 } from "@/dataStore/faqContent";
 
 export const categoryContent = {
@@ -46,30 +44,30 @@ export const categoryContent = {
             items: videoFaqs,
         },
     },
-    photo: {
-        title: "Youtube Photo Downloader",
-        subtitle: "Download Photos from Youtube",
-        placeholder: "Insert Youtube photo link here...",
+    playlist: {
+        title: "Youtube Playlist Downloader",
+        subtitle: "Download Playlist from Youtube",
+        placeholder: "Insert Youtube playlist link here...",
         about: {
             image: Images.Download,
-            title: "Download Youtube Photos",
-            description: `In today's digital world, Youtube has become a popular place to share the moments of your life through pictures, covering many different topics. If you ever want to save a photo on your phone or computer, YoutubeDl is a helpful tool that makes it simple to download and keep any photo you like from Youtube. You can use it whether you're on a PC, Mac, Android, or iPhone, and downloading your favorite Youtube pictures is just a few clicks away.`,
-            heading: "How to download Youtube photos?",
-            smallDescription: `Check the steps below to easily use this Youtube picture downloader. It helps save you time and effort.`,
-            steps: photoSteps,
+            title: "Download Youtube Playlist",
+            description: `In today's digital world, Youtube has become a popular place to share the moments of your life through videos content, covering many different topics. If you ever want to save a playlist on your phone or computer, YoutubeDl is a helpful tool that makes it simple to download and keep any playlist you like from Youtube. You can use it whether you're on a PC, Mac, Android, or iPhone, and downloading your favorite Youtube videos is just a few clicks away.`,
+            heading: "How to download Youtube playlist?",
+            smallDescription: `Check the steps below to easily use this Youtube playlist downloader. It helps save you time and effort.`,
+            steps: playlistSteps,
         },
         downloadDescription: {
             heading: "Youtube Downloader",
             image: Images.DownloadTwo,
-            title: "Photos Downloader",
-            description: `You can now download several Youtube photos from any device you use, like a smartphone or computer, using the YoutubeDl downloader. This is a free online tool that doesn't require a subscription. Simply copy the link from the post where the photo is located and paste it into the correct field. Also, keep in mind that you can download more than one photo at a time with the YoutubeDl photo downloader. There's no set limit on how many photos you can download.`,
-            link: "/photo",
+            title: "Playlist Downloader",
+            description: `You can now download several Youtube Playlist from any device you use, like a smartphone or computer, using the YoutubeDl downloader. This is a free online tool that doesn't require a subscription. Simply copy the link from the videos where the playlist is located and paste it into the correct field. Also, keep in mind that you can download more than one videos at a time with the YoutubeDl playlist downloader. There's no set limit on how many playlist you can download.`,
+            link: "/playlist",
         },
         faq: {
             title: "Frequently asked questions (FAQ)",
-            intro: `This FAQ gives answers to common questions or worries people have about the YoutubeDl.app posts download. If you don't find the information you're looking for, you can send us an email through our contact page.`,
+            intro: `This FAQ gives answers to common questions or worries people have about the YoutubeDl.app playlist download. If you don't find the information you're looking for, you can send us an email through our contact page.`,
             image: Images.Download,
-            items: photoFaq,
+            items: playlistFaq,
         },
     },
     shorts: {

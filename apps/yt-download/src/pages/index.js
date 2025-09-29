@@ -58,7 +58,7 @@ export default function Home() {
 
       <Downloader
         title="Youtube Downloader"
-        subtitle="Download Youtube Videos, Shorts & Photos"
+        subtitle="Download Youtube Videos, Shorts & Playlist"
         mainLinks={mainNavLinks}
         previewComponentMap={previewComponentMap}
         downloadFacebookMedia={downloadYoutubeMedia}
@@ -72,15 +72,15 @@ export default function Home() {
       <AppPromotion
         mobileImg={Images.mobile}
         appHeight={377}
-        promoText="Download your favorite photos, videos, and shorts in a single tap! Enjoy fast, HD downloads free of watermarks with our app."
+        promoText="Download your favorite playlist, videos, and shorts in a single tap! Enjoy fast, HD downloads free of watermarks with our app."
       />
 
       <AboutProcess
         image={Images.Download}
         title="Youtube Videos and Shorts Download"
-        description="YoutubeDl is an online web tool that helps you download Youtube Videos, Photos, Shorts. YoutubeDl.app is designed to be easy to use on any device, such as a mobile, tablet, or in your computer."
+        description="YoutubeDl is an online web tool that helps you download Youtube Videos, Playlist, Shorts. YoutubeDl.app is designed to be easy to use on any device, such as a mobile, tablet, or in your computer."
         heading="How to Download Youtube Content?"
-        smallDescription="You must follow these three easy steps to download video, short and photo from Youtube. Follow the simple steps below for best results."
+        smallDescription="You must follow these three easy steps to download video, short and playlist from Youtube. Follow the simple steps below for best results."
         steps={steps}
         headingColor="#08003a"
       />
@@ -92,15 +92,15 @@ export default function Home() {
       />
       <DownloadDescription
         heading="Features of YoutubeDl"
-        headingDescription="With YoutubeDl you can download any type of content from Youtube. Our service includes a video downloader along with support for Shorts and photos."
+        headingDescription="With YoutubeDl you can download any type of content from Youtube. Our service includes a video downloader along with support for Shorts and playlist."
         image={Images.videoImg2}
         title="Video Downloader"
         description="YoutubeDl.app supports downloading YouTube videos easily. It is designed to help you save videos directly from YouTube to your device."
         link="/video"
         secondImage={Images.DownloadTwo}
-        secondTitle="Photos Downloader"
-        secondDescription="Youtube photo download provided by YoutubeDl.app is a great tool for saving images from Youtube posts. With YoutubeDl, You can save either a single post image or multiple Youtube photos."
-        secondLink="/photo"
+        secondTitle="Playlist Downloader"
+        secondDescription="Youtube playlist download provided by YoutubeDl.app is a great tool for saving videos from Youtube playlist. With YoutubeDl, You can save either a single video or multiple Youtube videos."
+        secondLink="/playlist"
         headingColor="#08003a"
       />
       <DownloadDescription

@@ -7,9 +7,9 @@ const mainNavLinks = [
         icon: <FaVideo />,
     },
     {
-        href: "/photo",
-        label: "Post",
-        icon: <FaImage />,
+        href: "/playlist",
+        label: "Playlist",
+        icon: <MdOutlineSlideshow />,
     },
     {
         href: "/shorts",
@@ -22,6 +22,11 @@ const legalLinks = [
     { href: "/contact-us", label: "Contact" },
     { href: "/legal/privacy-policy", label: "Privacy Policy" },
     { href: "/legal/terms-and-conditions", label: "Terms & Conditions" },
-    { href: "https://instagram-media-download.vercel.app/", label: "InstaDl" },
+    {
+        href: "https://instagram-media-download.vercel.app/",
+        label: "InstaDl",
+        target: "_blank",
+        rel: "noopener noreferrer"
+    },
 ];
 export { mainNavLinks, legalLinks };

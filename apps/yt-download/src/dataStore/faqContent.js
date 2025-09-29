@@ -4,7 +4,7 @@ export const faqs = [
     {
         question: `What is YoutubeDl.app?`,
         answer:
-            "YoutubeDl.app is an online tool that lets you download YouTube content such as videos, Shorts, community posts, and more directly to your device for offline viewing.",
+            "YoutubeDl.app is an online tool that lets you download YouTube content such as videos, Shorts, playlist, and more directly to your device for offline viewing.",
     },
     {
         question: "Do I need to sign up or log in?",
@@ -14,12 +14,12 @@ export const faqs = [
     {
         question: "Are there any limits on how much I can download?",
         answer:
-            `No, there are no limits. You can download as many YouTube videos, Shorts, or posts as you like without restrictions.`,
+            `No, there are no limits. You can download as many YouTube videos, Shorts, or playlist as you like without restrictions.`,
     },
     {
-        question: "How do I download a post?",
+        question: "How do I download a playlist?",
         answer: [
-            "1. Copy the link to an Youtube post.",
+            "1. Copy the link to an Youtube playlist.",
             "2. Go to YoutubeDl.app and paste the link into the box.",
             "3. Click Download and choose the quality you want. The file will be sent to you right away.",
         ],
@@ -120,51 +120,51 @@ export const videoSteps = [
     },
 ];
 
-export const photoFaq = [
+export const playlistFaq = [
     {
         question: "What file formats can I download using YoutubeDl?",
         answer:
-            "These days, JPG is the easiest format to use when downloading images. For videos, MP4 remains the most widely used format around the world because it provides good quality while keeping the file size small."
+            "These days, mp4 is the easiest format to use when downloading videos. For playlist, MP4 remains the most widely used format around the world because it provides good quality while keeping the file size small."
     },
     {
-        question: "Can I download Youtube photos to my computer?",
+        question: "Can I download Youtube playlist to my computer?",
         answer:
-            `Of course, go ahead. YoutubeDl is an online service that works directly in your browser. Using this Youtube downloader on your PC is not a problem. Our photo downloader service is also available for tablets, Macs, and phones. Our photo downloading service is also available for tablets or phones.`
+            `Of course, go ahead. YoutubeDl is an online service that works directly in your browser. Using this Youtube downloader on your PC is not a problem. Our playlist downloader service is also available for tablets, Macs, and phones.`
     },
 
     {
         question: "Is this Youtube a free service?",
         answer:
-            `Yes! Our Youtube photos downloader is totally free to use. You don't need to pay for any premium services.`
+            `Yes! Our Youtube playlist downloader is totally free to use. You don't need to pay for any premium services.`
     },
     {
         question: "Which other devices are compatible with the YoutubeDl downloader?",
-        answer: `YoutubeDl works as an online service. You don't have to worry about using the YoutubeDl photos downloader on devices like iPads, iPhones, or Android phones. It also works perfectly on other devices like PCs. All you need is a web browser, and you're ready to go!`,
+        answer: `YoutubeDl works as an online service. You don't have to worry about using the YoutubeDl playlist downloader on devices like iPads, iPhones, or Android phones. It also works perfectly on other devices like PCs. All you need is a web browser, and you're ready to go!`,
     },
     {
-        question: "How safe is it to download Youtube photos using YoutubeDl?",
-        answer: "It's safe! You can download Youtube photos with YoutubeDl without any worry. Our safety policy ensures that we don't collect any of your personal data through this tool. We really value your trust in us!",
+        question: "How safe is it to download Youtube playlist using YoutubeDl?",
+        answer: "It's safe! You can download Youtube playlist with YoutubeDl without any worry. Our safety policy ensures that we don't collect any of your personal data through this tool. We really value your trust in us!",
     },
 ];
 
-export const photoSteps = [
+export const playlistSteps = [
     {
         image: Images.step1,
         title: "Copy the URL",
-        text: "Open a post on where there is your favorite Youtube picture and copy the link.",
-        link: "/photo"
+        text: "Open a playlist on where there is your favorite Youtube videos and copy the link.",
+        link: "/playlist"
     },
     {
         image: Images.step2,
         title: "Paste the link",
-        text: `Put the link from the Youtube image you want to download into the input line on the YoutubeDl website. Make sure the YoutubeDl web page is already open.`,
-        link: "/photo"
+        text: `Put the link from the Youtube playlist you want to download into the input line on the YoutubeDl website. Make sure the YoutubeDl web page is already open.`,
+        link: "/playlist"
     },
     {
         image: Images.step3,
         title: "Download",
-        text: `Click the Download button to save the photo(s) on your device. Download the ones that suit your needs.`,
-        link: "/photo"
+        text: `Click the Download button to save the playlist on your device. Download the ones that suit your needs.`,
+        link: "/playlist"
     },
 ];
 

@@ -8,7 +8,6 @@ import styles from "./PlayListPreview.module.scss";
 import MediaGallery from "@/youtubeModal/ui/MediaGallery/MediaGallery";
 
 export default function PlayListPreview({ data, error, playlist = [] }) {
-  // Determine main video data
   const mainVideo = playlist.items?.[0] || data;
 
   const postData = useMemo(() => {
@@ -53,7 +52,6 @@ export default function PlayListPreview({ data, error, playlist = [] }) {
 
   return (
     <div className={styles.post}>
-      {/* Main video */}
       {mediaUrls.length > 0 ? (
         <MediaVideo src={mediaUrls[0]} />
       ) : (
@@ -69,7 +67,6 @@ export default function PlayListPreview({ data, error, playlist = [] }) {
         </div>
       )}
 
-      {/* Header */}
       <PostHeader
         avatar={postData.avatar}
         username={postData.username}
@@ -78,7 +75,6 @@ export default function PlayListPreview({ data, error, playlist = [] }) {
         color="dark"
       />
 
-      {/* Activity panel */}
       <BottomActivityPanel
         data={{
           mediaUrls,
@@ -92,7 +88,6 @@ export default function PlayListPreview({ data, error, playlist = [] }) {
         }}
       />
 
-      {/* Playlist gallery for remaining videos */}
       {playlist.items?.length > 1 && (
         <MediaGallery
           mediaUrls={playlist.items
