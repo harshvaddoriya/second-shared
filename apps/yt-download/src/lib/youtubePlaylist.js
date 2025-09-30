@@ -1,47 +1,59 @@
-import { Innertube } from "youtubei.js";
-import axios from "axios";
+import { exec } from "child_process";
+import path from "path";
+
+export async function getYoutubeMediaInfo(url, type = "playlist") {
+    return new Promise((resolve, reject) => {
+        let cmd = `"${path.join(process.cwd(), "bin", "yt-dlp.exe")}" -J "${url}"`;
+
+        exec(cmd, { maxBuffer: 1024 * 1024 * 10 }, (error, stdout, stderr) => {
+            if (error) return reject({ success: false, error: error.message });
+
+            try {
+                const json = JSON.parse(stdout);
+
+                if (!json.entries || !Array.isArray(json.entries)) {
+                    return reject({ success: false, error: "No playlist entries found" });
+                }
+
+                const items = json.entries.map(v => {
+                    const video = (v.formats || [])
+                        .filter(f => f.vcodec !== "none" && f.acodec === "none") // video only
+                        .sort((a, b) => b.height - a.height)[0];
+
+                    const audio = (v.formats || [])
+                        .filter(f => f.acodec !== "none" && f.vcodec === "none") // audio only
+                        .sort((a, b) => b.abr - a.abr)[0];
+
+                    return {
+                        id: v.id,
+                        title: v.title,
+                        videoUrl: video?.url,
+                        audioUrl: audio?.url,
+                        thumbnail: v.thumbnail,
+                        duration: v.duration,
+                        channel: { name: v.uploader },
+                        statistics: {
+                            views: v.view_count || 0,
+                            likes: v.like_count || 0,
+                            comments: v.comment_count || 0,
+                        },
+                    };
+                });
 
 
-async function scrapeChannelIdFromPost(url) {
-    const res = await axios.get(url);
-    const html = res.data;
 
-    let match = html.match(/"channelId":"(UC[\w-]+)"/);
-    if (match) return match[1];
+                resolve({
+                    detectedType: "playlist",
+                    playlistUrl: url,
+                    title: json.title,
+                    items,
+                });
+            } catch (err) {
+                console.error("Failed to parse yt-dlp output:", err);
+                console.error("Raw output:", stdout.slice(0, 500));
+                reject({ success: false, error: "Failed to parse yt-dlp output" });
+            }
 
-    const initialDataMatch = html.match(/var ytInitialData = (.*?);<\/script>/s);
-    if (initialDataMatch) {
-        try {
-            const ytInitialData = JSON.parse(initialDataMatch[1]);
-            const channelId = JSON.stringify(ytInitialData).match(/UC[\w-]{22,}/)?.[0];
-            if (channelId) return channelId;
-        } catch { }
-    }
-
-    throw new Error("Could not extract channelId from post page");
-}
-
-export async function getYoutubePostData(url) {
-    try {
-        const postId = url.split("/").pop();
-        const channelId = await scrapeChannelIdFromPost(url);
-
-        const yt = await Innertube.create();
-        const post = await yt.getPost(postId, channelId);
-
-        return {
-            postId,
-            channelId,
-            title: post?.content?.text?.toString()?.slice(0, 50) || "YouTube Post",
-            content: post?.content?.text?.toString() ?? null,
-            published: post?.published ?? null,
-            likes: post?.like_count ?? 0,
-            author: post?.author?.name ?? null,
-            thumbnail: post?.images?.[0] || null,
-            media: post?.images?.map((img) => ({ url: img })) || [],
-        };
-    } catch (err) {
-        console.error("getYoutubePostData error:", err.message);
-        return { error: "Failed to fetch post data" };
-    }
+        });
+    });
 }

@@ -1,4 +1,5 @@
 import { fetchYoutubeMedia, fetchYoutubePost } from "@/lib/youtubeRapidApis";
+import { getYoutubeMediaInfo } from "@/lib/youtubePlaylist";
 
 export default async function handler(req, res) {
     if (req.method !== "POST") {
@@ -10,6 +11,7 @@ export default async function handler(req, res) {
 
     const getMediaTypeFromUrl = (url) => {
         if (/\/shorts\//i.test(url)) return "shorts";
+        if (/\/playlist\//i.test(url) || /list=/.test(url)) return "playlist";
         if (/\/watch\//i.test(url) || /v=/.test(url)) return "video";
         if (/\/posts?\//i.test(url)) return "post";
         return "video";
@@ -30,6 +32,16 @@ export default async function handler(req, res) {
 
             data = await fetchYoutubeMedia(videoId, detectedType);
             console.log("API response data ------------", data);
+        } else if (detectedType === "playlist") {
+            console.log("it is in playlist type");
+            const downloadResult = await getYoutubeMediaInfo(url, "playlist");
+            // data = { playlistUrl: url, downloadInfo: downloadResult };
+            console.log("Playlist Package data----------", data);
+            data = {
+                detectedType,
+                playlistUrl: url,
+                downloadInfo: downloadResult,
+            };
         } else if (detectedType === "post") {
             const match = url.match(/posts?\/([a-zA-Z0-9_-]+)/);
             const postId = match ? match[1] : null;
