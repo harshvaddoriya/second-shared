@@ -30,20 +30,34 @@ export default function BottomActivityPanel({ data }) {
 
   const displayUsername = username || "Youtube_user";
 
-  const handleDownloadClick = (url, index) => {
-    if (!url || typeof url !== "string") return;
-
-    sendGAEvent("download_media_click", {
-      mediaCount: mediaUrls.length,
-      currentIndex: index,
-    });
-
-    const a = document.createElement("a");
-    a.href = `/api/download?url=${encodeURIComponent(url)}`;
-    a.download = `video-${index + 1}.mp4`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+  const handleDownloadClick = (single = true) => {
+    if (single) {
+      if (!currentMediaUrl) return;
+      const a = document.createElement("a");
+      a.href = `/api/download?url=${encodeURIComponent(currentMediaUrl)}`;
+      a.download = `video-1.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      sendGAEvent("download_media_click", {
+        mediaCount: 1,
+        currentIndex: currentMediaIndex,
+      });
+    } else {
+      mediaUrls.forEach((url, index) => {
+        if (!url) return;
+        const a = document.createElement("a");
+        a.href = `/api/download?url=${encodeURIComponent(url)}`;
+        a.download = `video-${index + 1}.mp4`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+      sendGAEvent("download_media_click", {
+        mediaCount: mediaUrls.length,
+        currentIndex: -1,
+      });
+    }
   };
 
   const handleShareClick = () => {
@@ -84,9 +98,7 @@ export default function BottomActivityPanel({ data }) {
         <div className={styles.shareDownload}>
           <button
             className={styles.shareBtn}
-            onClick={() =>
-              handleDownloadClick(currentMediaUrl, currentMediaIndex)
-            }
+            onClick={() => handleDownloadClick(mediaUrls.length === 1)}
           >
             {mediaUrls.length > 1
               ? `Download All (${mediaUrls.length})`
