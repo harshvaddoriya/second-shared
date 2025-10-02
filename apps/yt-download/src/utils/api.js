@@ -22,7 +22,6 @@ export async function downloadYoutubeMedia(url) {
         const data = await res.json();
 
         if (!res.ok) {
-            console.error("API Error:", data.error || "Server error");
             data.error = data.error || "Server error";
         }
 
@@ -31,10 +30,8 @@ export async function downloadYoutubeMedia(url) {
             data.type = "playlist";
         }
 
-        console.log(data, "detected data----------");
         return data;
     } catch (err) {
-        console.error("downloadYoutubeMedia failed---", err);
         return { error: err.message || "Server error" };
     }
 }

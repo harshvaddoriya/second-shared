@@ -1,6 +1,5 @@
 export function trackErrorGA4({ error, errorInfo }) {
     if (!window.gtag) {
-        console.warn("GA4 not initialized yet.");
         return;
     }
 

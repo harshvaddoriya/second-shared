@@ -19,9 +19,6 @@ export async function fetchYoutubeMedia(videoId, detectedType) {
 
     const response = await axios.request(options);
     const data = response.data;
-
-    console.log(data, "youtube api response --------");
-
     const videoItem = data.videos?.items?.[0];
 
     return {

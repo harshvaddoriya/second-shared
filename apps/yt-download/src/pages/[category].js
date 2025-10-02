@@ -17,7 +17,6 @@ import PageNotFound from "@/components/PageNotFound/PageNotFound";
 
 
 export default function CategoryPage({ content, category }) {
-
     if (!content) {
         return <PageNotFound />;
     }

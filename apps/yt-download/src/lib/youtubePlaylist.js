@@ -50,7 +50,6 @@ export async function getYoutubeMediaInfo(url, type = "playlist") {
                 });
             } catch (err) {
                 console.error("Failed to parse yt-dlp output:", err);
-                console.error("Raw output:", stdout.slice(0, 500));
                 reject({ success: false, error: "Failed to parse yt-dlp output" });
             }
 
