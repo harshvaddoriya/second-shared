@@ -30,34 +30,22 @@ export default function BottomActivityPanel({ data }) {
 
   const displayUsername = username || "Youtube_user";
 
-  const handleDownloadClick = (single = true) => {
-    if (single) {
-      if (!currentMediaUrl) return;
-      const a = document.createElement("a");
-      a.href = `/api/download?url=${encodeURIComponent(currentMediaUrl)}`;
-      a.download = `video-1.mp4`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      sendGAEvent("download_media_click", {
-        mediaCount: 1,
-        currentIndex: currentMediaIndex,
-      });
-    } else {
-      mediaUrls.forEach((url, index) => {
-        if (!url) return;
-        const a = document.createElement("a");
-        a.href = `/api/download?url=${encodeURIComponent(url)}`;
-        a.download = `video-${index + 1}.mp4`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      });
-      sendGAEvent("download_media_click", {
-        mediaCount: mediaUrls.length,
-        currentIndex: -1,
-      });
-    }
+  const handleDownloadClick = (single = true, format = "mp4") => {
+    if (!currentMediaUrl) return;
+
+    const a = document.createElement("a");
+    a.href = `/api/download?url=${encodeURIComponent(
+      currentMediaUrl
+    )}&format=${format}`;
+    a.download = `media-${currentMediaIndex + 1}.${format}`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    sendGAEvent("download_media_click", {
+      mediaCount: 1,
+      currentIndex: currentMediaIndex,
+    });
   };
 
   const handleShareClick = () => {
