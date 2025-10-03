@@ -4,7 +4,7 @@
 }
 
 .container{
-  margin:120px auto 64px; 
+  margin:180px auto 64px; 
   max-width: 1024px;
   position: relative;
   overflow: visible;
@@ -18,7 +18,7 @@
   @media (max-width: 973px) {
     grid-template-columns: 1fr;
     text-align: center;
-    margin: 64px auto; 
+    margin: 90px auto 60px; 
   }
 
   @media(max-width:480px){

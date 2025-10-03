@@ -16,10 +16,9 @@ import {
 import { sendGAEvent } from "@/utils/gaUtils";
 import styles from "./BottomActivityPanel.module.scss";
 
-export default function BottomActivityPanel({ data }) {
+export default function BottomActivityPanel({ data, format = "mp4" }) {
   const {
     mediaUrls = [],
-    username,
     caption,
     currentMediaUrl,
     currentMediaIndex,
@@ -28,15 +27,13 @@ export default function BottomActivityPanel({ data }) {
     comments,
   } = data;
 
-  const displayUsername = username || "Youtube_user";
-
-  const handleDownloadClick = (single = true, format = "mp4") => {
+  const handleDownloadClick = (single = true) => {
     if (!currentMediaUrl) return;
 
     const a = document.createElement("a");
     a.href = `/api/download?url=${encodeURIComponent(
       currentMediaUrl
-    )}&format=${format}`;
+    )}&format=${format}`; // use the passed format
     a.download = `media-${currentMediaIndex + 1}.${format}`;
     document.body.appendChild(a);
     a.click();
@@ -45,6 +42,21 @@ export default function BottomActivityPanel({ data }) {
     sendGAEvent("download_media_click", {
       mediaCount: 1,
       currentIndex: currentMediaIndex,
+    });
+  };
+
+  const handleDownloadAllClick = () => {
+    mediaUrls.forEach((url, idx) => {
+      const a = document.createElement("a");
+      a.href = `/api/download?url=${encodeURIComponent(url)}&format=${format}`;
+      a.download = `media-${idx + 1}.${format}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    sendGAEvent("download_media_click", {
+      mediaCount: mediaUrls.length,
     });
   };
 
@@ -86,7 +98,11 @@ export default function BottomActivityPanel({ data }) {
         <div className={styles.shareDownload}>
           <button
             className={styles.shareBtn}
-            onClick={() => handleDownloadClick(mediaUrls.length === 1)}
+            onClick={
+              mediaUrls.length > 1
+                ? handleDownloadAllClick
+                : handleDownloadClick
+            }
           >
             {mediaUrls.length > 1
               ? `Download All (${mediaUrls.length})`

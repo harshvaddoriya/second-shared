@@ -17,6 +17,7 @@ const legalPagesData = {
                 heading: "2. How We Use Information",
                 text: "We use collected information to:",
                 list: [
+                    "The primary purpose of this website is to allow users to save their own posts, videos, and stories for personal memory and archival purposes.",
                     "Process your download requests",
                     "Improve our service quality and performance",
                     "Monitor service usage and prevent abuse",

@@ -1,64 +1,34 @@
 import axios from "axios";
+import ffmpeg from "fluent-ffmpeg";
 
 export default async function handler(req, res) {
-    const { url } = req.query;
+    const { url, format = "mp4" } = req.query;
 
     if (!url) return res.status(400).json({ error: "Missing video URL" });
 
     try {
-        const response = await axios.get(url, { responseType: "stream" });
+        if (format === "mp4") {
+            const response = await axios.get(url, { responseType: "arraybuffer" });
+            res.setHeader("Content-Disposition", "attachment; filename=video.mp4");
+            res.setHeader("Content-Type", "video/mp4");
+            res.end(Buffer.from(response.data));
+        } else if (format === "mp3") {
+            res.setHeader("Content-Disposition", "attachment; filename=audio.mp3");
+            res.setHeader("Content-Type", "audio/mpeg");
+            const videoStream = (await axios.get(url, { responseType: "stream" })).data;
 
-        res.setHeader("Content-Disposition", "attachment; filename=video.mp4");
-        res.setHeader("Content-Type", "video/mp4");
-
-        response.data.pipe(res);
-
+            ffmpeg(videoStream)
+                .format("mp3")
+                .on("error", (err) => {
+                    console.error("FFmpeg error:", err.message);
+                    res.status(500).end("MP3 conversion failed");
+                })
+                .pipe(res, { end: true });
+        } else {
+            res.status(400).json({ error: "Invalid format. Use mp4 or mp3" });
+        }
     } catch (err) {
         console.error("Download error:", err.message);
-        res.status(500).json({ error: "Failed to download video" });
+        res.status(500).json({ error: "Failed to download video/audio" });
     }
 }
-
-// import axios from "axios";
-// import ffmpeg from "fluent-ffmpeg";
-// import ffmpegPath from "@ffmpeg-installer/ffmpeg";
-// import stream from "stream";
-// import { promisify } from "util";
-
-// const pipeline = promisify(stream.pipeline);
-// ffmpeg.setFfmpegPath(ffmpegPath.path);
-
-// export default async function handler(req, res) {
-//   const { url, format = "mp4" } = req.query;
-
-//   if (!url) return res.status(400).json({ error: "Missing video URL" });
-
-//   try {
-//     const videoResponse = await axios.get(url, { responseType: "stream" });
-
-//     if (format === "mp3") {
-//       // Convert to mp3 on request
-//       res.setHeader("Content-Disposition", `attachment; filename=audio.mp3`);
-//       res.setHeader("Content-Type", "audio/mpeg");
-
-//       ffmpeg(videoResponse.data)
-//         .format("mp3")
-//         .audioCodec("libmp3lame")
-//         .on("error", (err) => {
-//           console.error("FFmpeg error:", err);
-//           res.status(500).send("Error converting video to mp3");
-//         })
-//         .pipe(res, { end: true });
-
-//     } else {
-//       // Default: send MP4
-//       res.setHeader("Content-Disposition", `attachment; filename=video.mp4`);
-//       res.setHeader("Content-Type", "video/mp4");
-//       await pipeline(videoResponse.data, res);
-//     }
-
-//   } catch (err) {
-//     console.error("Download error:", err.message);
-//     res.status(500).json({ error: "Failed to download video" });
-//   }
-// }

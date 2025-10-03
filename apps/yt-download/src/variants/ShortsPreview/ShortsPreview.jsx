@@ -12,11 +12,13 @@ import {
   MdOutlineShare,
 } from "react-icons/md";
 import styles from "./ShortsPreview.module.scss";
+import DownloadOptions from "@/youtubeModal/ui/DownloadOptions/DownloadOptions";
 
 export default function ShortsPreview({ data, error }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [format, setFormat] = useState("mp4");
   const videoRef = useRef(null);
 
   const postData = useMemo(() => {
@@ -155,6 +157,9 @@ export default function ShortsPreview({ data, error }) {
           </div>
         </div>
       </div>
+      <div className={styles.downloadOption}>
+        <DownloadOptions format={format} setFormat={setFormat} />
+      </div>
       <div className={styles.bottomOption}>
         <BottomActivityPanel
           data={{
@@ -162,6 +167,7 @@ export default function ShortsPreview({ data, error }) {
             currentMediaUrl: mediaUrls[0],
             currentMediaIndex: 0,
           }}
+          format={format}
         />
       </div>
     </div>
