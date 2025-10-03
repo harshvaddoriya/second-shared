@@ -7,7 +7,7 @@ import styles from "./ReelPreview.module.scss";
 
 export default function ReelPreview({ data }) {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const videoRef = useRef(null);
 

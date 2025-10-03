@@ -16,7 +16,7 @@ import styles from "./ShortsPreview.module.scss";
 export default function ShortsPreview({ data, error }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef(null);
 
   const postData = useMemo(() => {

@@ -9,7 +9,6 @@ export default function MediaVideo({ src }) {
       <video
         src={src}
         autoPlay
-        muted
         controls
         playsInline
         style={{ width: "100%", borderRadius: "8px" }}

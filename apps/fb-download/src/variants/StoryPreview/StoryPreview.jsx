@@ -23,7 +23,7 @@ export default function StoryPreview({ data }) {
   const [activeDuration, setActiveDuration] = useState(4000);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progressPaused, setProgressPaused] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     const currentUrl = urls[currentIndex];
