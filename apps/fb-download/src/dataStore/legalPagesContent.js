@@ -43,7 +43,7 @@ const legalPagesData = {
                 heading: "7. User Rights",
                 text: "You have the right to:",
                 list: [
-                    "Request information about data we collect",
+                    "Request information about data what we collect",
                     "Request deletion of your data",
                     "Opt-out of analytics tracking",
                     "Contact us with privacy concerns",
