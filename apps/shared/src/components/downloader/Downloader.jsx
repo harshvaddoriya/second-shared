@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import MediaPreview from "@/components/mediaPreview/MediaPreview";
+import ErrorPopup from "@/common/ErrorPopup/ErrorPopup";
 import { FaPaste, FaTimes } from "@/icons";
 import styles from "./style.module.scss";
 
@@ -23,6 +24,7 @@ export default function Downloader({
   const [mediaData, setMediaData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [popupError, setPopupError] = useState("");
   const [pageMeta, setPageMeta] = useState({
     title,
     description: subtitle,
@@ -57,13 +59,14 @@ export default function Downloader({
     }
 
     setLoading(true);
-    setError("");
+    // setError("");
+    setPopupError("");
     setMediaData(null);
     try {
       const data = await downloadFacebookMedia(url);
       setMediaData(data);
     } catch (err) {
-      setError(err.message || "Something went wrong");
+      setPopupError(err.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -184,6 +187,11 @@ export default function Downloader({
           />
         )
       )}
+      <ErrorPopup
+        message={popupError}
+        onClose={() => setPopupError("")}
+        onRetry={() => handleDownload({ preventDefault: () => {} })}
+      />
     </>
   );
 }

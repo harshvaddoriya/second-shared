@@ -1,0 +1,138 @@
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.helpCard {
+  background: #f3f3f3f2;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(66, 103, 178, 0.1);
+  max-width: 400px;       
+  width: 90%;           
+  text-align: center;
+  
+  @media(max-width:480px){
+    max-width:250px;
+  }
+
+  h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: $black-color;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 16px;
+    color: $dark-gray;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+}
+
+.helpActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+   @media (max-width: 1080px) {
+    justify-content: center !important;
+  }
+  
+}
+
+.refreshButton, .supportButton {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.refreshButton {
+  background: $magenta-color;
+  color: $color-white;
+
+  &:hover {
+    background:#8134af;
+    transform: translateY(-1px);
+  }
+
+  .refreshIcon {
+    animation: spin 2s linear infinite paused;
+  }
+
+  &:hover .refreshIcon {
+    animation-play-state: running;
+  }
+}
+
+.supportButton {
+  background: transparent;
+  color: $magenta-color;
+  border: 1px solid $magenta-color;
+
+  &:hover {
+    background: $magenta-color;
+    color: $color-white;
+    transform: translateY(-1px);
+  }
+}
+
+.refreshIcon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 20px 16px;
+  }
+
+  .errorContainer {
+    gap: 40px;
+  }
+
+  .errorContent {
+    padding: 24px;
+  }
+
+  .actionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .helpActions {
+    flex-direction: column;
+  }
+
+  .refreshButton, .supportButton {
+    justify-content: center;
+  }
+
+ 
+}
