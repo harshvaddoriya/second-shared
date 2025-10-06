@@ -17,7 +17,18 @@ export async function fetchStoryFromRapidAPI(url) {
   const response = await fetch(`${apiUrl}?url=${encodeURIComponent(url)}`, options);
   if (!response.ok) throw new Error(`RapidAPI error: ${response.status}`);
 
-  const result = await response.json();
+  // const result = await response.json();
+  let result;
+  try {
+    const text = await response.text();
+    if (!text) {
+      return null;
+    }
+    result = JSON.parse(text);
+  } catch (err) {
+    console.error("RapidAPI returned invalid JSON:", err);
+    return null;
+  }
 
   const mediaItems = result.medias || result.story || result.data || [];
 

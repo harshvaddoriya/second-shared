@@ -2,7 +2,7 @@ import NextFederationPlugin from '@module-federation/nextjs-mf';
 import pwa from 'next-pwa';
 
 const withPWA = pwa.default || pwa;
-
+const isDev = process.env.NODE_ENV === 'development';
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -17,7 +17,12 @@ const nextConfig = {
       },
     ],
   },
-  webpack(config) {
+  webpack(config, { isServer }) {
+    if (!isServer) {
+      config.watchOptions = {
+        ignored: ['**/.next/**', '**/node_modules/**'],
+      };
+    }
     config.plugins.push(
       new NextFederationPlugin({
         name: 'instaDownload',
@@ -78,9 +83,9 @@ const nextConfig = {
 
 export default withPWA({
   dest: 'public',
-  register: true,
+  register: !isDev,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
+  disable: isDev,
   maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
   sw: 'sw.js',
 })(nextConfig);
