@@ -1,12 +1,14 @@
 "use client";
 
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import PostHeader from "@/youtubeModal/ui/PostHeader/PostHeader";
 import BottomActivityPanel from "@/youtubeModal/ui/BottomActivityPanel/BottomActivityPanel";
 import MediaVideo from "../../youtubeModal/ui/MediaVideo/MediaVideo";
+import DownloadOptions from "@/youtubeModal/ui/DownloadOptions/DownloadOptions";
 import styles from "./VideoPreview.module.scss";
 
 export default function VideoPreview({ data, error }) {
+  const [format, setFormat] = useState("mp4");
   const postData = useMemo(() => {
     if (!data) return null;
     return {
@@ -70,18 +72,24 @@ export default function VideoPreview({ data, error }) {
         color="dark"
       />
 
-      <BottomActivityPanel
-        data={{
-          mediaUrls,
-          username: postData.username,
-          caption: postData.description,
-          currentMediaUrl: mediaUrls[0],
-          currentMediaIndex: 0,
-          likes: postData.likes,
-          views: postData.views,
-          comments: postData.comments,
-        }}
-      />
+      <div className={styles.downloadOption}>
+        <DownloadOptions format={format} setFormat={setFormat} />
+      </div>
+      <div className={styles.bottomOption}>
+        <BottomActivityPanel
+          data={{
+            mediaUrls,
+            username: postData.username,
+            caption: postData.description,
+            currentMediaUrl: mediaUrls[0],
+            currentMediaIndex: 0,
+            likes: postData.likes,
+            views: postData.views,
+            comments: postData.comments,
+          }}
+          format={format}
+        />
+      </div>
     </div>
   );
 }

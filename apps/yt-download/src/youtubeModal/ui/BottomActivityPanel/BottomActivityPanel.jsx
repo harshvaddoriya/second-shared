@@ -14,6 +14,7 @@ import {
   handleShare,
 } from "shared/hooks";
 import { sendGAEvent } from "@/utils/gaUtils";
+import { convert } from "@/utils/mp4tomp3Convert";
 import styles from "./BottomActivityPanel.module.scss";
 
 export default function BottomActivityPanel({ data, format = "mp4" }) {
@@ -27,17 +28,37 @@ export default function BottomActivityPanel({ data, format = "mp4" }) {
     comments,
   } = data;
 
-  const handleDownloadClick = (single = true) => {
+  const handleDownloadClick = async () => {
     if (!currentMediaUrl) return;
 
-    const a = document.createElement("a");
-    a.href = `/api/download?url=${encodeURIComponent(
-      currentMediaUrl
-    )}&format=${format}`; // use the passed format
-    a.download = `media-${currentMediaIndex + 1}.${format}`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    if (format === "mp4") {
+      const a = document.createElement("a");
+      a.href = `/api/download?url=${encodeURIComponent(
+        currentMediaUrl
+      )}&format=mp4`;
+
+      a.download = `media-${currentMediaIndex + 1}.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } else if (format === "mp3") {
+      const response = await fetch(
+        `/api/download?url=${encodeURIComponent(currentMediaUrl)}&format=mp4`
+      );
+      const blob = await response.blob();
+
+      const convertedAudio = await convert(
+        new File([blob], "video.mp4"),
+        "mp3"
+      );
+
+      const a = document.createElement("a");
+      a.href = convertedAudio.data;
+      a.download = `${convertedAudio.name}.mp3`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
 
     sendGAEvent("download_media_click", {
       mediaCount: 1,
@@ -45,19 +66,46 @@ export default function BottomActivityPanel({ data, format = "mp4" }) {
     });
   };
 
-  const handleDownloadAllClick = () => {
-    mediaUrls.forEach((url, idx) => {
-      const a = document.createElement("a");
-      a.href = `/api/download?url=${encodeURIComponent(url)}&format=${format}`;
-      a.download = `media-${idx + 1}.${format}`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    });
+  const handleDownloadAllClick = async () => {
+    if (!mediaUrls?.length) return;
 
     sendGAEvent("download_media_click", {
       mediaCount: mediaUrls.length,
     });
+
+    for (let i = 0; i < mediaUrls.length; i++) {
+      const url = mediaUrls[i];
+
+      try {
+        if (format === "mp4") {
+          const a = document.createElement("a");
+          a.href = `/api/download?url=${encodeURIComponent(url)}&format=mp4`;
+          a.download = `media-${i + 1}.mp4`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else if (format === "mp3") {
+          const response = await fetch(
+            `/api/download?url=${encodeURIComponent(url)}&format=mp4`
+          );
+          const blob = await response.blob();
+
+          const convertedAudio = await convert(
+            new File([blob], `Audio-${i + 1}.mp4`),
+            "mp3"
+          );
+
+          const a = document.createElement("a");
+          a.href = convertedAudio.data;
+          a.download = `${convertedAudio.name}.mp3`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+      } catch (error) {
+        console.error(`Error downloading file #${i + 1}:`, error);
+      }
+    }
   };
 
   const handleShareClick = () => {
@@ -106,8 +154,9 @@ export default function BottomActivityPanel({ data, format = "mp4" }) {
           >
             {mediaUrls.length > 1
               ? `Download All (${mediaUrls.length})`
-              : "Download"}
+              : `Download (${format.toUpperCase()})`}
           </button>
+
           <button className={styles.shareBtn} onClick={handleShareClick}>
             {mediaUrls.length > 1 ? `Share All (${mediaUrls.length})` : "Share"}
           </button>

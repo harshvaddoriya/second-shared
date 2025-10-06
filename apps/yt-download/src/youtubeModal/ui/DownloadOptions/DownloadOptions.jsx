@@ -1,12 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import styles from "./DownloadOptions.module.scss";
 
-export default function DownloadOptions({ 
-  format,
-  setFormat,
-}) {
+export default function DownloadOptions({ format, setFormat }) {
   return (
     <div className={styles.downloadOptions}>
       <select

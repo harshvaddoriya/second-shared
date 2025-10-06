@@ -1,12 +1,14 @@
 "use client";
 
-import { useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import PostHeader from "@/youtubeModal/ui/PostHeader/PostHeader";
 import BottomActivityPanel from "@/youtubeModal/ui/BottomActivityPanel/BottomActivityPanel";
 import MediaGallery from "@/youtubeModal/ui/MediaGallery/MediaGallery";
+import DownloadOptions from "@/youtubeModal/ui/DownloadOptions/DownloadOptions";
 import styles from "./PlayListPreview.module.scss";
 
 export default function PlayListPreview({ data, error }) {
+  const [format, setFormat] = useState("mp4");
   const videoRef = useRef(null);
 
   if (error) {
@@ -84,22 +86,29 @@ export default function PlayListPreview({ data, error }) {
         color="dark"
       />
 
-      <BottomActivityPanel
-        data={{
-          mediaUrls: postData.mediaUrls,
-          username: postData.username,
-          caption: postData.description,
-          currentMediaUrl: firstVideoUrl,
-          currentMediaIndex: 0,
-          likes: postData.likes,
-          views: postData.views,
-          comments: postData.comments,
-        }}
-      />
+      <div className={styles.downloadOption}>
+        <DownloadOptions format={format} setFormat={setFormat} />
+      </div>
+      <div className={styles.bottomOption}>
+        <BottomActivityPanel
+          data={{
+            mediaUrls: postData.mediaUrls,
+            username: postData.username,
+            caption: postData.description,
+            currentMediaUrl: firstVideoUrl,
+            currentMediaIndex: 0,
+            likes: postData.likes,
+            views: postData.views,
+            comments: postData.comments,
+          }}
+          format={format}
+        />
+      </div>
 
       {galleryUrls.length > 0 && (
         <MediaGallery
           mediaUrls={galleryUrls}
+          format={format}
           onDownload={(url, index) =>
             handleDownloadClick(mediaUrls.length === 1)
           }
