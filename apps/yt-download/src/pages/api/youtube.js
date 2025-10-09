@@ -24,8 +24,9 @@ export default async function handler(req, res) {
             const videoId = match ? match[1] : null;
             if (!videoId) throw new Error("Invalid YouTube video URL");
 
-            data = await fetchYoutubeMedia(videoId, detectedType);
+            const data = await fetchYoutubeMedia(videoId, detectedType);
 
+            return res.status(200).json(data);
         } else if (detectedType === "playlist") {
             data = await fetchPlaylistData(url);
 

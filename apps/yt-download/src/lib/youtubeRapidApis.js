@@ -1,6 +1,12 @@
 import axios from "axios";
 import parseCountText from "@/utils/commentCount";
 
+const normalizeQuality = (q) => {
+    if (!q) return "0p";
+    const num = q.match(/\d+/);
+    return num ? num[0] + "p" : "0p";
+};
+
 export async function fetchYoutubeMedia(videoId, detectedType) {
     const options = {
         method: "GET",
@@ -8,6 +14,7 @@ export async function fetchYoutubeMedia(videoId, detectedType) {
         params: {
             videoId,
             urlAccess: "normal",
+            merge: "true",
             videos: "auto",
             audios: "auto",
         },
@@ -19,14 +26,42 @@ export async function fetchYoutubeMedia(videoId, detectedType) {
 
     const response = await axios.request(options);
     const data = response.data;
-    const videoItem = data.videos?.items?.[0];
+
+    const mp4Videos = data.videos?.items
+        ?.filter((item) => item.url && item.extension && item.extension.toLowerCase().includes("mp4"))
+        ?.map((item) => ({
+            url: item.url,
+            quality: item.quality ? item.quality.toLowerCase() : "unknown",
+            type: "MP4",
+            size: item.sizeText || null,
+        })) || [];
+
+    const qualityOrder = ["1080p", "720p", "480p", "360p", "240p", "144p",];
+
+    const sortedVideos = mp4Videos.sort(
+        (a, b) => qualityOrder.indexOf(normalizeQuality(a.quality)) - qualityOrder.indexOf(normalizeQuality(b.quality))
+    );
+
+    const uniqueVideos = [];
+    const seen = new Set();
+    for (const video of sortedVideos) {
+        const q = normalizeQuality(video.quality);
+        if (!seen.has(q)) {
+            seen.add(q);
+            uniqueVideos.push(video);
+        }
+    }
+
+    const firstAudio = data.audios?.items?.[0] || null;
 
     return {
         id: videoId,
         title: data.title || "",
         description: data.description || "",
         thumbnail: data.thumbnail || "",
-        media: videoItem ? [{ url: videoItem.url }] : [],
+        media: uniqueVideos,
+        firstAudio,
+        availableQualities: uniqueVideos.map((v) => ({ type: v.type, quality: normalizeQuality(v.quality) })),
         statistics: {
             viewCount: data.viewCount || 0,
             likeCount: data.likeCount || 0,

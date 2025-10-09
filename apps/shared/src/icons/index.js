@@ -11,8 +11,10 @@ export {
     FaChevronRight,
     FaPlay, FaPause, FaHeart,
     FaEye,
-    FaVolumeUp, FaVolumeMute, FaRegComment, FaRegCommentDots
+    FaVolumeUp, FaVolumeMute, FaRegComment, FaRegCommentDots,
 } from "react-icons/fa";
+
+export { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 export { MdOutlineSlideshow, MdOutlineViewCarousel, MdDownload, MdDevices, MdThumbUp, MdSecurity, MdOutlineRemoveRedEye, MdOutlineThumbUp, MdOutlineComment, MdOutlineShare } from "react-icons/md";
 

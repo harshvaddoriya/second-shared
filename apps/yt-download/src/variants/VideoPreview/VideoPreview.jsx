@@ -8,7 +8,16 @@ import DownloadOptions from "@/youtubeModal/ui/DownloadOptions/DownloadOptions";
 import styles from "./VideoPreview.module.scss";
 
 export default function VideoPreview({ data, error }) {
-  const [format, setFormat] = useState("mp4");
+  const [format, setFormat] = useState(null);
+
+  const selectedVideo = useMemo(() => {
+    if (!data?.media || !format) return null;
+
+    const match = data.media.find((item) => item.id === format.id);
+
+    return match?.url || data.media[0]?.url;
+  }, [data, format]);
+
   const postData = useMemo(() => {
     if (!data) return null;
     return {
@@ -26,8 +35,6 @@ export default function VideoPreview({ data, error }) {
       comments: parseInt(data.statistics?.commentCount) || 0,
     };
   }, [data]);
-
-  console.log("MEDIA OBJECT:", data.media);
 
   if (error) {
     return (
@@ -49,8 +56,8 @@ export default function VideoPreview({ data, error }) {
 
   return (
     <div className={styles.post}>
-      {mediaUrls.length > 0 ? (
-        <MediaVideo src={mediaUrls[0]} />
+      {mediaUrls.length > 0 && data.firstAudio ? (
+        <MediaVideo videoUrl={selectedVideo} audioUrl={data.firstAudio.url} />
       ) : (
         <div style={{ padding: "10px", textAlign: "center" }}>
           <p>No video URL available</p>
@@ -73,21 +80,29 @@ export default function VideoPreview({ data, error }) {
       />
 
       <div className={styles.downloadOption}>
-        <DownloadOptions format={format} setFormat={setFormat} />
+        <DownloadOptions
+          videoId={data.id}
+          format={format}
+          setFormat={setFormat}
+        />
       </div>
+
       <div className={styles.bottomOption}>
         <BottomActivityPanel
           data={{
-            mediaUrls,
+            mediaUrls: data.media?.map((item) => item.url) || [],
+            mediaUrlsWithQuality: data.media || [],
             username: postData.username,
             caption: postData.description,
-            currentMediaUrl: mediaUrls[0],
+            currentMediaUrl: selectedVideo,
+            firstAudioUrl: data.firstAudio?.url,
             currentMediaIndex: 0,
             likes: postData.likes,
             views: postData.views,
             comments: postData.comments,
           }}
           format={format}
+          videoId={data.id}
         />
       </div>
     </div>

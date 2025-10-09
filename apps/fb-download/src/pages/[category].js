@@ -15,7 +15,6 @@ import Images from "../../public/images/index";
 import { sendGAEvent } from '@/utils/gaUtils';
 import PageNotFound from "@/components/PageNotFound/PageNotFound";
 
-
 export default function CategoryPage({ content, category }) {
 
     if (!content) {

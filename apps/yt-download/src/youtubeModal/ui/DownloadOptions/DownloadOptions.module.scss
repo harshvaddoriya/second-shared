@@ -1,16 +1,65 @@
-.downloadOptions {
-    width:100%;
+@import "../../../styles/variables";
 
+.downloadOptions {
+  position: relative;
+  width: 100%;
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+}
+
+.dropdown {
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: $color-white;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.select {
-  width:100%;
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+.arrow {
+  font-size: 12px;
 }
 
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: $color-white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
 
+.option {
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background: #f3f3f3;
+  }
+}
+
+.type {
+  font-weight: 500;
+  color: $dark-gray;
+}
+
+.quality {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: $gray-medium;
+}
