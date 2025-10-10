@@ -43,6 +43,30 @@ export function convert(videoBlob, targetAudioFormat = "mp3") {
     });
 }
 
+export async function downloadMp3FromMp4Url(mp4Url, filename = "audio") {
+    try {
+        // Fetch the MP4 file directly as a Blob
+        const response = await fetch(mp4Url);
+        if (!response.ok) throw new Error("Failed to fetch MP4 file");
+
+        const videoBlob = await response.blob();
+
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(videoBlob);
+        a.download = `${filename}.mp3`; // simple rename
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        console.log("MP3 ready for download!");
+    } catch (err) {
+        console.error("Conversion failed:", err);
+        alert("Failed to convert MP4 to MP3.");
+    }
+}
+
+
+
 
 function createWaveFileData(audioBuffer) {
     const frameLength = audioBuffer.length;

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
-import { handleShare, handleDownload } from "shared/hooks";
+import { useState, useRef, useMemo, useEffect } from "react";
+import { handleShare } from "shared/hooks";
 import BottomActivityPanel from "@/youtubeModal/ui/BottomActivityPanel/BottomActivityPanel";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { BsFillPlayFill, BsPauseFill } from "react-icons/bs";
@@ -13,13 +13,22 @@ import {
 } from "react-icons/md";
 import styles from "./ShortsPreview.module.scss";
 import DownloadOptions from "@/youtubeModal/ui/DownloadOptions/DownloadOptions";
+import { useAudioVideoSync } from "@/utils/useAudioVideoSync";
 
 export default function ShortsPreview({ data, error }) {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [format, setFormat] = useState("mp4");
+  const [format, setFormat] = useState(null);
+
   const videoRef = useRef(null);
+  const audioRef = useRef(null);
+
+  const selectedVideo = useMemo(() => {
+    if (!data?.media || !format) return null;
+    const match = data.media.find((item) => item.id === format.id);
+    return match?.url || data.media[0]?.url;
+  }, [data, format]);
 
   const postData = useMemo(() => {
     if (!data) return null;
@@ -32,58 +41,53 @@ export default function ShortsPreview({ data, error }) {
       statistics: data.statistics || {},
       username: data.username || "Youtube User",
       caption: data.description || data.caption || "Shorts caption",
-      likes: parseInt(data.statistics?.likeCount) || 0,
-      views: parseInt(data.statistics?.viewCount) || 0,
-      comments: parseInt(data.statistics?.commentCount) || 0,
+      likes: parseInt(data.statistics?.likeCount) || "like",
+      views: parseInt(data.statistics?.viewCount) || "views",
+      comments: parseInt(data.statistics?.commentCount) || "comments",
     };
   }, [data]);
 
-  if (error) {
+  if (error)
     return (
       <div className={styles.reelContainer}>
         <p style={{ color: "red" }}>Error: {error}</p>
       </div>
     );
-  }
 
-  if (!postData) {
+  if (!postData)
     return (
       <div className={styles.reelContainer}>
-        <p>No reels data available</p>
+        <p>No shorts data available</p>
       </div>
     );
-  }
 
-  const mediaUrls = postData.mediaUrls || [];
   const mediaUrl = postData.mediaUrls[0];
+  const audioUrl = data.firstAudio?.url;
 
-  const handlePlay = () => setIsPlaying(true);
-  const handlePause = () => setIsPlaying(false);
-  const handleEnded = () => setIsPlaying(false);
-
-  const toggleCaption = () => setIsExpanded(!isExpanded);
+  useAudioVideoSync(videoRef, audioRef);
 
   const toggleMute = () => {
-    if (!videoRef.current) return;
     const newMuted = !isMuted;
-    videoRef.current.muted = newMuted;
+    if (videoRef.current) videoRef.current.muted = newMuted;
+    if (audioRef.current) audioRef.current.muted = newMuted;
     setIsMuted(newMuted);
   };
 
   const handleVideoToggle = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsPlaying(true);
     } else {
-      videoRef.current.play();
+      video.pause();
+      setIsPlaying(false);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const getTruncatedText = (text, maxLength = 80) => {
     if (!text) return "Shorts caption";
     if (text.length <= maxLength) return text;
-
     const truncated = text.substring(0, maxLength);
     const lastSpace = truncated.lastIndexOf(" ");
     return lastSpace > 0 ? text.substring(0, lastSpace) : truncated;
@@ -101,10 +105,12 @@ export default function ShortsPreview({ data, error }) {
         loop
         playsInline
         preload="metadata"
-        onPlay={handlePlay}
-        onPause={handlePause}
-        onEnded={handleEnded}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onEnded={() => setIsPlaying(false)}
       />
+
+      {audioUrl && <audio ref={audioRef} src={audioUrl} muted={isMuted} />}
 
       <div className={styles.topLeftControls}>
         <button onClick={handleVideoToggle} className={styles.controlBtn}>
@@ -137,7 +143,10 @@ export default function ShortsPreview({ data, error }) {
       <div className={styles.overlayContent}>
         <div className={styles.leftContent}>
           <p className={styles.username}>@{postData.username}</p>
-          <div className={styles.caption} onClick={toggleCaption}>
+          <div
+            className={styles.caption}
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
             {isExpanded ? (
               <>
                 {postData.caption}
@@ -157,17 +166,25 @@ export default function ShortsPreview({ data, error }) {
           </div>
         </div>
       </div>
+
       <div className={styles.downloadOption}>
-        <DownloadOptions format={format} setFormat={setFormat} />
+        <DownloadOptions
+          videoId={data.id}
+          format={format}
+          setFormat={setFormat}
+        />
       </div>
       <div className={styles.bottomOption}>
         <BottomActivityPanel
           data={{
-            mediaUrls,
-            currentMediaUrl: mediaUrls[0],
+            mediaUrls: data.media?.map((item) => item.url) || [],
+            mediaUrlsWithQuality: data.media || [],
+            currentMediaUrl: selectedVideo,
+            firstAudioUrl: data.firstAudio?.url,
             currentMediaIndex: 0,
           }}
           format={format}
+          videoId={data.id}
         />
       </div>
     </div>

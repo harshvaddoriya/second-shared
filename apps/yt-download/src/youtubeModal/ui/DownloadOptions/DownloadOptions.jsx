@@ -9,6 +9,9 @@ export default function DownloadOptions({ format, setFormat, videoId }) {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const displayType = (type) =>
+    String(type).toLowerCase() === "audio" ? "mp3" : "mp4";
+
   useEffect(() => {
     if (!videoId) return;
 
@@ -16,19 +19,26 @@ export default function DownloadOptions({ format, setFormat, videoId }) {
       setLoading(true);
       try {
         const res = await fetch(`/api/downloadOptions?videoId=${videoId}`);
-        const data = await res.json(); // [{id, type, quality}, ...]
+        const data = await res.json();
 
-        // Remove duplicate qualities, keep first occurrence
+     
+        const audioOption = {
+          id: "mp3_audio",
+          type: "audio",
+          quality: "default",
+        };
+
+        const allOptions = [...data, audioOption];
+
         const uniqueByQuality = [];
         const seen = new Set();
-        data.forEach((item) => {
-          if (!seen.has(item.quality)) {
-            seen.add(item.quality);
+        allOptions.forEach((item) => {
+          if (!seen.has(item.quality + item.type)) {
+            seen.add(item.quality + item.type);
             uniqueByQuality.push(item);
           }
         });
 
-        // Sort descending by quality (assume numeric)
         uniqueByQuality.sort((a, b) => {
           const qa = parseInt(a.quality) || 0;
           const qb = parseInt(b.quality) || 0;
@@ -37,7 +47,6 @@ export default function DownloadOptions({ format, setFormat, videoId }) {
 
         setOptions(uniqueByQuality);
 
-        // Set initial format to highest quality
         if (!format && uniqueByQuality.length > 0) {
           setFormat(uniqueByQuality[0]);
         }
@@ -61,7 +70,7 @@ export default function DownloadOptions({ format, setFormat, videoId }) {
       <div className={styles.dropdown} onClick={() => setOpen((prev) => !prev)}>
         <span>
           {format
-            ? `${format.type}-${format.quality || ""}`
+            ? `${displayType(format.type)}-${format.quality || ""}`
             : loading
             ? "Loading..."
             : "Select Format"}
@@ -79,7 +88,7 @@ export default function DownloadOptions({ format, setFormat, videoId }) {
               className={styles.option}
               onClick={() => handleSelect(opt)}
             >
-              <span className={styles.type}>{opt.type}</span>
+              <span className={styles.type}>{displayType(opt.type)}</span>
               {opt.quality && (
                 <span className={styles.quality}>{opt.quality}</span>
               )}

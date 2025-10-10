@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   MdOutlineRemoveRedEye,
   MdOutlineThumbUp,
@@ -8,29 +8,46 @@ import {
 } from "shared/icons";
 import PostCaption from "@/youtubeModal/ui/PostCaption/PostCaption";
 import { handleShareAll, handleShare } from "shared/hooks";
+import { downloadMp3FromMp4Url } from "@/utils/mp4tomp3Convert";
 import { sendGAEvent } from "@/utils/gaUtils";
 import styles from "./BottomActivityPanel.module.scss";
 
 export default function BottomActivityPanel({ data, format, videoId }) {
-  // Destructure relevant data from post
-  const {
-    caption,
-    mediaUrlsWithQuality = [],
-    currentMediaUrl,
-    likes,
-    views,
-    comments,
-  } = data;
+  const { caption, currentMediaUrl, likes, views, comments } = data;
+  const [converting, setConverting] = useState(false);
 
-  // -----------------------------
-  // Download button click handler
-  // -----------------------------
-  // Downloads video based on selected format
+  // const handleDownloadClick = async () => {
+  //   if (!format?.id || !videoId) return;
+  //   setConverting(true);
+  //   try {
+  //     const res = await fetch(
+  //       `/api/download?videoId=${videoId}&qualityId=${format.id}`
+  //     );
+  //     const data = await res.json();
+  //     if (!data.file) throw new Error("File not ready yet");
+
+  //     if (format.type.toLowerCase() === "audio") {
+  //       await downloadMp3FromMp4Url(data.file, `audio-${format.quality}`);
+  //     } else {
+  //       const a = document.createElement("a");
+  //       a.href = data.file;
+  //       a.download = `${format.type}-${format.quality || "video"}.mp4`;
+  //       document.body.appendChild(a);
+  //       a.click();
+  //       a.remove();
+  //     }
+  //   } catch (err) {
+  //     console.error("Download failed:", err);
+  //     alert("File not ready yet. Try again in a few seconds.");
+  //   } finally {
+  //     setConverting(false);
+  //   }
+  // };
+
   const handleDownloadClick = async () => {
     if (!format?.id || !videoId) return;
 
     try {
-      // Call backend API to get downloadable video URL
       const res = await fetch(
         `/api/download?videoId=${videoId}&qualityId=${format.id}`
       );
@@ -38,7 +55,6 @@ export default function BottomActivityPanel({ data, format, videoId }) {
 
       if (!data.file) throw new Error("File not ready yet");
 
-      // Create temporary <a> element to trigger browser download
       const a = document.createElement("a");
       a.href = data.file;
       a.download = `${format.type}-${format.quality || "video"}.mp4`;
@@ -51,29 +67,19 @@ export default function BottomActivityPanel({ data, format, videoId }) {
     }
   };
 
-  // -----------------------------
-  // Share button click handler
-  // -----------------------------
   const handleShareClick = () => {
-    // Send analytics event
-    sendGAEvent("share_media_click", {
-      mediaCount: mediaUrlsWithQuality.length,
-    });
-
-    // If multiple media, share all; otherwise share single
-    if (mediaUrlsWithQuality.length > 1)
-      handleShareAll(mediaUrlsWithQuality.map((m) => m.url));
-    else handleShare(currentMediaUrl);
+    sendGAEvent("share_media_click", { mediaCount: 1 });
+    handleShare(currentMediaUrl);
   };
 
   return (
     <div className={styles.bottomAcitivity}>
       <div className={styles.counterSection}>
-        {/* Display post caption */}
         {caption && <PostCaption caption={caption} />}
 
-        {/* Display likes, views, comments stats if available */}
-        {(likes !== undefined || views !== undefined || comments !== undefined) && (
+        {(likes !== undefined ||
+          views !== undefined ||
+          comments !== undefined) && (
           <div className={styles.stats}>
             {likes !== undefined && (
               <span>
@@ -93,20 +99,15 @@ export default function BottomActivityPanel({ data, format, videoId }) {
           </div>
         )}
 
-        {/* Share and Download buttons */}
         <div className={styles.shareDownload}>
-          {/* Download button */}
           <button className={styles.shareBtn} onClick={handleDownloadClick}>
             {format
               ? `Download (${format.type}-${format.quality || ""})`
               : "Select Quality"}
           </button>
 
-          {/* Share button */}
           <button className={styles.shareBtn} onClick={handleShareClick}>
-            {mediaUrlsWithQuality.length > 1
-              ? `Share All (${mediaUrlsWithQuality.length})`
-              : "Share"}
+            Share
           </button>
         </div>
       </div>
