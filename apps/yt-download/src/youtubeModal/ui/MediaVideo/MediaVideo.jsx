@@ -13,6 +13,7 @@ export default function MediaVideo({ videoUrl, audioUrl, className }) {
       <video
         ref={videoRef}
         src={videoUrl}
+        controls
         autoPlay
         loop
         playsInline

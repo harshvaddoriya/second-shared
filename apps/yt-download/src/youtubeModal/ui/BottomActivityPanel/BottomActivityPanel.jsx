@@ -7,8 +7,8 @@ import {
   MdOutlineComment,
 } from "shared/icons";
 import PostCaption from "@/youtubeModal/ui/PostCaption/PostCaption";
-import { handleShareAll, handleShare } from "shared/hooks";
-import { downloadMp3FromMp4Url } from "@/utils/mp4tomp3Convert";
+import { handleShare } from "shared/hooks";
+import { convert } from "@/utils/mp4tomp3Convert";
 import { sendGAEvent } from "@/utils/gaUtils";
 import styles from "./BottomActivityPanel.module.scss";
 
@@ -16,54 +16,64 @@ export default function BottomActivityPanel({ data, format, videoId }) {
   const { caption, currentMediaUrl, likes, views, comments } = data;
   const [converting, setConverting] = useState(false);
 
-  // const handleDownloadClick = async () => {
-  //   if (!format?.id || !videoId) return;
-  //   setConverting(true);
-  //   try {
-  //     const res = await fetch(
-  //       `/api/download?videoId=${videoId}&qualityId=${format.id}`
-  //     );
-  //     const data = await res.json();
-  //     if (!data.file) throw new Error("File not ready yet");
-
-  //     if (format.type.toLowerCase() === "audio") {
-  //       await downloadMp3FromMp4Url(data.file, `audio-${format.quality}`);
-  //     } else {
-  //       const a = document.createElement("a");
-  //       a.href = data.file;
-  //       a.download = `${format.type}-${format.quality || "video"}.mp4`;
-  //       document.body.appendChild(a);
-  //       a.click();
-  //       a.remove();
-  //     }
-  //   } catch (err) {
-  //     console.error("Download failed:", err);
-  //     alert("File not ready yet. Try again in a few seconds.");
-  //   } finally {
-  //     setConverting(false);
-  //   }
-  // };
-
   const handleDownloadClick = async () => {
-    if (!format?.id || !videoId) return;
+    if (!format || !videoId) return;
+    setConverting(true);
 
     try {
-      const res = await fetch(
-        `/api/download?videoId=${videoId}&qualityId=${format.id}`
-      );
-      const data = await res.json();
+      const type = format.type?.toLowerCase() || "";
+      console.log("Format type:", type);
 
-      if (!data.file) throw new Error("File not ready yet");
+      if (["audio", "mp3"].includes(type)) {
+        console.log("Fetching MP4 for conversion...");
+        const response = await fetch(
+          `/api/fetchMp4?url=${encodeURIComponent(currentMediaUrl)}&format=mp4`
+        );
 
-      const a = document.createElement("a");
-      a.href = data.file;
-      a.download = `${format.type}-${format.quality || "video"}.mp4`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+        if (!response.ok) throw new Error("Failed to fetch MP4 file");
+
+        const blob = await response.blob();
+        console.log("Fetched MP4 blob:", blob);
+
+        const convertedAudio = await convert(
+          new File([blob], `video-${videoId || 1}.mp4`),
+          "mp3"
+        );
+
+        const a = document.createElement("a");
+        a.href = convertedAudio.data || convertedAudio;
+        a.download = convertedAudio.name
+          ? `${convertedAudio.name}.mp3`
+          : `audio-${videoId}.mp3`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } else {
+        console.log("Downloading MP4...");
+        const res = await fetch(
+          `/api/download?videoId=${videoId}&qualityId=${format.id}`
+        );
+        const fileData = await res.json();
+
+        if (!fileData.file) throw new Error("File not ready yet");
+
+        const a = document.createElement("a");
+        a.href = fileData.file;
+        a.download = `${type || "video"}-${format.quality || "default"}.mp4`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+
+      sendGAEvent("download_media_click", {
+        mediaCount: 1,
+        currentVideoId: videoId,
+      });
     } catch (err) {
       console.error("Download failed:", err);
       alert("File not ready yet. Try again in a few seconds.");
+    } finally {
+      setConverting(false);
     }
   };
 
@@ -77,9 +87,7 @@ export default function BottomActivityPanel({ data, format, videoId }) {
       <div className={styles.counterSection}>
         {caption && <PostCaption caption={caption} />}
 
-        {(likes !== undefined ||
-          views !== undefined ||
-          comments !== undefined) && (
+        {(likes || views || comments) && (
           <div className={styles.stats}>
             {likes !== undefined && (
               <span>
@@ -100,8 +108,14 @@ export default function BottomActivityPanel({ data, format, videoId }) {
         )}
 
         <div className={styles.shareDownload}>
-          <button className={styles.shareBtn} onClick={handleDownloadClick}>
-            {format
+          <button
+            className={styles.shareBtn}
+            onClick={handleDownloadClick}
+            disabled={converting}
+          >
+            {converting
+              ? "Converting..."
+              : format
               ? `Download (${format.type}-${format.quality || ""})`
               : "Select Quality"}
           </button>

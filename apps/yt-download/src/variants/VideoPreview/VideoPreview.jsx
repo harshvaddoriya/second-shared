@@ -95,7 +95,7 @@ export default function VideoPreview({ data, error }) {
             username: postData.username,
             caption: postData.description,
             currentMediaUrl: selectedVideo,
-            firstAudioUrl: data.firstAudio?.url,
+            firstAudio: data.firstAudio?.url,
             currentMediaIndex: 0,
             likes: postData.likes,
             views: postData.views,

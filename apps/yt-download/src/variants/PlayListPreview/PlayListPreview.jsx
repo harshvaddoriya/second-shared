@@ -1,81 +1,60 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo } from "react";
 import PostHeader from "@/youtubeModal/ui/PostHeader/PostHeader";
 import BottomActivityPanel from "@/youtubeModal/ui/BottomActivityPanel/BottomActivityPanel";
 import MediaGallery from "@/youtubeModal/ui/MediaGallery/MediaGallery";
 import DownloadOptions from "@/youtubeModal/ui/DownloadOptions/DownloadOptions";
+import MediaVideo from "@/youtubeModal/ui/MediaVideo/MediaVideo";
 import styles from "./PlayListPreview.module.scss";
 
 export default function PlayListPreview({ data, error }) {
-  const [format, setFormat] = useState("mp4");
-  const videoRef = useRef(null);
+  const [format, setFormat] = useState(null);
 
-  if (error) {
-    return (
-      <div className={styles.post}>
-        <p style={{ color: "red" }}>Error: {error}</p>
-      </div>
-    );
-  }
-
+  if (error) return <div style={{ color: "red" }}>Error: {error}</div>;
   const items = data?.items || [];
-  if (!items.length) {
-    return (
-      <div className={styles.post}>
-        <p>No media available</p>
-      </div>
-    );
-  }
+  if (!items.length) return <div>No media available</div>;
 
-  const postData = useMemo(() => {
-    const firstItem = items[0];
-    return {
+  const firstItem = items[0];
+
+  const postData = useMemo(
+    () => ({
       id: data.playlistUrl,
       title: data.title,
-      description: firstItem?.description || "",
-      thumbnail: firstItem?.thumbnail || "",
+      description: firstItem.description || "",
+      thumbnail: firstItem.thumbnail || "",
       items,
-      mediaUrls: items.map((item) => item.videoUrl).filter(Boolean),
-      username: firstItem?.channel?.name || "YouTube User",
-      fullName: firstItem?.channel?.name || "YouTube",
-      likes: parseInt(firstItem?.statistics?.likeCount) || 0,
-      views: parseInt(firstItem?.statistics?.viewCount) || 0,
-      comments: parseInt(firstItem?.statistics?.commentCount) || 0,
-    };
-  }, [data, items]);
-  console.log(items.map((i) => i.videoUrl));
-  const firstVideoUrl = postData.mediaUrls[0];
-  const galleryUrls = postData.mediaUrls;
+      username: firstItem.channel?.name || "YouTube User",
+      fullName: firstItem.channel?.name || "YouTube",
+      likes: parseInt(firstItem.statistics?.likeCount) || 0,
+      views: parseInt(firstItem.statistics?.viewCount) || 0,
+      comments: parseInt(firstItem.statistics?.commentCount) || 0,
+    }),
+    [data, firstItem]
+  );
 
-  useEffect(() => {
-    if (videoRef.current && firstVideoUrl) {
-      videoRef.current.src = firstVideoUrl;
-    }
-  }, [firstVideoUrl]);
+  const selectedVideo = useMemo(
+    () => ({
+      videoUrl: firstItem.videoUrl,
+      audioUrl: firstItem.audioUrl || null,
+    }),
+    [firstItem]
+  );
+
+  const firstVideoUrl = selectedVideo.videoUrl;
+  const audioUrl = selectedVideo.audioUrl;
+
+  const galleryMedia = useMemo(() => {
+    return items.map((item) => ({
+      videoUrl: item.videoUrl,
+      audioUrl: item.audioUrl || null,
+    }));
+  }, [items]);
 
   return (
     <div className={styles.post}>
-      {firstVideoUrl ? (
-        <video
-          ref={videoRef}
-          controls
-          autoPlay
-          playsInline
-          poster={postData.thumbnail}
-          style={{ width: "100%", maxHeight: "500px" }}
-        />
-      ) : (
-        <div style={{ padding: "10px", textAlign: "center" }}>
-          <p>No video URL available</p>
-          {postData.thumbnail && (
-            <img
-              src={postData.thumbnail}
-              alt={postData.title}
-              style={{ maxWidth: "100%", height: "auto", borderRadius: "8px" }}
-            />
-          )}
-        </div>
+      {firstVideoUrl && (
+        <MediaVideo videoUrl={firstVideoUrl} audioUrl={audioUrl} />
       )}
 
       <PostHeader
@@ -87,12 +66,18 @@ export default function PlayListPreview({ data, error }) {
       />
 
       <div className={styles.downloadOption}>
-        <DownloadOptions format={format} setFormat={setFormat} />
+        <DownloadOptions
+          videoId={firstItem.id}
+          format={format}
+          setFormat={setFormat}
+          options={firstItem.formats}
+        />
       </div>
+
       <div className={styles.bottomOption}>
         <BottomActivityPanel
           data={{
-            mediaUrls: postData.mediaUrls,
+            mediaUrls: items.map((i) => i.videoUrl),
             username: postData.username,
             caption: postData.description,
             currentMediaUrl: firstVideoUrl,
@@ -102,17 +87,12 @@ export default function PlayListPreview({ data, error }) {
             comments: postData.comments,
           }}
           format={format}
+          videoId={firstItem.id}
         />
       </div>
 
-      {galleryUrls.length > 0 && (
-        <MediaGallery
-          mediaUrls={galleryUrls}
-          format={format}
-          onDownload={(url, index) =>
-            handleDownloadClick(mediaUrls.length === 1)
-          }
-        />
+      {galleryMedia.length > 0 && (
+        <MediaGallery mediaUrls={galleryMedia} format={format} />
       )}
     </div>
   );

@@ -1,82 +1,64 @@
 "use client";
 
-import { isVideo } from "@/utils/constHelper";
-import MediaImage from "@/youtubeModal/ui/MediaImage/MediaImage";
 import MediaVideo from "@/youtubeModal/ui/MediaVideo/MediaVideo";
-import { handleShare } from "shared/hooks";
 import { sendGAEvent } from "@/utils/gaUtils";
-import { convert } from "@/utils/mp4tomp3Convert";
+import { handleShare } from "shared/hooks";
 import styles from "./MediaGallery.module.scss";
 
-export default function MediaGallery({ mediaUrls = [], format = "mp4" }) {
+export default function MediaGallery({ mediaUrls = [], format }) {
   if (!mediaUrls.length) return null;
 
-  const handleDownload = async (url, index) => {
-    if (!url) return;
+  const handleDownload = async (media, index) => {
+    if (!media?.videoUrl) return;
 
     try {
-      if (format === "mp4") {
-        const a = document.createElement("a");
-        a.href = `/api/download?url=${encodeURIComponent(url)}&format=mp4`;
-        a.download = `media-${index + 1}.mp4`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      } else if (format === "mp3") {
-        const response = await fetch(
-          `/api/download?url=${encodeURIComponent(url)}&format=mp4`
-        );
-        const blob = await response.blob();
+      const res = await fetch(
+        `/api/download?videoId=${media.videoUrl}&qualityId=${format.id}`
+      );
+      const fileData = await res.json();
 
-        const convertedAudio = await convert(
-          new File([blob], `video-${index + 1}.mp4`),
-          "mp3"
-        );
+      if (!fileData.file) throw new Error("File not ready yet");
 
-        const a = document.createElement("a");
-        a.href = convertedAudio.data;
-        a.download = `${convertedAudio.name}.mp3`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      }
+      const a = document.createElement("a");
+      a.href = fileData.file;
+      a.download = `${format?.type || "video"}-${
+        format?.quality || "default"
+      }.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
 
       sendGAEvent("download_media_click", {
         mediaCount: 1,
         currentIndex: index,
       });
-    } catch (error) {
-      console.error(`Error downloading media #${index + 1}:`, error);
+    } catch (err) {
+      console.error("Download failed:", err);
     }
   };
 
   const handleShareClick = (url) => {
-    if (!url) return;
     sendGAEvent("share_media_click", { mediaCount: mediaUrls.length });
     handleShare(url);
   };
 
   return (
     <div className={styles.galleryGrid}>
-      {mediaUrls.filter(Boolean).map((url, idx) => (
+      {mediaUrls.map((media, idx) => (
         <div key={idx} className={styles.mediaItem}>
           <div className={styles.mediaWrapper}>
-            {isVideo(url) ? (
-              <MediaVideo src={url} />
-            ) : (
-              <MediaImage src={url} alt={`Media ${idx + 1}`} />
-            )}
+            <MediaVideo videoUrl={media.videoUrl} audioUrl={media.audioUrl} />
           </div>
           <div className={styles.actionButtons}>
             <button
               className={styles.shareBtn}
-              onClick={() => handleDownload(url, idx)}
+              onClick={() => handleDownload(media, idx)}
             >
-              Download ({format.toUpperCase()})
+              Download ({format?.type?.toUpperCase() || "MP4"})
             </button>
             <button
               className={styles.shareBtn}
-              onClick={() => handleShareClick(url)}
+              onClick={() => handleShareClick(media.videoUrl)}
             >
               Share
             </button>
