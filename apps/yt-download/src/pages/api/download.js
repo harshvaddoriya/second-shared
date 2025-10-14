@@ -16,7 +16,6 @@ export default async function handler(req, res) {
         };
 
         const response = await axios.request(options);
-        // Return JSON with direct file URL
         res.status(200).json({ file: response.data.file });
     } catch (err) {
         console.error(err);

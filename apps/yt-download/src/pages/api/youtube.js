@@ -1,5 +1,6 @@
 import { fetchYoutubeMedia, fetchYoutubePost } from "@/lib/youtubeRapidApis";
 import { fetchPlaylistData } from "@/lib/youtubePlaylistData";
+import { getYoutubeVideoData } from "@/lib/youtubeData";
 
 const getMediaTypeFromUrl = (url) => {
     if (/\/shorts\//i.test(url)) return "shorts";
@@ -19,13 +20,22 @@ export default async function handler(req, res) {
     try {
         let data;
 
-        if (detectedType === "video" || detectedType === "shorts") {
-            const match = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/);
+        if (detectedType === "video") {
+            const match = url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);
             const videoId = match ? match[1] : null;
             if (!videoId) throw new Error("Invalid YouTube video URL");
 
-            const data = await fetchYoutubeMedia(videoId, detectedType);
+            //const data = await fetchYoutubeMedia(videoId, detectedType);
+            const data = await getYoutubeVideoData(videoId, detectedType);
+            console.log("API response data ------------", data);
+            return res.status(200).json(data);
+        } else if (detectedType === "shorts") {
+            const match = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/);
+            const videoId = match ? match[1] : null;
+            if (!videoId) throw new Error("Invalid YouTube shorts URL");
 
+            const data = await fetchYoutubeMedia(videoId, detectedType);
+            console.log("API response data ------------", data);
             return res.status(200).json(data);
         } else if (detectedType === "playlist") {
             data = await fetchPlaylistData(url);

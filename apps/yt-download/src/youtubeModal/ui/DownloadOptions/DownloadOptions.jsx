@@ -21,14 +21,15 @@ export default function DownloadOptions({ format, setFormat, videoId }) {
         const res = await fetch(`/api/downloadOptions?videoId=${videoId}`);
         const data = await res.json();
 
-     
-        const audioOption = {
-          id: "mp3_audio",
-          type: "audio",
-          quality: "default",
-        };
+        const audioOption = data.firstAudio
+          ? {
+              id: data.firstAudio.id,
+              type: "audio",
+              quality: data.firstAudio.quality || "128kbps",
+            }
+          : null;
 
-        const allOptions = [...data, audioOption];
+        const allOptions = audioOption ? [...data, audioOption] : data;
 
         const uniqueByQuality = [];
         const seen = new Set();

@@ -3,7 +3,6 @@
 import { useState, useMemo } from "react";
 import PostHeader from "@/youtubeModal/ui/PostHeader/PostHeader";
 import BottomActivityPanel from "@/youtubeModal/ui/BottomActivityPanel/BottomActivityPanel";
-import MediaVideo from "../../youtubeModal/ui/MediaVideo/MediaVideo";
 import DownloadOptions from "@/youtubeModal/ui/DownloadOptions/DownloadOptions";
 import styles from "./VideoPreview.module.scss";
 
@@ -11,10 +10,8 @@ export default function VideoPreview({ data, error }) {
   const [format, setFormat] = useState(null);
 
   const selectedVideo = useMemo(() => {
-    if (!data?.media || !format) return null;
-
+    if (!data?.media || !format) return data?.media?.[0]?.url || null;
     const match = data.media.find((item) => item.id === format.id);
-
     return match?.url || data.media[0]?.url;
   }, [data, format]);
 
@@ -56,8 +53,17 @@ export default function VideoPreview({ data, error }) {
 
   return (
     <div className={styles.post}>
-      {mediaUrls.length > 0 && data.firstAudio ? (
-        <MediaVideo videoUrl={selectedVideo} audioUrl={data.firstAudio.url} />
+      {mediaUrls.length > 0 ? (
+        <iframe
+          width="100%"
+          height="400"
+          src={`${mediaUrls[0]}?autoplay=1&mute=0&playsinline=1`}
+          frameBorder="0"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+          title={postData.title}
+          style={{ borderRadius: "8px" }}
+        />
       ) : (
         <div style={{ padding: "10px", textAlign: "center" }}>
           <p>No video URL available</p>
@@ -95,7 +101,6 @@ export default function VideoPreview({ data, error }) {
             username: postData.username,
             caption: postData.description,
             currentMediaUrl: selectedVideo,
-            firstAudio: data.firstAudio?.url,
             currentMediaIndex: 0,
             likes: postData.likes,
             views: postData.views,

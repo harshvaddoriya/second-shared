@@ -30,6 +30,9 @@ export default function ShortsPreview({ data, error }) {
     return match?.url || data.media[0]?.url;
   }, [data, format]);
 
+  console.log(selectedMedia, "shorts url sending fro mp3 conversion");
+  console.log(data.media, "getting media data for shprts url");
+
   const postData = useMemo(() => {
     if (!data) return null;
     return {

@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.9",
+    "@martel/audio-file-decoder": "^3.0.0-beta.4",
+    "audio-decode": "^2.2.3",
     "axios": "^1.12.2",
     "ffmpeg-static": "^5.2.0",
     "lamejs": "^1.2.1",
@@ -23,7 +25,7 @@
     "stream-buffers": "^3.0.3",
     "swiper": "^11.2.10",
     "youtubei.js": "^15.1.1",
-    "ytdl-core": "^4.11.5"
+    "ytdlp-nodejs": "^2.3.4"
   },
   "peerDependencies": {
     "react": "18.2.0",

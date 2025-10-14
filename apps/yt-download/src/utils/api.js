@@ -23,8 +23,9 @@ export async function downloadYoutubeMedia(url) {
 
         if (!res.ok) {
             throw new Error(data.error || "Server error");
-
         }
+
+        data.type = data.detectedType || data.type || "video";
 
         if (data.detectedType === "playlist") {
             data.type = "playlist";
