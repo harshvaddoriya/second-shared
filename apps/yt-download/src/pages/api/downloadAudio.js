@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       responseType: "arraybuffer",
       headers: {
         "x-rapidapi-host": "youtube-video-fast-downloader-24-7.p.rapidapi.com",
-        "x-rapidapi-key": "cfbce86b39msh497454a3d96e36dp10c908jsne1b0550288eb"
+        "x-rapidapi-key": "9745d092bcmsh3ff2573814b3686p141dffjsn770fd699ea9e"
       },
     });
 

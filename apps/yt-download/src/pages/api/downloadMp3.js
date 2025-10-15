@@ -24,6 +24,48 @@ export default async function handler(req, res) {
   ytdlpProcess.stderr.on('data', (data) => console.error(data.toString()));
 }
 
+
+
+// import youtubedl from "youtube-dl-exec";
+// import path from "path";
+// import fs from "fs";
+// import ffmpegPath from "ffmpeg-static";
+
+// export default async function handler(req, res) {
+//   const { videoId } = req.query;
+
+//   if (!videoId) return res.status(400).json({ error: "Missing videoId" });
+
+//   try {
+//     const tempMp3Path = path.join(process.cwd(), `audio-${videoId}.mp3`);
+//     const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+//     await youtubedl(videoUrl, {
+//       extractAudio: true,
+//       audioFormat: "mp3",
+//       audioQuality: 5,
+//       output: tempMp3Path,
+//       ffmpegLocation: ffmpegPath,
+//     });
+
+//     res.setHeader("Content-Type", "audio/mpeg");
+//     res.setHeader(
+//       "Content-Disposition",
+//       `attachment; filename="audio-${videoId}.mp3"`
+//     );
+
+//     const stream = fs.createReadStream(tempMp3Path);
+//     stream.pipe(res);
+
+//     stream.on("close", () => fs.unlinkSync(tempMp3Path));
+//   } catch (err) {
+//     console.error("MP3 download failed:", err);
+//     res.status(500).json({ error: "MP3 conversion failed" });
+//   }
+// }
+
+
+
 // export default async function handler(req, res) {
 //   const { videoUrl } = req.query;
 //   console.log("inside downloadMp3 api-------------");
@@ -42,7 +84,7 @@ export default async function handler(req, res) {
 
 //     const mp3Buffer = await ytdlp.run(fixedUrl, {
 //       format: 'bestaudio[ext=mp3]',
-//       output: '-', // memory buffer
+//       output: '-', 
 //     });
 
 //     console.log("mp3Buffer---------------:", mp3Buffer);
